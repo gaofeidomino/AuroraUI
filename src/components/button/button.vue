@@ -7,6 +7,7 @@ import { buttonEmits, buttonProps } from './button'
 defineOptions({
     name: 'AButton',
 })
+
 const props = defineProps(buttonProps)
 const emit = defineEmits(buttonEmits)
 
