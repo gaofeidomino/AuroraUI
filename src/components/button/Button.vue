@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'vue'
 import { Primitive, type PrimitiveProps } from 'reka-ui'
 import { cn } from '@/utils/cn'
-import { type ButtonVariants, buttonVariants } from './index'
+import { type ButtonVariants, buttonVariants } from '.'
 
 defineOptions({ name: 'AButton' })
 
