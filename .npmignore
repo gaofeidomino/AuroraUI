@@ -1,0 +1,40 @@
+# 开发文件
+src/
+examples/
+public/
+*.config.js
+*.config.ts
+vite.config.ts
+tsconfig*.json
+eslint.config.ts
+.prettierrc.json
+.editorconfig
+
+# 文档和配置
+README.md
+.gitignore
+.gitattributes
+
+# 开发依赖
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# 构建产物（除了 dist）
+dist/favicon.ico
+dist/.DS_Store
+
+# 测试文件
+test-aurora.js
+/tmp/
+
+# IDE 文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db 
