@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue'
-import Button from './button.vue'
+import Button from './Button.vue'
 import ButtonGroup from './button-group.vue'
 
 // import type { ButtonProps, ButtonShape, ButtonType } from './buttonTypes'
