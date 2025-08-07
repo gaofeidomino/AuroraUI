@@ -32,8 +32,8 @@ export default defineConfig(({ command, mode }) => {
             build: {
                 lib: {
                     entry: path.resolve(__dirname, 'src/index.ts'),
-                    name: 'AuroraUI',
-                    fileName: 'index',
+                    name: 'AuroraUIPlus',
+                    fileName: (format) => `aurora-ui-plus.${format}.js`,
                     formats: ['es', 'umd'],
                 },
                 rollupOptions: {
