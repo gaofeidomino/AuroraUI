@@ -42,8 +42,19 @@ export default defineConfig(({ command, mode }) => {
                         globals: {
                             vue: 'Vue',
                         },
+                        // 确保生成 CSS 文件
+                        assetFileNames: (assetInfo) => {
+                            if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+                                return 'style.css'
+                            }
+                            return assetInfo.name || 'assets/[name].[ext]'
+                        },
                     },
                 },
+                // 生成类型声明文件
+                outDir: 'dist',
+                // 确保 CSS 被提取
+                cssCodeSplit: false,
             },
         }
     }

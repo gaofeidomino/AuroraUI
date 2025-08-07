@@ -28,8 +28,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs"
+      "import": "./dist/aurora-ui-plus.es.js",
+      "require": "./dist/aurora-ui-plus.umd.js"
     },
     "./style": "./dist/style.css"
   },
@@ -42,7 +42,8 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "build:lib": "BUILD_LIB=true vite build",
+    "build:lib": "BUILD_LIB=true vite build && npm run build:types",
+    "build:types": "vue-tsc --project tsconfig.build.json",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
