@@ -9,7 +9,6 @@ import RekaResolver from 'reka-ui/resolver'
 import path from 'node:path'
 
 export default defineConfig(({ command, mode }) => {
-    console.log(command, mode)
     const isLibrary = process.env.BUILD_LIB === 'true'
 
     if (isLibrary) {
@@ -56,6 +55,15 @@ export default defineConfig(({ command, mode }) => {
                 // 确保 CSS 被提取
                 cssCodeSplit: false,
             },
+            esbuild: {
+                tsconfigRaw: {
+                    compilerOptions: {
+                        paths: {
+                            '@/*': ['./src/*'],
+                        },
+                    },
+                },
+            },
         }
     }
 
@@ -74,6 +82,10 @@ export default defineConfig(({ command, mode }) => {
             alias: {
                 '@': fileURLToPath(new URL('./src', import.meta.url)),
             },
+        },
+        server: {
+            port: 3000,
+            open: true,
         },
     }
 })

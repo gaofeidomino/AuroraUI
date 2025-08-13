@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 
 // 导入样式
-import './assets/css/main.css'
+import './style.css'
 
 import * as components from './components/index'
 export * from './components/index'

@@ -1,11 +1,9 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
-import './assets/css/main.css'
 import App from './App.vue'
+import './style.css'
 
+// 创建应用实例
 const app = createApp(App)
 
-app.use(createPinia())
-
+// 挂载应用
 app.mount('#app')
