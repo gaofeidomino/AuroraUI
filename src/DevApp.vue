@@ -19,7 +19,10 @@ const resetCount = () => {
         <div class="max-w-6xl mx-auto">
             <!-- 头部 -->
             <header class="mb-8">
-                <h1 class="text-3xl font-bold mb-2 text-foreground">AuroraUI 开发模式</h1>
+                <h1 class="text-3xl font-bold mb-2 text-foreground flex items-center">
+                    <img src="/public/logo.png" alt="AuroraUI" class="w-8 h-8" />
+                    <span class="ml-2">AuroraUI 开发模式</span>
+                </h1>
                 <p class="text-muted-foreground">快速测试和开发组件区域</p>
             </header>
 
@@ -62,7 +65,10 @@ const resetCount = () => {
                                 <AButton>正常按钮</AButton>
                                 <AButton disabled>禁用按钮</AButton>
                                 <AButton variant="outline" disabled>禁用轮廓按钮</AButton>
+                                <AButton variant="destructive" disabled>禁用危险按钮</AButton>
+                                <AButton variant="secondary" disabled>禁用次要按钮</AButton>
                             </div>
+                            <p class="text-sm text-muted-foreground mt-2">将鼠标悬停在禁用按钮上查看鼠标样式变化</p>
                         </div>
 
                         <div>
