@@ -66,21 +66,6 @@ pnpm dev:examples
 pnpm lint
 ```
 
-## 📦 项目结构
-
-```
-AuroraUI/
-├── src/
-│   ├── components/          # 组件源码（学习组件设计）
-│   │   ├── button/         # Button 组件实现
-│   │   └── card/           # Card 组件实现
-│   ├── utils/              # 工具函数（学习代码复用）
-│   └── index.ts            # 主入口文件（学习模块导出）
-├── examples/               # 示例应用（学习文档编写）
-├── tests/                  # 测试文件（学习测试策略）
-└── dist/                   # 构建输出（学习构建优化）
-```
-
 ## 📚 文档
 
 - [组件文档](./examples/) - 查看组件示例和用法

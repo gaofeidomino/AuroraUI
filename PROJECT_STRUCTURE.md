@@ -118,6 +118,7 @@ pnpm dev:examples
 - **examples/**: 组件展示和用法示例
 - **TESTING.md**: 测试相关文档
 - **PROJECT_STRUCTURE.md**: 项目结构说明
+- **PLUGINS_AND_DEPENDENCIES.md**: 插件和依赖说明
 
 ## 🔧 工具链
 

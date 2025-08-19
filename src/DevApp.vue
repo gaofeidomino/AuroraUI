@@ -20,7 +20,7 @@ const resetCount = () => {
             <!-- 头部 -->
             <header class="mb-8">
                 <h1 class="text-3xl font-bold mb-2 text-foreground flex items-center">
-                    <img src="/public/logo.png" alt="AuroraUI" class="w-8 h-8" />
+                    <img src="/logo.png" alt="AuroraUI" class="w-8 h-8" />
                     <span class="ml-2">AuroraUI 开发模式</span>
                 </h1>
                 <p class="text-muted-foreground">快速测试和开发组件区域</p>

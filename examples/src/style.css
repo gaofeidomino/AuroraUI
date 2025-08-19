@@ -1,6 +1,4 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
 
 /* 自定义样式 */
 @layer base {
