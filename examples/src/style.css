@@ -50,35 +50,55 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
 
 /* 代码高亮样式 */
 .code-block {
-  @apply bg-muted rounded-lg p-4 font-mono text-sm overflow-x-auto;
+  background-color: hsl(var(--muted));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
 }
 
 /* 组件展示卡片 */
 .component-card {
-  @apply border rounded-lg p-6 bg-card shadow-sm;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  background-color: hsl(var(--card));
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 .component-title {
-  @apply text-2xl font-semibold mb-4 text-card-foreground;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: hsl(var(--card-foreground));
 }
 
 .component-description {
-  @apply text-muted-foreground mb-6;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 1.5rem;
 }
 
 .component-demo {
-  @apply mb-6;
+  margin-bottom: 1.5rem;
 }
 
 .component-code {
-  @apply bg-muted rounded-lg p-4 font-mono text-sm overflow-x-auto border;
+  background-color: hsl(var(--muted));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  border: 1px solid hsl(var(--border));
 }

@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/utils/cn'
+import { alertVariants, type AlertVariants } from '.'
+
+defineOptions({ name: 'AAlert' })
 
 const props = defineProps<{
     class?: HTMLAttributes['class']
+    variant: AlertVariants['variant']
 }>()
-
-defineOptions({ name: 'ACard' })
-
-const basicClass = 'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border shadow-sm'
 </script>
 
 <template>
-    <div data-slot="card" :class="cn(basicClass, props.class)">
+    <div data-slot="alert" role="alert" :class="cn(alertVariants({ variant }), props.class)">
         <slot />
     </div>
 </template>

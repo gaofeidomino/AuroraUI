@@ -8,6 +8,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Alert: typeof import('./src/components/alert/Alert.vue')['default']
+    AlertDescription: typeof import('./src/components/alert/AlertDescription.vue')['default']
+    AlertTitle: typeof import('./src/components/alert/AlertTitle.vue')['default']
     Button: typeof import('./src/components/button/Button.vue')['default']
     Card: typeof import('./src/components/card/Card.vue')['default']
     CardContent: typeof import('./src/components/card/CardContent.vue')['default']
@@ -19,5 +22,6 @@ declare module 'vue' {
     Label: typeof import('./src/components/label/Label.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Textarea: typeof import('./src/components/textarea/Textarea.vue')['default']
   }
 }

@@ -2,17 +2,17 @@
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/utils/cn'
 
+defineOptions({ name: 'AAlertTitle' })
+
 const props = defineProps<{
     class?: HTMLAttributes['class']
 }>()
 
-defineOptions({ name: 'ACard' })
-
-const basicClass = 'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border shadow-sm'
+const basicClass = 'col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight'
 </script>
 
 <template>
-    <div data-slot="card" :class="cn(basicClass, props.class)">
+    <div data-slot="alert-title" :class="cn(basicClass, props.class)">
         <slot />
     </div>
 </template>

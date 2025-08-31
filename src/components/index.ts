@@ -1,3 +1,6 @@
+// 警告框组件
+export { Alert as AAlert, AlertDescription as AAlertDescription, AlertTitle as AAlertTitle, alertVariants, type AlertVariants } from './alert'
+
 // 按钮组件
 export { Button as AButton, buttonVariants, type ButtonVariants } from './button'
 
@@ -11,3 +14,9 @@ export { CardTitle as ACardTitle } from './card'
 
 // 输入框组件
 export { Input as AInput } from './input'
+
+// 文本域组件
+export { Textarea as ATextarea } from './textarea'
+
+// 标签组件
+export { Label as ALabel } from './label'

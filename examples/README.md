@@ -59,6 +59,13 @@ examples/
 
 ## 包含的示例
 
+### Alert 警告框组件
+
+- **变体展示**: default, destructive
+- **状态展示**: 提示, 成功, 警告, 错误
+- **组件结构**: Alert, AlertTitle, AlertDescription
+- **图标支持**: SVG 图标集成
+
 ### Button 按钮组件
 
 - **变体展示**: default, destructive, outline, secondary, ghost, link
@@ -66,6 +73,34 @@ examples/
 - **状态展示**: 正常, 禁用
 - **交互示例**: 点击事件, 计数功能
 - **链接按钮**: 外部链接, 路由导航
+
+### Card 卡片组件
+
+- **基础用法**: 完整卡片结构展示
+- **组件结构**: Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter
+- **样式变体**: 主要色调, 背景色, 阴影效果
+- **交互示例**: 可点击卡片, 表单集成
+
+### Input 输入框组件
+
+- **基础用法**: 文本输入, 双向绑定
+- **输入类型**: email, password, number, file
+- **状态展示**: 正常, 禁用, 错误, 必填
+- **表单集成**: 与 Label 组件配合使用
+
+### Label 标签组件
+
+- **基础用法**: 表单标签标识
+- **状态展示**: 正常, 禁用, 错误
+- **必填标识**: required 属性支持
+- **表单关联**: 与输入控件关联
+
+### Textarea 文本域组件
+
+- **基础用法**: 多行文本输入
+- **尺寸控制**: 小尺寸, 大尺寸
+- **状态展示**: 正常, 禁用, 错误, 必填
+- **自动调整**: 高度自适应
 
 ## 开发说明
 

@@ -294,6 +294,261 @@ const value = ref('')
 &lt;/template&gt;</code></pre>
             </div>
         </section>
+
+        <!-- Alert 组件示例 -->
+        <section class="component-card">
+            <h2 class="component-title">Alert 警告框</h2>
+            <p class="component-description">警告框组件用于显示重要的信息、警告或错误消息，支持多种变体。</p>
+
+            <!-- 基础示例 -->
+            <div class="component-demo">
+                <h3 class="text-lg font-medium mb-4">基础用法</h3>
+                <div class="space-y-4">
+                    <AAlert variant="default">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 16v-4M12 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <AAlertTitle>提示</AAlertTitle>
+                        <AAlertDescription> 这是一个默认的警告框，用于显示一般信息。 </AAlertDescription>
+                    </AAlert>
+
+                    <AAlert variant="destructive">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                        </svg>
+                        <AAlertTitle>错误</AAlertTitle>
+                        <AAlertDescription> 这是一个错误警告框，用于显示错误或危险信息。 </AAlertDescription>
+                    </AAlert>
+                </div>
+            </div>
+
+            <!-- 不同状态示例 -->
+            <div class="component-demo">
+                <h3 class="text-lg font-medium mb-4">不同状态</h3>
+                <div class="space-y-4">
+                    <AAlert variant="default">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <AAlertTitle>成功</AAlertTitle>
+                        <AAlertDescription> 操作已成功完成！ </AAlertDescription>
+                    </AAlert>
+
+                    <AAlert variant="default">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                        </svg>
+                        <AAlertTitle>警告</AAlertTitle>
+                        <AAlertDescription> 请注意这个重要信息。 </AAlertDescription>
+                    </AAlert>
+                </div>
+            </div>
+
+            <!-- 代码示例 -->
+            <div class="component-code">
+                <pre><code>&lt;template&gt;
+  &lt;AAlert variant="default"&gt;
+    &lt;svg&gt;...&lt;/svg&gt;
+    &lt;AAlertTitle&gt;提示&lt;/AAlertTitle&gt;
+    &lt;AAlertDescription&gt;
+      这是一个默认的警告框。
+    &lt;/AAlertDescription&gt;
+  &lt;/AAlert&gt;
+  
+  &lt;AAlert variant="destructive"&gt;
+    &lt;svg&gt;...&lt;/svg&gt;
+    &lt;AAlertTitle&gt;错误&lt;/AAlertTitle&gt;
+    &lt;AAlertDescription&gt;
+      这是一个错误警告框。
+    &lt;/AAlertDescription&gt;
+  &lt;/AAlert&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Textarea 组件示例 -->
+        <section class="component-card">
+            <h2 class="component-title">Textarea 文本域</h2>
+            <p class="component-description">文本域组件用于输入多行文本，支持自动调整高度和多种状态。</p>
+
+            <!-- 基础示例 -->
+            <div class="component-demo">
+                <h3 class="text-lg font-medium mb-4">基础用法</h3>
+                <div class="space-y-4">
+                    <div>
+                        <ALabel for="basic-textarea">基础文本域</ALabel>
+                        <ATextarea id="basic-textarea" v-model="textareaValue" placeholder="请输入多行文本..." />
+                    </div>
+                    <p class="text-sm text-muted-foreground">当前值: {{ textareaValue }}</p>
+                </div>
+            </div>
+
+            <!-- 不同尺寸示例 -->
+            <div class="component-demo">
+                <h3 class="text-lg font-medium mb-4">不同尺寸</h3>
+                <div class="space-y-4">
+                    <div>
+                        <ALabel for="small-textarea">小尺寸</ALabel>
+                        <ATextarea id="small-textarea" placeholder="小尺寸文本域" class="min-h-12" />
+                    </div>
+                    <div>
+                        <ALabel for="large-textarea">大尺寸</ALabel>
+                        <ATextarea id="large-textarea" placeholder="大尺寸文本域" class="min-h-32" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 状态示例 -->
+            <div class="component-demo">
+                <h3 class="text-lg font-medium mb-4">状态</h3>
+                <div class="space-y-4">
+                    <ATextarea placeholder="正常状态" />
+                    <ATextarea disabled placeholder="禁用状态" />
+                    <ATextarea aria-invalid="true" placeholder="错误状态" />
+                    <ATextarea required placeholder="必填字段" />
+                </div>
+            </div>
+
+            <!-- 代码示例 -->
+            <div class="component-code">
+                <pre><code>&lt;template&gt;
+  &lt;ATextarea v-model="value" placeholder="请输入多行文本..." /&gt;
+  
+  &lt;ATextarea disabled placeholder="禁用状态" /&gt;
+  &lt;ATextarea aria-invalid="true" placeholder="错误状态" /&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+
+const value = ref('')
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Card 组件示例 -->
+        <section class="component-card">
+            <h2 class="component-title">Card 卡片</h2>
+            <p class="component-description">卡片组件用于组织和展示相关内容，支持头部、内容、描述和底部等部分。</p>
+
+            <!-- 基础示例 -->
+            <div class="component-demo">
+                <h3 class="text-lg font-medium mb-4">基础用法</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <ACard>
+                        <ACardHeader>
+                            <ACardTitle>基础卡片</ACardTitle>
+                            <ACardDescription> 这是一个基础的卡片组件示例 </ACardDescription>
+                        </ACardHeader>
+                        <ACardContent>
+                            <p>这是卡片的主要内容区域，可以放置任何内容。</p>
+                        </ACardContent>
+                        <ACardFooter>
+                            <AButton>操作按钮</AButton>
+                        </ACardFooter>
+                    </ACard>
+
+                    <ACard>
+                        <ACardHeader>
+                            <ACardTitle>简单卡片</ACardTitle>
+                        </ACardHeader>
+                        <ACardContent>
+                            <p>这是一个没有描述和底部的简单卡片。</p>
+                        </ACardContent>
+                    </ACard>
+                </div>
+            </div>
+
+            <!-- 不同样式示例 -->
+            <div class="component-demo">
+                <h3 class="text-lg font-medium mb-4">不同样式</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <ACard class="border-primary">
+                        <ACardHeader>
+                            <ACardTitle class="text-primary">主要卡片</ACardTitle>
+                            <ACardDescription>带有主要色调的卡片</ACardDescription>
+                        </ACardHeader>
+                        <ACardContent>
+                            <p>这个卡片使用了主要色调的边框。</p>
+                        </ACardContent>
+                    </ACard>
+
+                    <ACard class="bg-muted">
+                        <ACardHeader>
+                            <ACardTitle>背景卡片</ACardTitle>
+                            <ACardDescription>带有背景色的卡片</ACardDescription>
+                        </ACardHeader>
+                        <ACardContent>
+                            <p>这个卡片使用了背景色。</p>
+                        </ACardContent>
+                    </ACard>
+
+                    <ACard class="shadow-lg">
+                        <ACardHeader>
+                            <ACardTitle>阴影卡片</ACardTitle>
+                            <ACardDescription>带有阴影效果的卡片</ACardDescription>
+                        </ACardHeader>
+                        <ACardContent>
+                            <p>这个卡片使用了阴影效果。</p>
+                        </ACardContent>
+                    </ACard>
+                </div>
+            </div>
+
+            <!-- 交互示例 -->
+            <div class="component-demo">
+                <h3 class="text-lg font-medium mb-4">交互示例</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <ACard class="hover:shadow-md transition-shadow cursor-pointer" @click="handleCardClick">
+                        <ACardHeader>
+                            <ACardTitle>可点击卡片</ACardTitle>
+                            <ACardDescription>点击这个卡片查看交互效果</ACardDescription>
+                        </ACardHeader>
+                        <ACardContent>
+                            <p>点击次数: {{ cardClickCount }}</p>
+                        </ACardContent>
+                    </ACard>
+
+                    <ACard>
+                        <ACardHeader>
+                            <ACardTitle>表单卡片</ACardTitle>
+                            <ACardDescription>在卡片中使用表单组件</ACardDescription>
+                        </ACardHeader>
+                        <ACardContent class="space-y-4">
+                            <div>
+                                <ALabel for="card-name">姓名</ALabel>
+                                <AInput id="card-name" v-model="cardForm.name" placeholder="请输入姓名" />
+                            </div>
+                            <div>
+                                <ALabel for="card-email">邮箱</ALabel>
+                                <AInput id="card-email" v-model="cardForm.email" type="email" placeholder="请输入邮箱" />
+                            </div>
+                        </ACardContent>
+                        <ACardFooter>
+                            <AButton @click="handleCardSubmit">提交</AButton>
+                        </ACardFooter>
+                    </ACard>
+                </div>
+            </div>
+
+            <!-- 代码示例 -->
+            <div class="component-code">
+                <pre><code>&lt;template&gt;
+  &lt;ACard&gt;
+    &lt;ACardHeader&gt;
+      &lt;ACardTitle&gt;卡片标题&lt;/ACardTitle&gt;
+      &lt;ACardDescription&gt;卡片描述&lt;/ACardDescription&gt;
+    &lt;/ACardHeader&gt;
+    &lt;ACardContent&gt;
+      &lt;p&gt;卡片内容&lt;/p&gt;
+    &lt;/ACardContent&gt;
+    &lt;ACardFooter&gt;
+      &lt;AButton&gt;操作按钮&lt;/AButton&gt;
+    &lt;/ACardFooter&gt;
+  &lt;/ACard&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+        </section>
     </div>
 </template>
 
@@ -302,10 +557,16 @@ import { ref } from 'vue'
 
 const clickCount = ref(0)
 const inputValue = ref('')
+const textareaValue = ref('')
+const cardClickCount = ref(0)
 const formData = ref({
     name: '',
     email: '',
     message: '',
+})
+const cardForm = ref({
+    name: '',
+    email: '',
 })
 
 const handleClick = () => {
@@ -326,5 +587,13 @@ const resetForm = () => {
         email: '',
         message: '',
     }
+}
+
+const handleCardClick = () => {
+    cardClickCount.value++
+}
+
+const handleCardSubmit = () => {
+    alert('卡片表单提交: ' + JSON.stringify(cardForm.value))
 }
 </script>
