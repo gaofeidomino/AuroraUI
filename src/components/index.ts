@@ -20,3 +20,6 @@ export { Textarea as ATextarea } from './textarea'
 
 // 标签组件
 export { Label as ALabel } from './label'
+
+// 手风琴组件
+export { Accordion as AAccordion, AccordionItem as AAccordionItem, AccordionTrigger as AAccordionTrigger, AccordionContent as AAccordionContent } from './accordion'

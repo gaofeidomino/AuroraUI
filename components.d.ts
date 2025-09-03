@@ -8,6 +8,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Accordion: typeof import('./src/components/accordion/Accordion.vue')['default']
+    AccordionContent: typeof import('./src/components/accordion/AccordionContent.vue')['default']
+    AccordionItem: typeof import('./src/components/accordion/AccordionItem.vue')['default']
+    AccordionTrigger: typeof import('./src/components/accordion/AccordionTrigger.vue')['default']
     Alert: typeof import('./src/components/alert/Alert.vue')['default']
     AlertDescription: typeof import('./src/components/alert/AlertDescription.vue')['default']
     AlertTitle: typeof import('./src/components/alert/AlertTitle.vue')['default']

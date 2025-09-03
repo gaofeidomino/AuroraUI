@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { AButton, ACard, ACardContent, ACardDescription, ACardFooter, ACardHeader, ACardTitle, AInput, ATextarea, ALabel } from './components'
+import { AButton, ACard, ACardContent, ACardDescription, ACardFooter, ACardHeader, ACardTitle, AInput, ATextarea, ALabel, AAccordion, AAccordionItem, AAccordionTrigger, AAccordionContent } from './components'
 
 const clickCount = ref(0)
 const inputValue = ref('')
@@ -12,6 +12,10 @@ const commentValue = ref('')
 const descriptionValue = ref('这是一个默认的描述内容，用于测试只读状态。')
 const feedbackValue = ref('')
 
+// Accordion 相关状态
+const accordionValue = ref<string | undefined>(undefined)
+const accordionMultipleValue = ref<string[]>([])
+
 const handleClick = () => {
     clickCount.value++
     console.log('按钮被点击了！', clickCount.value)
@@ -19,6 +23,17 @@ const handleClick = () => {
 
 const resetCount = () => {
     clickCount.value = 0
+}
+
+// Accordion 事件处理
+const handleAccordionChange = (value: string | undefined) => {
+    accordionValue.value = value
+    console.log('单选 Accordion 值变化:', value)
+}
+
+const handleAccordionMultipleChange = (value: string[]) => {
+    accordionMultipleValue.value = value
+    console.log('多选 Accordion 值变化:', value)
 }
 </script>
 
@@ -372,6 +387,193 @@ const resetCount = () => {
                                     <ALabel for="markdown-textarea">Markdown 编辑</ALabel>
                                     <ATextarea id="markdown-textarea" placeholder="# 标题&#10;&#10;在这里输入 Markdown 内容..." class="mt-1 font-mono text-sm min-h-32" />
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Accordion 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Accordion 组件测试</h2>
+                    <p class="text-muted-foreground mb-4">测试可折叠面板组件</p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法 - 单选模式</h3>
+                            <AAccordion type="single" collapsible class="w-full max-w-2xl" @value-change="handleAccordionChange">
+                                <AAccordionItem value="item-1">
+                                    <AAccordionTrigger class="text-lg font-medium"> 什么是 AuroraUI？ </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <p class="text-muted-foreground">AuroraUI 是一个个人学习项目，使用 Vue 3 + TypeScript + Tailwind CSS 技术栈实现的现代化 UI 组件库。 专注于学习组件库开发的最佳实践，包括组件设计、测试策略、构建优化和文档编写。</p>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                                <AAccordionItem value="item-2">
+                                    <AAccordionTrigger class="text-lg font-medium"> 技术栈特点 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <ul class="text-muted-foreground space-y-2">
+                                            <li>• Vue 3 Composition API - 现代 Vue 开发</li>
+                                            <li>• TypeScript - 类型安全和开发体验</li>
+                                            <li>• Tailwind CSS - 原子化 CSS 框架</li>
+                                            <li>• Vite - 现代化构建工具</li>
+                                            <li>• Vitest - 单元测试框架</li>
+                                        </ul>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                                <AAccordionItem value="item-3">
+                                    <AAccordionTrigger class="text-lg font-medium"> 学习目标 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <p class="text-muted-foreground">这个项目旨在学习组件库设计的最佳实践，包括可复用组件开发、类型安全、测试策略、 构建优化和文档编写等各个方面。</p>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                            </AAccordion>
+                            <p class="text-sm text-muted-foreground mt-2">当前选中项: {{ accordionValue || '无' }}</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">多选模式</h3>
+                            <AAccordion type="multiple" class="w-full max-w-2xl" @value-change="handleAccordionMultipleChange">
+                                <AAccordionItem value="multi-1">
+                                    <AAccordionTrigger class="text-lg font-medium"> 组件库特性 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <div class="text-muted-foreground space-y-2">
+                                            <p>• 现代化设计语言</p>
+                                            <p>• 完整的 TypeScript 支持</p>
+                                            <p>• 响应式设计</p>
+                                            <p>• 无障碍访问支持</p>
+                                        </div>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                                <AAccordionItem value="multi-2">
+                                    <AAccordionTrigger class="text-lg font-medium"> 开发工具 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <div class="text-muted-foreground space-y-2">
+                                            <p>• 热重载开发环境</p>
+                                            <p>• 自动化测试</p>
+                                            <p>• 代码质量检查</p>
+                                            <p>• 自动化构建</p>
+                                        </div>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                                <AAccordionItem value="multi-3">
+                                    <AAccordionTrigger class="text-lg font-medium"> 文档和示例 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <div class="text-muted-foreground space-y-2">
+                                            <p>• 详细的 API 文档</p>
+                                            <p>• 丰富的使用示例</p>
+                                            <p>• 最佳实践指南</p>
+                                            <p>• 在线演示环境</p>
+                                        </div>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                            </AAccordion>
+                            <p class="text-sm text-muted-foreground mt-2">当前选中项: {{ accordionMultipleValue.length > 0 ? accordionMultipleValue.join(', ') : '无' }}</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">自定义样式</h3>
+                            <AAccordion type="single" collapsible class="w-full max-w-2xl">
+                                <AAccordionItem value="custom-1" class="border-primary/20">
+                                    <AAccordionTrigger class="text-lg font-medium text-primary hover:text-primary/80"> 自定义主题色 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <p class="text-muted-foreground">这个手风琴项使用了自定义的主题色样式，包括边框颜色和文字颜色。</p>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                                <AAccordionItem value="custom-2" class="border-secondary/20">
+                                    <AAccordionTrigger class="text-lg font-medium text-secondary hover:text-secondary/80"> 次要主题色 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <p class="text-muted-foreground">这个手风琴项使用了次要主题色，展示不同的视觉层次。</p>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                            </AAccordion>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">复杂内容示例</h3>
+                            <AAccordion type="single" collapsible class="w-full max-w-3xl">
+                                <AAccordionItem value="complex-1">
+                                    <AAccordionTrigger class="text-lg font-medium"> 表单配置 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <div class="space-y-4">
+                                            <div>
+                                                <ALabel for="config-name">配置名称</ALabel>
+                                                <AInput id="config-name" placeholder="请输入配置名称" class="mt-1" />
+                                            </div>
+                                            <div>
+                                                <ALabel for="config-desc">配置描述</ALabel>
+                                                <ATextarea id="config-desc" placeholder="请输入配置描述" class="mt-1" />
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <AButton size="sm">保存配置</AButton>
+                                                <AButton variant="outline" size="sm">重置</AButton>
+                                            </div>
+                                        </div>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                                <AAccordionItem value="complex-2">
+                                    <AAccordionTrigger class="text-lg font-medium"> 数据统计 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="p-4 bg-muted rounded-lg">
+                                                <div class="text-2xl font-bold text-primary">1,234</div>
+                                                <div class="text-sm text-muted-foreground">总用户数</div>
+                                            </div>
+                                            <div class="p-4 bg-muted rounded-lg">
+                                                <div class="text-2xl font-bold text-secondary">567</div>
+                                                <div class="text-sm text-muted-foreground">活跃用户</div>
+                                            </div>
+                                        </div>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                            </AAccordion>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">特殊状态示例</h3>
+                            <AAccordion type="single" collapsible class="w-full max-w-2xl" default-value="default-open">
+                                <AAccordionItem value="default-open">
+                                    <AAccordionTrigger class="text-lg font-medium"> 默认展开的项目 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <p class="text-muted-foreground">这个手风琴项默认是展开状态，用户可以直接看到内容。</p>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                                <AAccordionItem value="disabled-item" disabled>
+                                    <AAccordionTrigger class="text-lg font-medium opacity-50"> 禁用的项目 </AAccordionTrigger>
+                                    <AAccordionContent>
+                                        <p class="text-muted-foreground">这个手风琴项被禁用了，用户无法点击展开。</p>
+                                    </AAccordionContent>
+                                </AAccordionItem>
+                            </AAccordion>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">程序化控制示例</h3>
+                            <div class="space-y-4">
+                                <div class="flex flex-wrap gap-2">
+                                    <AButton size="sm" @click="accordionValue = 'item-1'">展开第一项</AButton>
+                                    <AButton size="sm" @click="accordionValue = 'item-2'">展开第二项</AButton>
+                                    <AButton size="sm" @click="accordionValue = 'item-3'">展开第三项</AButton>
+                                    <AButton size="sm" variant="outline" @click="accordionValue = undefined">全部折叠</AButton>
+                                </div>
+                                <AAccordion type="single" collapsible class="w-full max-w-2xl" v-model="accordionValue">
+                                    <AAccordionItem value="item-1">
+                                        <AAccordionTrigger class="text-lg font-medium"> 可控制的项 1 </AAccordionTrigger>
+                                        <AAccordionContent>
+                                            <p class="text-muted-foreground">这个手风琴项可以通过按钮程序化控制展开和折叠。</p>
+                                        </AAccordionContent>
+                                    </AAccordionItem>
+                                    <AAccordionItem value="item-2">
+                                        <AAccordionTrigger class="text-lg font-medium"> 可控制的项 2 </AAccordionTrigger>
+                                        <AAccordionContent>
+                                            <p class="text-muted-foreground">这个手风琴项也可以通过按钮程序化控制展开和折叠。</p>
+                                        </AAccordionContent>
+                                    </AAccordionItem>
+                                    <AAccordionItem value="item-3">
+                                        <AAccordionTrigger class="text-lg font-medium"> 可控制的项 3 </AAccordionTrigger>
+                                        <AAccordionContent>
+                                            <p class="text-muted-foreground">这个手风琴项同样可以通过按钮程序化控制展开和折叠。</p>
+                                        </AAccordionContent>
+                                    </AAccordionItem>
+                                </AAccordion>
                             </div>
                         </div>
                     </div>
