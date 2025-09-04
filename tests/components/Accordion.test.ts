@@ -10,7 +10,7 @@ describe('Accordion Component', () => {
             },
         })
 
-        const accordion = screen.getByTestId('accordion')
+        const accordion = document.querySelector('[data-slot="accordion"]')
         expect(accordion).toBeInTheDocument()
         expect(accordion).toHaveAttribute('data-slot', 'accordion')
     })
@@ -27,7 +27,7 @@ describe('Accordion Component', () => {
             },
         })
 
-        const accordion = screen.getByTestId('accordion')
+        const accordion = document.querySelector('[data-slot="accordion"]')
         expect(accordion).toBeInTheDocument()
     })
 
@@ -50,7 +50,7 @@ describe('Accordion Component', () => {
             },
         })
 
-        const accordion = screen.getByTestId('accordion')
+        const accordion = document.querySelector('[data-slot="accordion"]')
         expect(accordion).toBeInTheDocument()
     })
 })

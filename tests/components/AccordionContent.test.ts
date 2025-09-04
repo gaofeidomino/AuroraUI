@@ -1,43 +1,55 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { AccordionContent } from '../../src/components/accordion/index'
+import { Accordion, AccordionItem, AccordionContent } from '../../src/components/accordion/index'
 
 describe('AccordionContent Component', () => {
     it('renders correctly with default props', () => {
-        render(AccordionContent, {
-            slots: {
-                default: 'Content Text',
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent>Content Text</AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
-        const content = screen.getByTestId('accordion-content')
+        const content = document.querySelector('[data-slot="accordion-content"]')
         expect(content).toBeInTheDocument()
         expect(content).toHaveAttribute('data-slot', 'accordion-content')
         expect(content).toHaveTextContent('Content Text')
     })
 
     it('applies default classes correctly', () => {
-        render(AccordionContent, {
-            slots: {
-                default: 'Content',
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent>Content</AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
-        const content = screen.getByTestId('accordion-content')
+        const content = document.querySelector('[data-slot="accordion-content"]')
         expect(content).toHaveClass('data-[state=closed]:animate-accordion-up', 'data-[state=open]:animate-accordion-down', 'overflow-hidden', 'text-sm')
     })
 
     it('applies custom class names', () => {
-        render(AccordionContent, {
-            props: {
-                class: 'custom-class',
-            },
-            slots: {
-                default: 'Content',
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent class="custom-class">Content</AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
-        const content = screen.getByTestId('accordion-content')
+        const content = document.querySelector('[data-slot="accordion-content"]')
         expect(content).toBeInTheDocument()
 
         // Check that custom class is applied to the inner div
@@ -46,16 +58,18 @@ describe('AccordionContent Component', () => {
     })
 
     it('forwards props correctly', () => {
-        render(AccordionContent, {
-            props: {
-                class: 'test-class',
-            },
-            slots: {
-                default: 'Content',
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent class="test-class">Content</AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
-        const content = screen.getByTestId('accordion-content')
+        const content = document.querySelector('[data-slot="accordion-content"]')
         expect(content).toBeInTheDocument()
 
         const innerDiv = content.querySelector('div')
@@ -63,10 +77,17 @@ describe('AccordionContent Component', () => {
     })
 
     it('renders with slot content', () => {
-        render(AccordionContent, {
-            slots: {
-                default: '<span data-testid="slot-content">Slot Content</span>',
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent>
+                            <span data-testid="slot-content">Slot Content</span>
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
         const slotContent = screen.getByTestId('slot-content')
@@ -75,13 +96,18 @@ describe('AccordionContent Component', () => {
     })
 
     it('has correct inner div structure', () => {
-        render(AccordionContent, {
-            slots: {
-                default: 'Content',
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent>Content</AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
-        const content = screen.getByTestId('accordion-content')
+        const content = document.querySelector('[data-slot="accordion-content"]')
         const innerDiv = content.querySelector('div')
 
         expect(innerDiv).toBeInTheDocument()
@@ -89,16 +115,18 @@ describe('AccordionContent Component', () => {
     })
 
     it('combines default and custom classes correctly', () => {
-        render(AccordionContent, {
-            props: {
-                class: 'custom-class',
-            },
-            slots: {
-                default: 'Content',
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent class="custom-class">Content</AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
-        const content = screen.getByTestId('accordion-content')
+        const content = document.querySelector('[data-slot="accordion-content"]')
         expect(content).toHaveClass('data-[state=closed]:animate-accordion-up', 'data-[state=open]:animate-accordion-down')
 
         const innerDiv = content.querySelector('div')
@@ -106,13 +134,18 @@ describe('AccordionContent Component', () => {
     })
 
     it('has correct animation classes for accordion states', () => {
-        render(AccordionContent, {
-            slots: {
-                default: 'Content',
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent>Content</AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
-        const content = screen.getByTestId('accordion-content')
+        const content = document.querySelector('[data-slot="accordion-content"]')
 
         // Check for accordion animation classes
         expect(content).toHaveClass('data-[state=closed]:animate-accordion-up')
@@ -120,19 +153,24 @@ describe('AccordionContent Component', () => {
     })
 
     it('renders with complex slot content', () => {
-        render(AccordionContent, {
-            slots: {
-                default: `
-                    <div data-testid="complex-content">
-                        <h3>Title</h3>
-                        <p>Description</p>
-                        <ul>
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                        </ul>
-                    </div>
-                `,
-            },
+        render({
+            components: { Accordion, AccordionItem, AccordionContent },
+            template: `
+                <Accordion :defaultValue="['item-1']">
+                    <AccordionItem value="item-1">
+                        <AccordionContent>
+                            <div data-testid="complex-content">
+                                <h3>Title</h3>
+                                <p>Description</p>
+                                <ul>
+                                    <li>Item 1</li>
+                                    <li>Item 2</li>
+                                </ul>
+                            </div>
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            `,
         })
 
         const complexContent = screen.getByTestId('complex-content')

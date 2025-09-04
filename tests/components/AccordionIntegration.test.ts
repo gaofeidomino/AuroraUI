@@ -12,7 +12,7 @@ describe('Accordion Integration', () => {
                 AccordionContent,
             },
             template: `
-                <Accordion>
+                <Accordion :defaultValue="['item-1', 'item-2']">
                     <AccordionItem value="item-1">
                         <AccordionTrigger>Section 1</AccordionTrigger>
                         <AccordionContent>Content for section 1</AccordionContent>
@@ -26,21 +26,21 @@ describe('Accordion Integration', () => {
         })
 
         // Check main accordion container
-        const accordion = screen.getByTestId('accordion')
+        const accordion = document.querySelector('[data-slot="accordion"]')
         expect(accordion).toBeInTheDocument()
 
         // Check accordion items
-        const items = screen.getAllByTestId('accordion-item')
+        const items = document.querySelectorAll('[data-slot="accordion-item"]')
         expect(items).toHaveLength(2)
 
         // Check triggers
-        const triggers = screen.getAllByTestId('accordion-trigger')
+        const triggers = document.querySelectorAll('[data-slot="accordion-trigger"]')
         expect(triggers).toHaveLength(2)
         expect(triggers[0]).toHaveTextContent('Section 1')
         expect(triggers[1]).toHaveTextContent('Section 2')
 
         // Check content areas
-        const contents = screen.getAllByTestId('accordion-content')
+        const contents = document.querySelectorAll('[data-slot="accordion-content"]')
         expect(contents).toHaveLength(2)
         expect(contents[0]).toHaveTextContent('Content for section 1')
         expect(contents[1]).toHaveTextContent('Content for section 2')
@@ -55,7 +55,7 @@ describe('Accordion Integration', () => {
                 AccordionContent,
             },
             template: `
-                <Accordion>
+                <Accordion :defaultValue="['item-1']">
                     <AccordionItem value="item-1" class="custom-item">
                         <AccordionTrigger class="custom-trigger">Custom Trigger</AccordionTrigger>
                         <AccordionContent class="custom-content">Custom Content</AccordionContent>
@@ -64,9 +64,9 @@ describe('Accordion Integration', () => {
             `,
         })
 
-        const item = screen.getByTestId('accordion-item')
-        const trigger = screen.getByTestId('accordion-trigger')
-        const content = screen.getByTestId('accordion-content')
+        const item = document.querySelector('[data-slot="accordion-item"]')
+        const trigger = document.querySelector('[data-slot="accordion-trigger"]')
+        const content = document.querySelector('[data-slot="accordion-content"]')
 
         expect(item).toHaveClass('custom-item')
         expect(trigger).toHaveClass('custom-trigger')
@@ -85,7 +85,7 @@ describe('Accordion Integration', () => {
                 AccordionContent,
             },
             template: `
-                <Accordion>
+                <Accordion :defaultValue="['faq-1', 'faq-2']">
                     <AccordionItem value="faq-1">
                         <AccordionTrigger>What is AuroraUI?</AccordionTrigger>
                         <AccordionContent>
@@ -109,16 +109,16 @@ describe('Accordion Integration', () => {
         })
 
         // Check FAQ structure
-        const items = screen.getAllByTestId('accordion-item')
+        const items = document.querySelectorAll('[data-slot="accordion-item"]')
         expect(items).toHaveLength(2)
 
         // Check questions
-        const questions = screen.getAllByTestId('accordion-trigger')
+        const questions = document.querySelectorAll('[data-slot="accordion-trigger"]')
         expect(questions[0]).toHaveTextContent('What is AuroraUI?')
         expect(questions[1]).toHaveTextContent('How to use components?')
 
         // Check answers
-        const answers = screen.getAllByTestId('accordion-content')
+        const answers = document.querySelectorAll('[data-slot="accordion-content"]')
         expect(answers[0]).toHaveTextContent('AuroraUI is a modern Vue.js component library')
         expect(answers[0]).toHaveTextContent('Built with Vue 3')
         expect(answers[1]).toHaveTextContent('Import and use components in your Vue templates')
@@ -133,7 +133,7 @@ describe('Accordion Integration', () => {
                 AccordionContent,
             },
             template: `
-                <Accordion>
+                <Accordion :defaultValue="['item-1']">
                     <AccordionItem value="item-1">
                         <AccordionTrigger>
                             Section with Icon
@@ -152,7 +152,7 @@ describe('Accordion Integration', () => {
         expect(customIcon).toHaveTextContent('🔽')
 
         // Default chevron should not be present when custom icon is provided
-        const trigger = screen.getByTestId('accordion-trigger')
+        const trigger = document.querySelector('[data-slot="accordion-trigger"]')
         const defaultChevron = trigger.querySelector('svg')
         expect(defaultChevron).not.toBeInTheDocument()
     })
@@ -166,7 +166,7 @@ describe('Accordion Integration', () => {
                 AccordionContent,
             },
             template: `
-                <Accordion>
+                <Accordion :defaultValue="['item-1']">
                     <AccordionItem value="item-1">
                         <AccordionTrigger>Accessible Section</AccordionTrigger>
                         <AccordionContent>Accessible content</AccordionContent>
@@ -175,10 +175,10 @@ describe('Accordion Integration', () => {
             `,
         })
 
-        const accordion = screen.getByTestId('accordion')
-        const item = screen.getByTestId('accordion-item')
-        const trigger = screen.getByTestId('accordion-trigger')
-        const content = screen.getByTestId('accordion-content')
+        const accordion = document.querySelector('[data-slot="accordion"]')
+        const item = document.querySelector('[data-slot="accordion-item"]')
+        const trigger = document.querySelector('[data-slot="accordion-trigger"]')
+        const content = document.querySelector('[data-slot="accordion-content"]')
 
         // Check proper nesting
         expect(accordion).toContainElement(item)
