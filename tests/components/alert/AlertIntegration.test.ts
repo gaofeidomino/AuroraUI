@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
 import '@testing-library/jest-dom'
-import { Alert, AlertTitle, AlertDescription } from '../../src/components/alert'
+import { Alert, AlertTitle, AlertDescription } from '../../../src/components/alert'
 
 describe('Alert Component Integration', () => {
     it('renders complete alert structure with all components', () => {

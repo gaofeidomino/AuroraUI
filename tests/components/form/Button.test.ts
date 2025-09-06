@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/vue'
 import userEvent from '@testing-library/user-event'
-import { Button } from '../../src/components/button/index'
+import { Button } from '../../../src/components/button/index'
 
 describe('Button Component', () => {
     it('renders correctly with default props', () => {

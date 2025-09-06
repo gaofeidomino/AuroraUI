@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/vue'
-import { Input } from '../../src/components/input'
+import { Input } from '../../../src/components/input'
 
 describe('Input Component', () => {
     it('renders correctly with default props', () => {

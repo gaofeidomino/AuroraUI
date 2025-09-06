@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { Label } from '../../src/components/label'
+import { Label } from '../../../src/components/label'
 
 describe('Label Component', () => {
     it('renders correctly with default content', () => {

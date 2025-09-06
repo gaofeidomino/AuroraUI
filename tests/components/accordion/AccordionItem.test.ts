@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { Accordion, AccordionItem } from '../../src/components/accordion/index'
+import { Accordion, AccordionItem } from '../../../src/components/accordion/index'
 
 describe('AccordionItem Component', () => {
     it('renders correctly with default props', () => {

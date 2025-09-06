@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
 import '@testing-library/jest-dom'
-import { Alert } from '../../src/components/alert'
+import { Alert } from '../../../src/components/alert'
 
 describe('Alert Component', () => {
     it('renders correctly with default variant', () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/vue'
-import { Textarea } from '../../src/components/textarea'
+import { Textarea } from '../../../src/components/textarea'
 
 describe('Textarea Component', () => {
     it('renders correctly with default props', () => {
