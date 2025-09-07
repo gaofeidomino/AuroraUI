@@ -1,16 +1,34 @@
 import { describe, it, expect } from 'vitest'
-import { render } from '@testing-library/vue'
+import { render, fireEvent } from '@testing-library/vue'
 import '@testing-library/jest-dom'
-import { AlertDialogDescription } from '../../../src/components/alert-dialog'
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogDescription } from '../../../src/components/alert-dialog'
 
 describe('AlertDialogDescription Component', () => {
-    it('renders correctly', () => {
-        const { container } = render(AlertDialogDescription, {
-            slots: {
-                default: 'Dialog Description',
+    it('renders correctly', async () => {
+        const { container } = render({
+            components: {
+                AlertDialog,
+                AlertDialogTrigger,
+                AlertDialogContent,
+                AlertDialogDescription,
             },
+            template: `
+                <AlertDialog>
+                    <AlertDialogTrigger>
+                        <button data-testid="trigger">Open Dialog</button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <AlertDialogDescription>Dialog Description</AlertDialogDescription>
+                    </AlertDialogContent>
+                </AlertDialog>
+            `,
         })
-        expect(container.querySelector('[data-slot="alert-dialog-description"]')).toBeInTheDocument()
-        expect(container.querySelector('[data-slot="alert-dialog-description"]')).toHaveTextContent('Dialog Description')
+        
+        // Click trigger to open dialog
+        const trigger = container.querySelector('[data-testid="trigger"]')
+        await fireEvent.click(trigger!)
+        
+        expect(document.querySelector('[data-slot="alert-dialog-description"]')).toBeInTheDocument()
+        expect(document.querySelector('[data-slot="alert-dialog-description"]')).toHaveTextContent('Dialog Description')
     })
 })

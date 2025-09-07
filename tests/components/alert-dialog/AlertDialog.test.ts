@@ -1,15 +1,27 @@
 import { describe, it, expect } from 'vitest'
 import { render } from '@testing-library/vue'
 import '@testing-library/jest-dom'
-import { AlertDialog } from '../../../src/components/alert-dialog'
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from '../../../src/components/alert-dialog'
 
 describe('AlertDialog Component', () => {
     it('renders correctly', () => {
-        const { container } = render(AlertDialog, {
-            slots: {
-                default: '<div>Test Content</div>',
+        const { container } = render({
+            components: {
+                AlertDialog,
+                AlertDialogTrigger,
+                AlertDialogContent,
             },
+            template: `
+                <AlertDialog>
+                    <AlertDialogTrigger>
+                        <button>Open Dialog</button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <div>Test Content</div>
+                    </AlertDialogContent>
+                </AlertDialog>
+            `,
         })
-        expect(container.firstChild).toBeInTheDocument()
+        expect(container.querySelector('button')).toBeInTheDocument()
     })
 })
