@@ -23,11 +23,11 @@ describe('AlertDialogTitle Component', () => {
                 </AlertDialog>
             `,
         })
-        
+
         // Click trigger to open dialog
         const trigger = container.querySelector('[data-testid="trigger"]')
         await fireEvent.click(trigger!)
-        
+
         expect(document.querySelector('[data-slot="alert-dialog-title"]')).toBeInTheDocument()
         expect(document.querySelector('[data-slot="alert-dialog-title"]')).toHaveTextContent('Dialog Title')
     })

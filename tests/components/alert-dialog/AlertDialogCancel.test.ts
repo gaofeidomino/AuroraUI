@@ -23,11 +23,11 @@ describe('AlertDialogCancel Component', () => {
                 </AlertDialog>
             `,
         })
-        
+
         // Click trigger to open dialog
         const trigger = container.querySelector('[data-testid="trigger"]')
         await fireEvent.click(trigger!)
-        
+
         const cancelButton = document.querySelector('[data-slot="alert-dialog-content"] button')
         expect(cancelButton).toBeInTheDocument()
         expect(cancelButton).toHaveTextContent('Cancel')
