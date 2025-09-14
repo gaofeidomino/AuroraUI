@@ -54,40 +54,50 @@ describe('Avatar Component', () => {
 
 describe('AvatarImage Component', () => {
     it('renders correctly with default props', () => {
-        render(AvatarImage, {
-            props: {
-                src: 'https://example.com/avatar.jpg',
-                alt: 'User Avatar',
-            },
-            slots: {
-                default: 'Image Content',
-            },
-        })
+        const TestComponent = {
+            components: { Avatar, AvatarImage },
+            template: `
+                <Avatar>
+                    <AvatarImage src="https://example.com/avatar.jpg" alt="User Avatar" />
+                </Avatar>
+            `,
+        }
 
-        const avatarImage = screen.getByText('Image Content')
-        expect(avatarImage).toBeDefined()
-        expect(avatarImage.closest('[data-slot="avatar-image"]')).toBeDefined()
+        render(TestComponent)
+
+        const avatarImageElement = document.querySelector('[data-slot="avatar-image"]')
+        expect(avatarImageElement).toBeDefined()
+        expect(avatarImageElement?.getAttribute('src')).toBe('https://example.com/avatar.jpg')
+        expect(avatarImageElement?.getAttribute('alt')).toBe('User Avatar')
     })
 
     it('renders with src and alt attributes', () => {
-        render(AvatarImage, {
-            props: {
-                src: 'https://example.com/user.jpg',
-                alt: 'User Profile Picture',
-            },
-        })
+        const TestComponent = {
+            components: { Avatar, AvatarImage },
+            template: `
+                <Avatar>
+                    <AvatarImage src="https://example.com/user.jpg" alt="User Profile Picture" />
+                </Avatar>
+            `,
+        }
+
+        render(TestComponent)
 
         const avatarImageElement = document.querySelector('[data-slot="avatar-image"]')
         expect(avatarImageElement).toBeDefined()
     })
 
     it('maintains proper data-slot attribute', () => {
-        render(AvatarImage, {
-            props: {
-                src: 'test.jpg',
-                alt: 'Test',
-            },
-        })
+        const TestComponent = {
+            components: { Avatar, AvatarImage },
+            template: `
+                <Avatar>
+                    <AvatarImage src="test.jpg" alt="Test" />
+                </Avatar>
+            `,
+        }
+
+        render(TestComponent)
 
         const avatarImageElement = document.querySelector('[data-slot="avatar-image"]')
         expect(avatarImageElement).toBeDefined()
@@ -97,11 +107,16 @@ describe('AvatarImage Component', () => {
 
 describe('AvatarFallback Component', () => {
     it('renders correctly with default props', () => {
-        render(AvatarFallback, {
-            slots: {
-                default: 'Fallback Content',
-            },
-        })
+        const TestComponent = {
+            components: { Avatar, AvatarFallback },
+            template: `
+                <Avatar>
+                    <AvatarFallback>Fallback Content</AvatarFallback>
+                </Avatar>
+            `,
+        }
+
+        render(TestComponent)
 
         const avatarFallback = screen.getByText('Fallback Content')
         expect(avatarFallback).toBeDefined()
@@ -109,14 +124,16 @@ describe('AvatarFallback Component', () => {
     })
 
     it('renders with custom class', () => {
-        render(AvatarFallback, {
-            props: {
-                class: 'custom-fallback-class',
-            },
-            slots: {
-                default: 'Fallback Content',
-            },
-        })
+        const TestComponent = {
+            components: { Avatar, AvatarFallback },
+            template: `
+                <Avatar>
+                    <AvatarFallback class="custom-fallback-class">Fallback Content</AvatarFallback>
+                </Avatar>
+            `,
+        }
+
+        render(TestComponent)
 
         const avatarFallback = screen.getByText('Fallback Content')
         const avatarFallbackElement = avatarFallback.closest('[data-slot="avatar-fallback"]')
@@ -125,7 +142,16 @@ describe('AvatarFallback Component', () => {
     })
 
     it('renders without content when no slot provided', () => {
-        render(AvatarFallback)
+        const TestComponent = {
+            components: { Avatar, AvatarFallback },
+            template: `
+                <Avatar>
+                    <AvatarFallback />
+                </Avatar>
+            `,
+        }
+
+        render(TestComponent)
 
         const avatarFallbackElement = document.querySelector('[data-slot="avatar-fallback"]')
         expect(avatarFallbackElement).toBeDefined()
@@ -133,11 +159,16 @@ describe('AvatarFallback Component', () => {
     })
 
     it('maintains proper data-slot attribute', () => {
-        render(AvatarFallback, {
-            slots: {
-                default: 'Test Fallback',
-            },
-        })
+        const TestComponent = {
+            components: { Avatar, AvatarFallback },
+            template: `
+                <Avatar>
+                    <AvatarFallback>Test Fallback</AvatarFallback>
+                </Avatar>
+            `,
+        }
+
+        render(TestComponent)
 
         const avatarFallbackElement = screen.getByText('Test Fallback').closest('[data-slot="avatar-fallback"]')
         expect(avatarFallbackElement).toBeDefined()

@@ -126,7 +126,8 @@ describe('Badge Component', () => {
     })
 
     it('renders as different HTML elements', () => {
-        const { rerender } = render(Badge, {
+        // Test div element
+        const { unmount: unmountDiv } = render(Badge, {
             props: {
                 as: 'div',
             },
@@ -137,12 +138,19 @@ describe('Badge Component', () => {
 
         let badgeElement = screen.getByText('Div Badge').closest('[data-slot="badge"]')
         expect(badgeElement?.tagName).toBe('DIV')
+        unmountDiv()
 
-        rerender({
-            as: 'span',
+        // Test span element
+        render(Badge, {
+            props: {
+                as: 'span',
+            },
+            slots: {
+                default: 'Span Badge',
+            },
         })
 
-        badgeElement = screen.getByText('Div Badge').closest('[data-slot="badge"]')
+        badgeElement = screen.getByText('Span Badge').closest('[data-slot="badge"]')
         expect(badgeElement?.tagName).toBe('SPAN')
     })
 
