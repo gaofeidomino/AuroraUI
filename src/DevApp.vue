@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { CalendarDate } from '@internationalized/date'
+import type { DateValue } from 'reka-ui'
 import { AButton, ACard, ACardContent, ACardDescription, ACardFooter, ACardHeader, ACardTitle, AInput, ATextarea, ALabel, AAccordion, AAccordionItem, AAccordionTrigger, AAccordionContent, AAlert, AAlertDescription, AAlertTitle, ABadge, AAvatar, AAvatarFallback, AAvatarImage, AAspectRatio, ACalendar } from './components'
 
 const clickCount = ref(0)
@@ -24,8 +26,8 @@ const alertType = ref<'default' | 'destructive'>('default')
 const badgeCount = ref(5)
 
 // Calendar 相关状态
-const selectedDate = ref<Date | undefined>(undefined)
-const calendarValue = ref<Date | undefined>(undefined)
+const selectedDate = ref<DateValue | undefined>(undefined)
+const calendarValue = ref<DateValue | undefined>(undefined)
 
 const handleClick = () => {
     clickCount.value++
@@ -67,30 +69,27 @@ const decrementBadge = () => {
 }
 
 // Calendar 事件处理
-const handleDateSelect = (date: Date | undefined) => {
+const handleDateSelect = (date: DateValue | undefined) => {
     selectedDate.value = date
     console.log('选择的日期:', date)
 }
 
 const goToToday = () => {
     const today = new Date()
-    selectedDate.value = today
-    calendarValue.value = today
+    const calendarToday = new CalendarDate(today.getFullYear(), today.getMonth() + 1, today.getDate())
+    selectedDate.value = calendarToday as DateValue
+    calendarValue.value = calendarToday as DateValue
 }
 
 const goToNextMonth = () => {
     if (calendarValue.value) {
-        const nextMonth = new Date(calendarValue.value)
-        nextMonth.setMonth(nextMonth.getMonth() + 1)
-        calendarValue.value = nextMonth
+        calendarValue.value = calendarValue.value.add({ months: 1 })
     }
 }
 
 const goToPrevMonth = () => {
     if (calendarValue.value) {
-        const prevMonth = new Date(calendarValue.value)
-        prevMonth.setMonth(prevMonth.getMonth() - 1)
-        calendarValue.value = prevMonth
+        calendarValue.value = calendarValue.value.subtract({ months: 1 })
     }
 }
 </script>
@@ -920,7 +919,7 @@ const goToPrevMonth = () => {
                                         <ACardDescription>选择一个日期</ACardDescription>
                                     </ACardHeader>
                                     <ACardContent>
-                                        <ACalendar v-model="selectedDate" @update:model-value="handleDateSelect" class="rounded-md border" />
+                                        <ACalendar v-model="selectedDate as any" @update:model-value="handleDateSelect" class="rounded-md border" />
                                     </ACardContent>
                                 </ACard>
 
@@ -941,7 +940,7 @@ const goToPrevMonth = () => {
 
                                 <ACard class="w-fit">
                                     <ACardContent class="p-4">
-                                        <ACalendar v-model="calendarValue" class="rounded-md border" />
+                                        <ACalendar v-model="calendarValue as any" class="rounded-md border" />
                                     </ACardContent>
                                 </ACard>
 
@@ -984,7 +983,7 @@ const goToPrevMonth = () => {
                                 <ACardContent class="space-y-4">
                                     <div>
                                         <ALabel>选择日期</ALabel>
-                                        <ACalendar v-model="selectedDate" class="rounded-md border mt-2" />
+                                        <ACalendar v-model="selectedDate as any" class="rounded-md border mt-2" />
                                     </div>
 
                                     <div v-if="selectedDate" class="p-3 bg-muted rounded-lg">

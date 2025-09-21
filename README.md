@@ -108,6 +108,16 @@ pnpm format
 
 # Run examples
 pnpm dev:examples
+
+# Publish to npm (with automatic version management)
+pnpm publish              # Patch version (1.0.0 -> 1.0.1)
+pnpm publish:minor        # Minor version (1.0.0 -> 1.1.0)
+pnpm publish:major        # Major version (1.0.0 -> 2.0.0)
+pnpm publish:beta         # Beta version (1.0.0 -> 1.0.1-beta.0)
+pnpm publish:alpha        # Alpha version (1.0.0 -> 1.0.1-alpha.0)
+pnpm publish:rc           # Release candidate (1.0.0 -> 1.0.1-rc.0)
+
+
 ```
 
 ## 📦 Available Components
@@ -172,6 +182,30 @@ Contributions are welcome! This is a learning project, so feel free to:
 3. Make your changes
 4. Add tests for new features
 5. Submit a pull request
+
+## 📋 Version Management
+
+AuroraUI uses smart version management for publishing. Each publish command automatically updates the version number and publishes to npm with the appropriate tag.
+
+### Version Types
+
+| Command              | Version Change        | NPM Tag | Use Case           |
+| -------------------- | --------------------- | ------- | ------------------ |
+| `pnpm publish`       | 1.0.0 → 1.0.1         | latest  | Bug fixes          |
+| `pnpm publish:minor` | 1.0.0 → 1.1.0         | latest  | New features       |
+| `pnpm publish:major` | 1.0.0 → 2.0.0         | latest  | Breaking changes   |
+| `pnpm publish:beta`  | 1.0.0 → 1.0.1-beta.0  | beta    | Testing releases   |
+| `pnpm publish:alpha` | 1.0.0 → 1.0.1-alpha.0 | alpha   | Internal testing   |
+| `pnpm publish:rc`    | 1.0.0 → 1.0.1-rc.0    | rc      | Release candidates |
+
+### Automated Workflow
+
+Each publish command automatically:
+
+1. **Updates version** - Modifies package.json version
+2. **Runs tests** - Ensures code quality
+3. **Builds project** - Generates dist directory
+4. **Publishes to npm** - Uses correct tag for release type
 
 ## 🙏 Acknowledgments
 
