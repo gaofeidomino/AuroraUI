@@ -23,3 +23,15 @@ export { Label as ALabel } from './label'
 
 // 手风琴组件
 export { Accordion as AAccordion, AccordionItem as AAccordionItem, AccordionTrigger as AAccordionTrigger, AccordionContent as AAccordionContent } from './accordion'
+
+// 徽章组件
+export { Badge as ABadge, badgeVariants, type BadgeVariants } from './badge'
+
+// 头像组件
+export { Avatar as AAvatar, AvatarFallback as AAvatarFallback, AvatarImage as AAvatarImage } from './avatar'
+
+// 宽高比组件
+export { AspectRatio as AAspectRatio } from './aspect-ratio'
+
+// 日历组件
+export { Calendar as ACalendar, CalendarCell as ACalendarCell, CalendarCellTrigger as ACalendarCellTrigger, CalendarGrid as ACalendarGrid, CalendarGridBody as ACalendarGridBody, CalendarGridHead as ACalendarGridHead, CalendarGridRow as ACalendarGridRow, CalendarHeadCell as ACalendarHeadCell, CalendarHeader as ACalendarHeader, CalendarHeading as ACalendarHeading, CalendarNextButton as ACalendarNextButton, CalendarPrevButton as ACalendarPrevButton } from './calendar'

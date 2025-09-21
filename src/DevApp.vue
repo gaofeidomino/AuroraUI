@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { AButton, ACard, ACardContent, ACardDescription, ACardFooter, ACardHeader, ACardTitle, AInput, ATextarea, ALabel, AAccordion, AAccordionItem, AAccordionTrigger, AAccordionContent } from './components'
+import { AButton, ACard, ACardContent, ACardDescription, ACardFooter, ACardHeader, ACardTitle, AInput, ATextarea, ALabel, AAccordion, AAccordionItem, AAccordionTrigger, AAccordionContent, AAlert, AAlertDescription, AAlertTitle, ABadge, AAvatar, AAvatarFallback, AAvatarImage, AAspectRatio, ACalendar } from './components'
 
 const clickCount = ref(0)
 const inputValue = ref('')
@@ -15,6 +15,17 @@ const feedbackValue = ref('')
 // Accordion 相关状态
 const accordionValue = ref<string | undefined>(undefined)
 const accordionMultipleValue = ref<string[]>([])
+
+// Alert 相关状态
+const showAlert = ref(false)
+const alertType = ref<'default' | 'destructive'>('default')
+
+// Badge 相关状态
+const badgeCount = ref(5)
+
+// Calendar 相关状态
+const selectedDate = ref<Date | undefined>(undefined)
+const calendarValue = ref<Date | undefined>(undefined)
 
 const handleClick = () => {
     clickCount.value++
@@ -34,6 +45,53 @@ const handleAccordionChange = (value: string | undefined) => {
 const handleAccordionMultipleChange = (value: string[]) => {
     accordionMultipleValue.value = value
     console.log('多选 Accordion 值变化:', value)
+}
+
+// Alert 事件处理
+const showAlertMessage = (type: 'default' | 'destructive' = 'default') => {
+    alertType.value = type
+    showAlert.value = true
+    setTimeout(() => {
+        showAlert.value = false
+    }, 3000)
+}
+
+const incrementBadge = () => {
+    badgeCount.value++
+}
+
+const decrementBadge = () => {
+    if (badgeCount.value > 0) {
+        badgeCount.value--
+    }
+}
+
+// Calendar 事件处理
+const handleDateSelect = (date: Date | undefined) => {
+    selectedDate.value = date
+    console.log('选择的日期:', date)
+}
+
+const goToToday = () => {
+    const today = new Date()
+    selectedDate.value = today
+    calendarValue.value = today
+}
+
+const goToNextMonth = () => {
+    if (calendarValue.value) {
+        const nextMonth = new Date(calendarValue.value)
+        nextMonth.setMonth(nextMonth.getMonth() + 1)
+        calendarValue.value = nextMonth
+    }
+}
+
+const goToPrevMonth = () => {
+    if (calendarValue.value) {
+        const prevMonth = new Date(calendarValue.value)
+        prevMonth.setMonth(prevMonth.getMonth() - 1)
+        calendarValue.value = prevMonth
+    }
 }
 </script>
 
@@ -575,6 +633,382 @@ const handleAccordionMultipleChange = (value: string[]) => {
                                     </AAccordionItem>
                                 </AAccordion>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Alert 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Alert 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="space-y-4">
+                                <AAlert variant="default">
+                                    <AAlertTitle>提示信息</AAlertTitle>
+                                    <AAlertDescription> 这是一个默认的提示框，用于显示重要信息。 </AAlertDescription>
+                                </AAlert>
+
+                                <AAlert variant="destructive">
+                                    <AAlertTitle>错误信息</AAlertTitle>
+                                    <AAlertDescription> 这是一个错误提示框，用于显示错误或警告信息。 </AAlertDescription>
+                                </AAlert>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">动态显示</h3>
+                            <div class="space-y-4">
+                                <div class="flex gap-2">
+                                    <AButton size="sm" @click="showAlertMessage('default')">显示普通提示</AButton>
+                                    <AButton size="sm" variant="destructive" @click="showAlertMessage('destructive')">显示错误提示</AButton>
+                                </div>
+
+                                <div v-if="showAlert" class="transition-all duration-300">
+                                    <AAlert :variant="alertType">
+                                        <AAlertTitle>{{ alertType === 'destructive' ? '错误' : '提示' }}</AAlertTitle>
+                                        <AAlertDescription>
+                                            {{ alertType === 'destructive' ? '这是一个动态显示的错误提示！' : '这是一个动态显示的普通提示！' }}
+                                        </AAlertDescription>
+                                    </AAlert>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Badge 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Badge 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="flex flex-wrap items-center gap-4">
+                                <div class="flex items-center gap-2">
+                                    <span>通知</span>
+                                    <ABadge>{{ badgeCount }}</ABadge>
+                                </div>
+
+                                <div class="flex items-center gap-2">
+                                    <span>消息</span>
+                                    <ABadge variant="secondary">新</ABadge>
+                                </div>
+
+                                <div class="flex items-center gap-2">
+                                    <span>状态</span>
+                                    <ABadge variant="destructive">错误</ABadge>
+                                </div>
+
+                                <div class="flex items-center gap-2">
+                                    <span>成功</span>
+                                    <ABadge variant="outline">完成</ABadge>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">交互控制</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4">
+                                    <span>当前计数: </span>
+                                    <ABadge variant="default">{{ badgeCount }}</ABadge>
+                                    <div class="flex gap-2">
+                                        <AButton size="sm" @click="incrementBadge">增加</AButton>
+                                        <AButton size="sm" variant="outline" @click="decrementBadge">减少</AButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">不同尺寸</h3>
+                            <div class="flex flex-wrap items-center gap-4">
+                                <div class="flex items-center gap-2">
+                                    <span>小尺寸</span>
+                                    <ABadge class="text-xs">小</ABadge>
+                                </div>
+
+                                <div class="flex items-center gap-2">
+                                    <span>默认尺寸</span>
+                                    <ABadge>默认</ABadge>
+                                </div>
+
+                                <div class="flex items-center gap-2">
+                                    <span>大尺寸</span>
+                                    <ABadge class="text-lg px-3 py-1">大</ABadge>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Avatar 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Avatar 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="flex flex-wrap items-center gap-4">
+                                <AAvatar>
+                                    <AAvatarImage src="https://github.com/shadcn.png" alt="用户头像" />
+                                    <AAvatarFallback>CN</AAvatarFallback>
+                                </AAvatar>
+
+                                <AAvatar>
+                                    <AAvatarFallback>AB</AAvatarFallback>
+                                </AAvatar>
+
+                                <AAvatar>
+                                    <AAvatarImage src="https://invalid-url.com/avatar.png" alt="无效图片" />
+                                    <AAvatarFallback>无效</AAvatarFallback>
+                                </AAvatar>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">不同尺寸</h3>
+                            <div class="flex flex-wrap items-center gap-4">
+                                <AAvatar class="h-8 w-8">
+                                    <AAvatarImage src="https://github.com/shadcn.png" alt="小头像" />
+                                    <AAvatarFallback>小</AAvatarFallback>
+                                </AAvatar>
+
+                                <AAvatar class="h-12 w-12">
+                                    <AAvatarImage src="https://github.com/shadcn.png" alt="默认头像" />
+                                    <AAvatarFallback>默认</AAvatarFallback>
+                                </AAvatar>
+
+                                <AAvatar class="h-16 w-16">
+                                    <AAvatarImage src="https://github.com/shadcn.png" alt="大头像" />
+                                    <AAvatarFallback>大</AAvatarFallback>
+                                </AAvatar>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">用户列表示例</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3 p-3 border rounded-lg">
+                                    <AAvatar>
+                                        <AAvatarImage src="https://github.com/shadcn.png" alt="张三" />
+                                        <AAvatarFallback>张三</AAvatarFallback>
+                                    </AAvatar>
+                                    <div>
+                                        <div class="font-medium">张三</div>
+                                        <div class="text-sm text-muted-foreground">前端开发工程师</div>
+                                    </div>
+                                    <ABadge class="ml-auto">在线</ABadge>
+                                </div>
+
+                                <div class="flex items-center gap-3 p-3 border rounded-lg">
+                                    <AAvatar>
+                                        <AAvatarFallback>李四</AAvatarFallback>
+                                    </AAvatar>
+                                    <div>
+                                        <div class="font-medium">李四</div>
+                                        <div class="text-sm text-muted-foreground">后端开发工程师</div>
+                                    </div>
+                                    <ABadge variant="secondary" class="ml-auto">离线</ABadge>
+                                </div>
+
+                                <div class="flex items-center gap-3 p-3 border rounded-lg">
+                                    <AAvatar>
+                                        <AAvatarImage src="https://github.com/vercel.png" alt="王五" />
+                                        <AAvatarFallback>王五</AAvatarFallback>
+                                    </AAvatar>
+                                    <div>
+                                        <div class="font-medium">王五</div>
+                                        <div class="text-sm text-muted-foreground">UI/UX 设计师</div>
+                                    </div>
+                                    <ABadge variant="outline" class="ml-auto">忙碌</ABadge>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AspectRatio 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">AspectRatio 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">不同比例</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div>
+                                    <h4 class="text-sm font-medium mb-2">16:9 比例</h4>
+                                    <AAspectRatio :ratio="16 / 9" class="bg-muted rounded-md overflow-hidden">
+                                        <div class="flex items-center justify-center h-full">
+                                            <span class="text-muted-foreground">16:9</span>
+                                        </div>
+                                    </AAspectRatio>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-sm font-medium mb-2">4:3 比例</h4>
+                                    <AAspectRatio :ratio="4 / 3" class="bg-muted rounded-md overflow-hidden">
+                                        <div class="flex items-center justify-center h-full">
+                                            <span class="text-muted-foreground">4:3</span>
+                                        </div>
+                                    </AAspectRatio>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-sm font-medium mb-2">1:1 比例</h4>
+                                    <AAspectRatio :ratio="1" class="bg-muted rounded-md overflow-hidden">
+                                        <div class="flex items-center justify-center h-full">
+                                            <span class="text-muted-foreground">1:1</span>
+                                        </div>
+                                    </AAspectRatio>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">实际应用示例</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-sm font-medium mb-2">视频播放器</h4>
+                                    <AAspectRatio :ratio="16 / 9" class="bg-black rounded-lg overflow-hidden">
+                                        <div class="flex items-center justify-center h-full text-white">
+                                            <div class="text-center">
+                                                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-2 mx-auto">
+                                                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z" />
+                                                    </svg>
+                                                </div>
+                                                <p>视频播放器</p>
+                                            </div>
+                                        </div>
+                                    </AAspectRatio>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-sm font-medium mb-2">图片卡片</h4>
+                                    <AAspectRatio :ratio="4 / 3" class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg overflow-hidden">
+                                        <div class="flex items-center justify-center h-full text-white">
+                                            <div class="text-center">
+                                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-2 mx-auto">
+                                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                                                    </svg>
+                                                </div>
+                                                <p>图片占位符</p>
+                                            </div>
+                                        </div>
+                                    </AAspectRatio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calendar 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Calendar 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="space-y-4">
+                                <ACard class="w-fit">
+                                    <ACardHeader>
+                                        <ACardTitle>日期选择器</ACardTitle>
+                                        <ACardDescription>选择一个日期</ACardDescription>
+                                    </ACardHeader>
+                                    <ACardContent>
+                                        <ACalendar v-model="selectedDate" @update:model-value="handleDateSelect" class="rounded-md border" />
+                                    </ACardContent>
+                                </ACard>
+
+                                <div v-if="selectedDate" class="p-4 bg-muted rounded-lg">
+                                    <p class="text-sm text-muted-foreground">选择的日期: {{ selectedDate }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">带导航控制的日历</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-2">
+                                    <AButton size="sm" @click="goToPrevMonth">上个月</AButton>
+                                    <AButton size="sm" @click="goToToday">今天</AButton>
+                                    <AButton size="sm" @click="goToNextMonth">下个月</AButton>
+                                </div>
+
+                                <ACard class="w-fit">
+                                    <ACardContent class="p-4">
+                                        <ACalendar v-model="calendarValue" class="rounded-md border" />
+                                    </ACardContent>
+                                </ACard>
+
+                                <div class="p-4 bg-muted rounded-lg">
+                                    <p class="text-sm text-muted-foreground">当前月份: {{ calendarValue }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">不同尺寸</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="text-sm font-medium mb-2">小尺寸</h4>
+                                    <ACard class="w-fit">
+                                        <ACardContent class="p-2">
+                                            <ACalendar class="rounded-md border scale-75 origin-top-left" />
+                                        </ACardContent>
+                                    </ACard>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-sm font-medium mb-2">默认尺寸</h4>
+                                    <ACard class="w-fit">
+                                        <ACardContent class="p-4">
+                                            <ACalendar class="rounded-md border" />
+                                        </ACardContent>
+                                    </ACard>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">表单集成示例</h3>
+                            <ACard class="max-w-md">
+                                <ACardHeader>
+                                    <ACardTitle>预约时间</ACardTitle>
+                                    <ACardDescription>请选择您的预约日期</ACardDescription>
+                                </ACardHeader>
+                                <ACardContent class="space-y-4">
+                                    <div>
+                                        <ALabel>选择日期</ALabel>
+                                        <ACalendar v-model="selectedDate" class="rounded-md border mt-2" />
+                                    </div>
+
+                                    <div v-if="selectedDate" class="p-3 bg-muted rounded-lg">
+                                        <p class="text-sm font-medium">已选择日期</p>
+                                        <p class="text-sm text-muted-foreground">
+                                            {{ selectedDate }}
+                                        </p>
+                                    </div>
+
+                                    <div class="flex gap-2 pt-2">
+                                        <AButton size="sm" :disabled="!selectedDate">确认预约</AButton>
+                                        <AButton size="sm" variant="outline" @click="selectedDate = undefined">清除选择</AButton>
+                                    </div>
+                                </ACardContent>
+                            </ACard>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">自定义样式</h3>
+                            <ACard class="w-fit">
+                                <ACardContent class="p-4">
+                                    <ACalendar class="rounded-lg border-2 border-primary/20 shadow-lg" />
+                                </ACardContent>
+                            </ACard>
                         </div>
                     </div>
                 </section>
