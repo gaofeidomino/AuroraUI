@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { CalendarDate } from '@internationalized/date'
 import type { DateValue } from 'reka-ui'
-import { AButton, ACard, ACardContent, ACardDescription, ACardFooter, ACardHeader, ACardTitle, AInput, ATextarea, ALabel, AAccordion, AAccordionItem, AAccordionTrigger, AAccordionContent, AAlert, AAlertDescription, AAlertTitle, ABadge, AAvatar, AAvatarFallback, AAvatarImage, AAspectRatio, ACalendar } from './components'
+import { AButton, ACard, ACardContent, ACardDescription, ACardFooter, ACardHeader, ACardTitle, AInput, ATextarea, ALabel, AAccordion, AAccordionItem, AAccordionTrigger, AAccordionContent, AAlert, AAlertDescription, AAlertTitle, ABadge, AAvatar, AAvatarFallback, AAvatarImage, AAspectRatio, ACalendar, ACarousel, ACarouselContent, ACarouselItem, ACarouselNext, ACarouselPrevious } from './components'
 
 const clickCount = ref(0)
 const inputValue = ref('')
@@ -1008,6 +1008,214 @@ const goToPrevMonth = () => {
                                     <ACalendar class="rounded-lg border-2 border-primary/20 shadow-lg" />
                                 </ACardContent>
                             </ACard>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Carousel 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Carousel 组件测试</h2>
+
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法 - 水平轮播</h3>
+                            <div class="max-w-xs mx-auto">
+                                <ACarousel class="w-full">
+                                    <ACarouselContent>
+                                        <ACarouselItem v-for="i in 5" :key="i">
+                                            <div class="p-1">
+                                                <ACard>
+                                                    <ACardContent class="flex aspect-square items-center justify-center p-6">
+                                                        <span class="text-4xl font-semibold">{{ i }}</span>
+                                                    </ACardContent>
+                                                </ACard>
+                                            </div>
+                                        </ACarouselItem>
+                                    </ACarouselContent>
+                                    <ACarouselPrevious />
+                                    <ACarouselNext />
+                                </ACarousel>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">垂直轮播</h3>
+                            <div class="max-w-xs mx-auto">
+                                <ACarousel orientation="vertical" class="w-full max-w-xs">
+                                    <ACarouselContent class="-mt-1 h-[200px]">
+                                        <ACarouselItem v-for="i in 5" :key="i" class="pt-1 md:basis-1/2">
+                                            <div class="p-1">
+                                                <ACard>
+                                                    <ACardContent class="flex items-center justify-center p-6">
+                                                        <span class="text-3xl font-semibold">{{ i }}</span>
+                                                    </ACardContent>
+                                                </ACard>
+                                            </div>
+                                        </ACarouselItem>
+                                    </ACarouselContent>
+                                    <ACarouselPrevious />
+                                    <ACarouselNext />
+                                </ACarousel>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">图片轮播示例</h3>
+                            <div class="max-w-2xl mx-auto">
+                                <ACarousel class="w-full">
+                                    <ACarouselContent>
+                                        <ACarouselItem v-for="i in 4" :key="i">
+                                            <div class="p-1">
+                                                <ACard>
+                                                    <ACardContent class="p-0">
+                                                        <AAspectRatio :ratio="16 / 9" class="bg-muted">
+                                                            <div class="flex items-center justify-center h-full">
+                                                                <div class="text-center">
+                                                                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-2 mx-auto">
+                                                                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                                                            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <p class="text-muted-foreground">图片 {{ i }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </AAspectRatio>
+                                                    </ACardContent>
+                                                </ACard>
+                                            </div>
+                                        </ACarouselItem>
+                                    </ACarouselContent>
+                                    <ACarouselPrevious />
+                                    <ACarouselNext />
+                                </ACarousel>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">多项展示 - 一次显示 3 个</h3>
+                            <div class="max-w-4xl mx-auto">
+                                <ACarousel :opts="{ align: 'start' }" class="w-full">
+                                    <ACarouselContent>
+                                        <ACarouselItem v-for="i in 10" :key="i" class="md:basis-1/2 lg:basis-1/3">
+                                            <div class="p-1">
+                                                <ACard>
+                                                    <ACardContent class="flex aspect-square items-center justify-center p-6">
+                                                        <span class="text-2xl font-semibold">{{ i }}</span>
+                                                    </ACardContent>
+                                                </ACard>
+                                            </div>
+                                        </ACarouselItem>
+                                    </ACarouselContent>
+                                    <ACarouselPrevious />
+                                    <ACarouselNext />
+                                </ACarousel>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">产品卡片轮播</h3>
+                            <div class="max-w-5xl mx-auto">
+                                <ACarousel :opts="{ align: 'start', loop: true }" class="w-full">
+                                    <ACarouselContent>
+                                        <ACarouselItem v-for="i in 6" :key="i" class="md:basis-1/2 lg:basis-1/3">
+                                            <div class="p-1">
+                                                <ACard>
+                                                    <ACardHeader>
+                                                        <AAspectRatio :ratio="16 / 9" class="bg-muted rounded-md">
+                                                            <div class="flex items-center justify-center h-full">
+                                                                <span class="text-4xl text-muted-foreground">{{ i }}</span>
+                                                            </div>
+                                                        </AAspectRatio>
+                                                    </ACardHeader>
+                                                    <ACardContent>
+                                                        <ACardTitle class="text-lg">产品 {{ i }}</ACardTitle>
+                                                        <ACardDescription class="mt-2">这是产品 {{ i }} 的简要描述信息</ACardDescription>
+                                                    </ACardContent>
+                                                    <ACardFooter class="gap-2">
+                                                        <AButton size="sm" class="w-full">查看详情</AButton>
+                                                    </ACardFooter>
+                                                </ACard>
+                                            </div>
+                                        </ACarouselItem>
+                                    </ACarouselContent>
+                                    <ACarouselPrevious />
+                                    <ACarouselNext />
+                                </ACarousel>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">自定义样式和控制</h3>
+                            <div class="max-w-xl mx-auto">
+                                <ACarousel v-slot="{ scrollPrev, scrollNext, canScrollPrev, canScrollNext }" :opts="{ loop: false }" class="w-full">
+                                    <ACarouselContent>
+                                        <ACarouselItem v-for="i in 5" :key="i">
+                                            <div class="p-1">
+                                                <ACard class="border-2 border-primary/20">
+                                                    <ACardContent class="flex aspect-video items-center justify-center p-6">
+                                                        <div class="text-center">
+                                                            <span class="text-5xl font-bold text-primary">{{ i }}</span>
+                                                            <p class="text-sm text-muted-foreground mt-2">幻灯片 {{ i }}</p>
+                                                        </div>
+                                                    </ACardContent>
+                                                </ACard>
+                                            </div>
+                                        </ACarouselItem>
+                                    </ACarouselContent>
+
+                                    <!-- 自定义控制按钮 -->
+                                    <div class="flex items-center justify-center gap-2 mt-4">
+                                        <AButton size="sm" variant="outline" :disabled="!canScrollPrev" @click="scrollPrev()">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                            上一张
+                                        </AButton>
+                                        <AButton size="sm" variant="outline" :disabled="!canScrollNext" @click="scrollNext()">
+                                            下一张
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </AButton>
+                                    </div>
+                                </ACarousel>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">用户评价轮播</h3>
+                            <div class="max-w-3xl mx-auto">
+                                <ACarousel :opts="{ loop: true }" class="w-full">
+                                    <ACarouselContent>
+                                        <ACarouselItem v-for="i in 4" :key="i">
+                                            <div class="p-1">
+                                                <ACard>
+                                                    <ACardHeader>
+                                                        <div class="flex items-center gap-4">
+                                                            <AAvatar>
+                                                                <AAvatarFallback>U{{ i }}</AAvatarFallback>
+                                                            </AAvatar>
+                                                            <div>
+                                                                <ACardTitle class="text-base">用户 {{ i }}</ACardTitle>
+                                                                <div class="flex gap-1 mt-1">
+                                                                    <svg v-for="star in 5" :key="star" class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ACardHeader>
+                                                    <ACardContent>
+                                                        <p class="text-muted-foreground">"这是一个非常棒的产品！使用体验超出了我的预期，强烈推荐给大家。"</p>
+                                                    </ACardContent>
+                                                </ACard>
+                                            </div>
+                                        </ACarouselItem>
+                                    </ACarouselContent>
+                                    <ACarouselPrevious />
+                                    <ACarouselNext />
+                                </ACarousel>
+                            </div>
                         </div>
                     </div>
                 </section>

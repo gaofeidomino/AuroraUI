@@ -39,3 +39,6 @@ echo -e "${YELLOW}🔄 Running version management...${NC}"
 node scripts/version.js $VERSION_TYPE
 
 echo -e "${GREEN}🎉 Publish completed successfully!${NC}"
+
+
+

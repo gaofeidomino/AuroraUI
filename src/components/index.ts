@@ -35,3 +35,6 @@ export { AspectRatio as AAspectRatio } from './aspect-ratio'
 
 // 日历组件
 export { Calendar as ACalendar, CalendarCell as ACalendarCell, CalendarCellTrigger as ACalendarCellTrigger, CalendarGrid as ACalendarGrid, CalendarGridBody as ACalendarGridBody, CalendarGridHead as ACalendarGridHead, CalendarGridRow as ACalendarGridRow, CalendarHeadCell as ACalendarHeadCell, CalendarHeader as ACalendarHeader, CalendarHeading as ACalendarHeading, CalendarNextButton as ACalendarNextButton, CalendarPrevButton as ACalendarPrevButton } from './calendar'
+
+// 轮播组件
+export { Carousel as ACarousel, CarouselContent as ACarouselContent, CarouselItem as ACarouselItem, CarouselNext as ACarouselNext, CarouselPrevious as ACarouselPrevious, type CarouselApi } from './carousel'
