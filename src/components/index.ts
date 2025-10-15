@@ -38,3 +38,27 @@ export { Calendar as ACalendar, CalendarCell as ACalendarCell, CalendarCellTrigg
 
 // 轮播组件
 export { Carousel as ACarousel, CarouselContent as ACarouselContent, CarouselItem as ACarouselItem, CarouselNext as ACarouselNext, CarouselPrevious as ACarouselPrevious, type CarouselApi } from './carousel'
+
+// 复选框组件
+export { Checkbox as ACheckbox } from './checkbox'
+
+// 可折叠组件
+export { Collapsible as ACollapsible, CollapsibleContent as ACollapsibleContent, CollapsibleTrigger as ACollapsibleTrigger } from './collapsible'
+
+// 组合框组件
+export { Combobox as ACombobox, ComboboxInput as AComboboxInput, ComboboxItem as AComboboxItem } from './combobox'
+
+// 命令组件
+export { Command as ACommand, CommandInput as ACommandInput, CommandList as ACommandList, CommandEmpty as ACommandEmpty, CommandGroup as ACommandGroup, CommandItem as ACommandItem } from './command'
+
+// 上下文菜单组件
+export { ContextMenu as AContextMenu, ContextMenuContent as AContextMenuContent, ContextMenuItem as AContextMenuItem, ContextMenuTrigger as AContextMenuTrigger } from './context-menu'
+
+// 对话框组件
+export { Dialog as ADialog, DialogContent as ADialogContent, DialogDescription as ADialogDescription, DialogFooter as ADialogFooter, DialogHeader as ADialogHeader, DialogTitle as ADialogTitle, DialogTrigger as ADialogTrigger } from './dialog'
+
+// 抽屉组件
+export { Drawer as ADrawer, DrawerContent as ADrawerContent, DrawerDescription as ADrawerDescription, DrawerFooter as ADrawerFooter, DrawerHeader as ADrawerHeader, DrawerTitle as ADrawerTitle, DrawerTrigger as ADrawerTrigger } from './drawer'
+
+// 下拉菜单组件
+export { DropdownMenu as ADropdownMenu, DropdownMenuContent as ADropdownMenuContent, DropdownMenuItem as ADropdownMenuItem, DropdownMenuTrigger as ADropdownMenuTrigger } from './dropdown-menu'

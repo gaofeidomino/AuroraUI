@@ -2,7 +2,71 @@
 import { ref } from 'vue'
 import { CalendarDate } from '@internationalized/date'
 import type { DateValue } from 'reka-ui'
-import { AButton, ACard, ACardContent, ACardDescription, ACardFooter, ACardHeader, ACardTitle, AInput, ATextarea, ALabel, AAccordion, AAccordionItem, AAccordionTrigger, AAccordionContent, AAlert, AAlertDescription, AAlertTitle, ABadge, AAvatar, AAvatarFallback, AAvatarImage, AAspectRatio, ACalendar, ACarousel, ACarouselContent, ACarouselItem, ACarouselNext, ACarouselPrevious } from './components'
+import {
+    AButton,
+    ACard,
+    ACardContent,
+    ACardDescription,
+    ACardFooter,
+    ACardHeader,
+    ACardTitle,
+    AInput,
+    ATextarea,
+    ALabel,
+    AAccordion,
+    AAccordionItem,
+    AAccordionTrigger,
+    AAccordionContent,
+    AAlert,
+    AAlertDescription,
+    AAlertTitle,
+    ABadge,
+    AAvatar,
+    AAvatarFallback,
+    AAvatarImage,
+    AAspectRatio,
+    ACalendar,
+    ACarousel,
+    ACarouselContent,
+    ACarouselItem,
+    ACarouselNext,
+    ACarouselPrevious,
+    ACheckbox,
+    ACollapsible,
+    ACollapsibleContent,
+    ACollapsibleTrigger,
+    ACombobox,
+    AComboboxInput,
+    AComboboxItem,
+    ACommand,
+    ACommandInput,
+    ACommandList,
+    ACommandEmpty,
+    ACommandGroup,
+    ACommandItem,
+    AContextMenu,
+    AContextMenuContent,
+    AContextMenuItem,
+    AContextMenuTrigger,
+    ADialog,
+    ADialogContent,
+    ADialogDescription,
+    ADialogFooter,
+    ADialogHeader,
+    ADialogTitle,
+    ADialogTrigger,
+    ADrawer,
+    ADrawerContent,
+    ADrawerDescription,
+    ADrawerFooter,
+    ADrawerHeader,
+    ADrawerTitle,
+    ADrawerTrigger,
+    ADropdownMenu,
+    ADropdownMenuContent,
+    ADropdownMenuItem,
+    ADropdownMenuTrigger,
+} from './components'
 
 const clickCount = ref(0)
 const inputValue = ref('')
@@ -28,6 +92,20 @@ const badgeCount = ref(5)
 // Calendar 相关状态
 const selectedDate = ref<DateValue | undefined>(undefined)
 const calendarValue = ref<DateValue | undefined>(undefined)
+
+// Checkbox 相关状态
+const checkboxValue = ref(false)
+const checkboxGroup = ref<string[]>([])
+
+// Combobox 相关状态
+const comboboxValue = ref<string | undefined>(undefined)
+const comboboxOpen = ref(false)
+
+// Dialog 相关状态
+const dialogOpen = ref(false)
+
+// Drawer 相关状态
+const drawerOpen = ref(false)
 
 const handleClick = () => {
     clickCount.value++
@@ -1220,14 +1298,331 @@ const goToPrevMonth = () => {
                     </div>
                 </section>
 
-                <!-- 新组件开发区域 -->
+                <!-- Checkbox 组件测试 -->
                 <section class="border rounded-lg p-6 bg-card">
-                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">新组件开发区域</h2>
-                    <p class="text-muted-foreground mb-4">在这里测试新开发的组件</p>
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Checkbox 组件测试</h2>
 
-                    <!-- 这里可以添加新组件 -->
-                    <div class="p-4 border-2 border-dashed border-border rounded-lg">
-                        <p class="text-center text-muted-foreground">在这里添加新组件进行测试</p>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-2">
+                                    <ACheckbox id="terms" v-model:checked="checkboxValue" />
+                                    <ALabel for="terms">我同意服务条款</ALabel>
+                                </div>
+                                <p class="text-sm text-muted-foreground">当前状态: {{ checkboxValue ? '选中' : '未选中' }}</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">多选组</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <ACheckbox id="option1" value="option1" v-model:checked="checkboxGroup" />
+                                    <ALabel for="option1">选项 1</ALabel>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <ACheckbox id="option2" value="option2" v-model:checked="checkboxGroup" />
+                                    <ALabel for="option2">选项 2</ALabel>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <ACheckbox id="option3" value="option3" v-model:checked="checkboxGroup" />
+                                    <ALabel for="option3">选项 3</ALabel>
+                                </div>
+                                <p class="text-sm text-muted-foreground">选中项: {{ checkboxGroup.join(', ') || '无' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Collapsible 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Collapsible 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ACollapsible class="w-full max-w-md">
+                                <ACollapsibleTrigger class="flex items-center justify-between w-full px-4 py-2 text-left bg-muted rounded-md hover:bg-muted/80">
+                                    <span>点击展开/折叠内容</span>
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </ACollapsibleTrigger>
+                                <ACollapsibleContent class="px-4 py-2">
+                                    <p class="text-muted-foreground">这是可折叠的内容区域。你可以在这里放置任何内容。</p>
+                                </ACollapsibleContent>
+                            </ACollapsible>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">复杂内容</h3>
+                            <ACollapsible class="w-full max-w-lg">
+                                <ACollapsibleTrigger class="flex items-center justify-between w-full px-4 py-3 text-left bg-primary/10 rounded-lg hover:bg-primary/20">
+                                    <span class="font-medium">用户设置</span>
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </ACollapsibleTrigger>
+                                <ACollapsibleContent class="px-4 py-4">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <ALabel for="username">用户名</ALabel>
+                                            <AInput id="username" placeholder="请输入用户名" class="mt-1" />
+                                        </div>
+                                        <div>
+                                            <ALabel for="email">邮箱</ALabel>
+                                            <AInput id="email" type="email" placeholder="请输入邮箱" class="mt-1" />
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <AButton size="sm">保存</AButton>
+                                            <AButton size="sm" variant="outline">取消</AButton>
+                                        </div>
+                                    </div>
+                                </ACollapsibleContent>
+                            </ACollapsible>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Combobox 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Combobox 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="w-full max-w-sm">
+                                <ACombobox v-model:open="comboboxOpen" v-model:model-value="comboboxValue">
+                                    <AComboboxInput placeholder="搜索框架..." />
+                                    <div class="p-1">
+                                        <AComboboxItem value="nextjs">Next.js</AComboboxItem>
+                                        <AComboboxItem value="sveltekit">SvelteKit</AComboboxItem>
+                                        <AComboboxItem value="astro">Astro</AComboboxItem>
+                                        <AComboboxItem value="nuxt">Nuxt</AComboboxItem>
+                                        <AComboboxItem value="remix">Remix</AComboboxItem>
+                                    </div>
+                                </ACombobox>
+                                <p class="text-sm text-muted-foreground mt-2">选中值: {{ comboboxValue || '无' }}</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">编程语言选择</h3>
+                            <div class="w-full max-w-sm">
+                                <ACombobox>
+                                    <AComboboxInput placeholder="选择编程语言..." />
+                                    <div class="p-1">
+                                        <AComboboxItem value="javascript">JavaScript</AComboboxItem>
+                                        <AComboboxItem value="typescript">TypeScript</AComboboxItem>
+                                        <AComboboxItem value="python">Python</AComboboxItem>
+                                        <AComboboxItem value="java">Java</AComboboxItem>
+                                        <AComboboxItem value="rust">Rust</AComboboxItem>
+                                        <AComboboxItem value="go">Go</AComboboxItem>
+                                    </div>
+                                </ACombobox>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Command 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Command 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="w-full max-w-sm">
+                                <ACommand class="rounded-lg border shadow-md">
+                                    <ACommandInput placeholder="输入命令或搜索..." />
+                                    <ACommandList>
+                                        <ACommandEmpty>未找到结果。</ACommandEmpty>
+                                        <ACommandGroup heading="建议">
+                                            <ACommandItem>Calendar</ACommandItem>
+                                            <ACommandItem>Search Emoji</ACommandItem>
+                                            <ACommandItem>Calculator</ACommandItem>
+                                        </ACommandGroup>
+                                        <ACommandGroup heading="设置">
+                                            <ACommandItem>Profile</ACommandItem>
+                                            <ACommandItem>Billing</ACommandItem>
+                                            <ACommandItem>Settings</ACommandItem>
+                                        </ACommandGroup>
+                                    </ACommandList>
+                                </ACommand>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dialog 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Dialog 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ADialog v-model:open="dialogOpen">
+                                <ADialogTrigger as-child>
+                                    <AButton variant="outline">打开对话框</AButton>
+                                </ADialogTrigger>
+                                <ADialogContent class="sm:max-w-[425px]">
+                                    <ADialogHeader>
+                                        <ADialogTitle>编辑个人资料</ADialogTitle>
+                                        <ADialogDescription> 在这里更新您的个人信息。点击保存时您的更改将被保存。 </ADialogDescription>
+                                    </ADialogHeader>
+                                    <div class="grid gap-4 py-4">
+                                        <div class="grid grid-cols-4 items-center gap-4">
+                                            <ALabel for="name" class="text-right">姓名</ALabel>
+                                            <AInput id="name" value="张三" class="col-span-3" />
+                                        </div>
+                                        <div class="grid grid-cols-4 items-center gap-4">
+                                            <ALabel for="username" class="text-right">用户名</ALabel>
+                                            <AInput id="username" value="@zhangsan" class="col-span-3" />
+                                        </div>
+                                    </div>
+                                    <ADialogFooter>
+                                        <AButton type="submit">保存更改</AButton>
+                                    </ADialogFooter>
+                                </ADialogContent>
+                            </ADialog>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Drawer 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Drawer 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ADrawer v-model:open="drawerOpen">
+                                <ADrawerTrigger as-child>
+                                    <AButton variant="outline">打开抽屉</AButton>
+                                </ADrawerTrigger>
+                                <ADrawerContent>
+                                    <ADrawerHeader class="text-left">
+                                        <ADrawerTitle>移动端菜单</ADrawerTitle>
+                                        <ADrawerDescription> 这是一个移动端友好的抽屉组件。 </ADrawerDescription>
+                                    </ADrawerHeader>
+                                    <div class="px-4 pb-4">
+                                        <div class="space-y-4">
+                                            <div class="flex items-center space-x-2">
+                                                <AButton variant="ghost" class="w-full justify-start">
+                                                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                                    </svg>
+                                                    首页
+                                                </AButton>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <AButton variant="ghost" class="w-full justify-start">
+                                                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                    </svg>
+                                                    个人资料
+                                                </AButton>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <AButton variant="ghost" class="w-full justify-start">
+                                                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                                        />
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    </svg>
+                                                    设置
+                                                </AButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ADrawerContent>
+                            </ADrawer>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DropdownMenu 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">DropdownMenu 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ADropdownMenu>
+                                <ADropdownMenuTrigger as-child>
+                                    <AButton variant="outline">打开菜单</AButton>
+                                </ADropdownMenuTrigger>
+                                <ADropdownMenuContent class="w-56">
+                                    <ADropdownMenuItem>新建</ADropdownMenuItem>
+                                    <ADropdownMenuItem>复制</ADropdownMenuItem>
+                                    <ADropdownMenuItem>粘贴</ADropdownMenuItem>
+                                    <ADropdownMenuItem>删除</ADropdownMenuItem>
+                                </ADropdownMenuContent>
+                            </ADropdownMenu>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">用户菜单</h3>
+                            <ADropdownMenu>
+                                <ADropdownMenuTrigger as-child>
+                                    <AButton variant="ghost" class="relative h-8 w-8 rounded-full">
+                                        <AAvatar class="h-8 w-8">
+                                            <AAvatarFallback>用户</AAvatarFallback>
+                                        </AAvatar>
+                                    </AButton>
+                                </ADropdownMenuTrigger>
+                                <ADropdownMenuContent class="w-56" align="end" force-mount>
+                                    <div class="flex items-center justify-start gap-2 p-2">
+                                        <div class="flex flex-col space-y-1 leading-none">
+                                            <p class="font-medium">用户名</p>
+                                            <p class="w-[200px] truncate text-sm text-muted-foreground">user@example.com</p>
+                                        </div>
+                                    </div>
+                                    <div class="my-1 h-px bg-border" />
+                                    <ADropdownMenuItem>个人资料</ADropdownMenuItem>
+                                    <ADropdownMenuItem>设置</ADropdownMenuItem>
+                                    <ADropdownMenuItem>帮助</ADropdownMenuItem>
+                                    <div class="my-1 h-px bg-border" />
+                                    <ADropdownMenuItem>登出</ADropdownMenuItem>
+                                </ADropdownMenuContent>
+                            </ADropdownMenu>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ContextMenu 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">ContextMenu 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <p class="text-sm text-muted-foreground mb-4">在下面的卡片上右键点击查看上下文菜单</p>
+
+                            <AContextMenu>
+                                <AContextMenuTrigger as-child>
+                                    <ACard class="w-64 h-32 flex items-center justify-center cursor-context-menu">
+                                        <ACardContent class="text-center">
+                                            <p class="text-lg font-medium">右键点击我</p>
+                                            <p class="text-sm text-muted-foreground">查看上下文菜单</p>
+                                        </ACardContent>
+                                    </ACard>
+                                </AContextMenuTrigger>
+                                <AContextMenuContent>
+                                    <AContextMenuItem>复制</AContextMenuItem>
+                                    <AContextMenuItem>粘贴</AContextMenuItem>
+                                    <AContextMenuItem>剪切</AContextMenuItem>
+                                    <div class="my-1 h-px bg-border" />
+                                    <AContextMenuItem>重命名</AContextMenuItem>
+                                    <AContextMenuItem>删除</AContextMenuItem>
+                                </AContextMenuContent>
+                            </AContextMenu>
+                        </div>
                     </div>
                 </section>
             </div>
