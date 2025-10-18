@@ -68,3 +68,9 @@ export { Menubar as AMenubar, MenubarContent as AMenubarContent, MenubarItem as 
 
 // 导航菜单组件
 export { NavigationMenu as ANavigationMenu, NavigationMenuContent as ANavigationMenuContent, NavigationMenuItem as ANavigationMenuItem, NavigationMenuLink as ANavigationMenuLink, NavigationMenuList as ANavigationMenuList, NavigationMenuTrigger as ANavigationMenuTrigger } from './navigation-menu'
+
+// 表单组件
+export { FormControl as AFormControl, FormDescription as AFormDescription, FormItem as AFormItem, FormLabel as AFormLabel, FormMessage as AFormMessage, Form as AForm, FormField as AFormField, FormFieldArray as AFormFieldArray } from './form'
+
+// 悬停卡片组件
+export { HoverCard as AHoverCard, HoverCardContent as AHoverCardContent, HoverCardTrigger as AHoverCardTrigger } from './hover-card'
