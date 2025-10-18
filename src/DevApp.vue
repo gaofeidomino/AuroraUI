@@ -58,7 +58,6 @@ import {
     ADrawer,
     ADrawerContent,
     ADrawerDescription,
-    ADrawerFooter,
     ADrawerHeader,
     ADrawerTitle,
     ADrawerTrigger,
@@ -66,6 +65,18 @@ import {
     ADropdownMenuContent,
     ADropdownMenuItem,
     ADropdownMenuTrigger,
+    AMenubar,
+    AMenubarContent,
+    AMenubarItem,
+    AMenubarMenu,
+    AMenubarTrigger,
+    AMenubarSeparator,
+    ANavigationMenu,
+    ANavigationMenuContent,
+    ANavigationMenuItem,
+    ANavigationMenuLink,
+    ANavigationMenuList,
+    ANavigationMenuTrigger,
 } from './components'
 
 const clickCount = ref(0)
@@ -1439,14 +1450,14 @@ const goToPrevMonth = () => {
                                     <ACommandList>
                                         <ACommandEmpty>未找到结果。</ACommandEmpty>
                                         <ACommandGroup heading="建议">
-                                            <ACommandItem>Calendar</ACommandItem>
-                                            <ACommandItem>Search Emoji</ACommandItem>
-                                            <ACommandItem>Calculator</ACommandItem>
+                                            <ACommandItem value="calendar">Calendar</ACommandItem>
+                                            <ACommandItem value="search-emoji">Search Emoji</ACommandItem>
+                                            <ACommandItem value="calculator">Calculator</ACommandItem>
                                         </ACommandGroup>
                                         <ACommandGroup heading="设置">
-                                            <ACommandItem>Profile</ACommandItem>
-                                            <ACommandItem>Billing</ACommandItem>
-                                            <ACommandItem>Settings</ACommandItem>
+                                            <ACommandItem value="profile">Profile</ACommandItem>
+                                            <ACommandItem value="billing">Billing</ACommandItem>
+                                            <ACommandItem value="settings">Settings</ACommandItem>
                                         </ACommandGroup>
                                     </ACommandList>
                                 </ACommand>
@@ -1622,6 +1633,431 @@ const goToPrevMonth = () => {
                                     <AContextMenuItem>删除</AContextMenuItem>
                                 </AContextMenuContent>
                             </AContextMenu>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Menubar 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Menubar 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="w-full max-w-2xl">
+                                <AMenubar>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger>文件</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>新建</AMenubarItem>
+                                            <AMenubarItem>打开</AMenubarItem>
+                                            <AMenubarItem>保存</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>退出</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger>编辑</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>撤销</AMenubarItem>
+                                            <AMenubarItem>重做</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>复制</AMenubarItem>
+                                            <AMenubarItem>粘贴</AMenubarItem>
+                                            <AMenubarItem>剪切</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger>视图</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>放大</AMenubarItem>
+                                            <AMenubarItem>缩小</AMenubarItem>
+                                            <AMenubarItem>重置缩放</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>全屏</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger>帮助</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>帮助文档</AMenubarItem>
+                                            <AMenubarItem>快捷键</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>关于</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                </AMenubar>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">应用程序菜单示例</h3>
+                            <div class="w-full max-w-3xl">
+                                <AMenubar>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger>应用</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>关于应用</AMenubarItem>
+                                            <AMenubarItem>偏好设置</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>隐藏应用</AMenubarItem>
+                                            <AMenubarItem>隐藏其他</AMenubarItem>
+                                            <AMenubarItem>显示全部</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>退出</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger>项目</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>新建项目</AMenubarItem>
+                                            <AMenubarItem>打开项目</AMenubarItem>
+                                            <AMenubarItem>最近项目</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>项目设置</AMenubarItem>
+                                            <AMenubarItem>项目信息</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger>工具</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>代码格式化</AMenubarItem>
+                                            <AMenubarItem>语法检查</AMenubarItem>
+                                            <AMenubarItem>包管理</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>终端</AMenubarItem>
+                                            <AMenubarItem>调试器</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger>窗口</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>最小化</AMenubarItem>
+                                            <AMenubarItem>缩放</AMenubarItem>
+                                            <AMenubarSeparator />
+                                            <AMenubarItem>开发工具</AMenubarItem>
+                                            <AMenubarItem>控制台</AMenubarItem>
+                                            <AMenubarItem>网络监控</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                </AMenubar>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">自定义样式</h3>
+                            <div class="w-full max-w-2xl">
+                                <AMenubar class="border-primary/20 bg-primary/5">
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger class="text-primary font-medium">自定义</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>主题设置</AMenubarItem>
+                                            <AMenubarItem>布局配置</AMenubarItem>
+                                            <AMenubarItem>插件管理</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                    <AMenubarMenu>
+                                        <AMenubarTrigger class="text-secondary font-medium">高级</AMenubarTrigger>
+                                        <AMenubarContent>
+                                            <AMenubarItem>高级设置</AMenubarItem>
+                                            <AMenubarItem>开发者选项</AMenubarItem>
+                                            <AMenubarItem>实验性功能</AMenubarItem>
+                                        </AMenubarContent>
+                                    </AMenubarMenu>
+                                </AMenubar>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NavigationMenu 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">NavigationMenu 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="w-full max-w-4xl">
+                                <ANavigationMenu>
+                                    <ANavigationMenuList>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuTrigger>产品</ANavigationMenuTrigger>
+                                            <ANavigationMenuContent>
+                                                <div class="grid gap-3 p-6 w-[400px] md:w-[500px] lg:w-[600px]">
+                                                    <div class="row-span-3">
+                                                        <ACard>
+                                                            <ACardHeader>
+                                                                <ACardTitle>产品概览</ACardTitle>
+                                                                <ACardDescription>了解我们的产品系列</ACardDescription>
+                                                            </ACardHeader>
+                                                            <ACardContent>
+                                                                <p class="text-sm text-muted-foreground">
+                                                                    从基础功能到高级特性，我们提供完整的产品解决方案。
+                                                                </p>
+                                                            </ACardContent>
+                                                        </ACard>
+                                                    </div>
+                                                    <div class="grid gap-2">
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                                                    <span class="font-medium">核心产品</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">主要功能模块</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                                                                    <span class="font-medium">扩展功能</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">高级特性</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                    </div>
+                                                </div>
+                                            </ANavigationMenuContent>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuTrigger>解决方案</ANavigationMenuTrigger>
+                                            <ANavigationMenuContent>
+                                                <div class="grid gap-3 p-6 w-[400px] md:w-[500px] lg:w-[600px]">
+                                                    <div class="grid gap-2">
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                                                    <span class="font-medium">企业解决方案</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">为企业量身定制</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                                                    <span class="font-medium">个人解决方案</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">个人用户首选</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                                                    <span class="font-medium">开发者工具</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">开发人员专用</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                    </div>
+                                                </div>
+                                            </ANavigationMenuContent>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2">
+                                                    <span class="font-medium">定价</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2">
+                                                    <span class="font-medium">文档</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2">
+                                                    <span class="font-medium">支持</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                    </ANavigationMenuList>
+                                </ANavigationMenu>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">网站导航示例</h3>
+                            <div class="w-full max-w-5xl">
+                                <ANavigationMenu>
+                                    <ANavigationMenuList>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuTrigger>服务</ANavigationMenuTrigger>
+                                            <ANavigationMenuContent>
+                                                <div class="grid gap-3 p-6 w-[500px] md:w-[600px] lg:w-[700px]">
+                                                    <div class="row-span-2">
+                                                        <ACard class="p-6 bg-gradient-to-br from-primary/10 to-secondary/10">
+                                                            <ACardHeader>
+                                                                <ACardTitle class="text-primary">我们的服务</ACardTitle>
+                                                                <ACardDescription>
+                                                                    提供全方位的技术服务和解决方案
+                                                                </ACardDescription>
+                                                            </ACardHeader>
+                                                            <ACardContent>
+                                                                <p class="text-sm text-muted-foreground">
+                                                                    从咨询到实施，从维护到优化，我们提供完整的服务链条。
+                                                                </p>
+                                                            </ACardContent>
+                                                        </ACard>
+                                                    </div>
+                                                    <div class="grid grid-cols-2 gap-2">
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4 hover:bg-accent/50 transition-colors">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                                                                        <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="font-medium">咨询</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">专业咨询</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4 hover:bg-accent/50 transition-colors">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center">
+                                                                        <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="font-medium">实施</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">项目实施</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4 hover:bg-accent/50 transition-colors">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center">
+                                                                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                                                                            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="font-medium">维护</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">系统维护</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4 hover:bg-accent/50 transition-colors">
+                                                                <div class="flex items-center gap-2">
+                                                                    <div class="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                                                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                                                                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <span class="font-medium">优化</span>
+                                                                </div>
+                                                                <p class="text-sm text-muted-foreground mt-1">性能优化</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                    </div>
+                                                </div>
+                                            </ANavigationMenuContent>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuTrigger>公司</ANavigationMenuTrigger>
+                                            <ANavigationMenuContent>
+                                                <div class="grid gap-3 p-6 w-[400px] md:w-[500px] lg:w-[600px]">
+                                                    <div class="grid gap-2">
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <span class="font-medium">关于我们</span>
+                                                                <p class="text-sm text-muted-foreground mt-1">了解我们的故事</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <span class="font-medium">团队介绍</span>
+                                                                <p class="text-sm text-muted-foreground mt-1">认识我们的团队</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <span class="font-medium">新闻动态</span>
+                                                                <p class="text-sm text-muted-foreground mt-1">最新资讯</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                        <ANavigationMenuLink>
+                                                            <ACard class="p-4">
+                                                                <span class="font-medium">加入我们</span>
+                                                                <p class="text-sm text-muted-foreground mt-1">招聘信息</p>
+                                                            </ACard>
+                                                        </ANavigationMenuLink>
+                                                    </div>
+                                                </div>
+                                            </ANavigationMenuContent>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2">
+                                                    <span class="font-medium">联系我们</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2">
+                                                    <span class="font-medium">登录</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                    </ANavigationMenuList>
+                                </ANavigationMenu>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">简洁导航</h3>
+                            <div class="w-full max-w-3xl">
+                                <ANavigationMenu>
+                                    <ANavigationMenuList>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2 hover:bg-accent/50 transition-colors">
+                                                    <span class="font-medium">首页</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2 hover:bg-accent/50 transition-colors">
+                                                    <span class="font-medium">产品</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2 hover:bg-accent/50 transition-colors">
+                                                    <span class="font-medium">服务</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2 hover:bg-accent/50 transition-colors">
+                                                    <span class="font-medium">关于</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                        <ANavigationMenuItem>
+                                            <ANavigationMenuLink>
+                                                <ACard class="px-4 py-2 hover:bg-accent/50 transition-colors">
+                                                    <span class="font-medium">联系</span>
+                                                </ACard>
+                                            </ANavigationMenuLink>
+                                        </ANavigationMenuItem>
+                                    </ANavigationMenuList>
+                                </ANavigationMenu>
+                            </div>
                         </div>
                     </div>
                 </section>

@@ -62,3 +62,9 @@ export { Drawer as ADrawer, DrawerContent as ADrawerContent, DrawerDescription a
 
 // 下拉菜单组件
 export { DropdownMenu as ADropdownMenu, DropdownMenuContent as ADropdownMenuContent, DropdownMenuItem as ADropdownMenuItem, DropdownMenuTrigger as ADropdownMenuTrigger } from './dropdown-menu'
+
+// 菜单栏组件
+export { Menubar as AMenubar, MenubarContent as AMenubarContent, MenubarItem as AMenubarItem, MenubarMenu as AMenubarMenu, MenubarTrigger as AMenubarTrigger, MenubarSeparator as AMenubarSeparator } from './menubar'
+
+// 导航菜单组件
+export { NavigationMenu as ANavigationMenu, NavigationMenuContent as ANavigationMenuContent, NavigationMenuItem as ANavigationMenuItem, NavigationMenuLink as ANavigationMenuLink, NavigationMenuList as ANavigationMenuList, NavigationMenuTrigger as ANavigationMenuTrigger } from './navigation-menu'
