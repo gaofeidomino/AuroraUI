@@ -19,8 +19,16 @@
 | [Card](./card/README.md)                | 1          | ✅   | ✅   |
 | [Carousel](./carousel/README.md)        | 7          | ✅   | ✅   |
 | [Form](./form/README.md)                | 4          | ✅   | ✅   |
+| [NumberField](./number-field/README.md) | 3          | ✅   | ✅   |
+| [Pagination](./pagination/README.md)    | 3          | ✅   | ✅   |
+| [PinInput](./pin-input/README.md)       | 2          | ✅   | ✅   |
+| [Popover](./popover/README.md)          | 3          | ✅   | ✅   |
+| [Progress](./progress/README.md)        | 1          | ✅   | ✅   |
+| [RadioGroup](./radio-group/README.md)   | 2          | ✅   | ✅   |
+| [Table](./table/README.md)              | 3          | ✅   | ✅   |
+| [Tabs](./tabs/README.md)                | 2          | ✅   | ✅   |
 
-**总计: 56+ 个测试文件**
+**总计: 78+ 个测试文件**
 
 ---
 
@@ -54,6 +62,20 @@
 
 - **Calendar** - 日历选择器
 - **Carousel** - 轮播图
+- **Table** - 数据表格
+- **Progress** - 进度条
+- **Pagination** - 分页组件
+
+### 输入组件
+
+- **NumberField** - 数字输入框
+- **PinInput** - 密码输入框
+- **RadioGroup** - 单选框组
+
+### 交互组件
+
+- **Popover** - 弹出框
+- **Tabs** - 标签页
 
 ---
 
