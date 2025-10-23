@@ -2228,14 +2228,15 @@ const onReset = () => {
                                     </ACardHeader>
                                     <ACardContent>
                                         <ul class="space-y-2 text-sm text-muted-foreground">
-                                            <li>• 使用 Zod 进行表单验证和类型安全</li>
+                                            <li>• 使用 VeeValidate + Zod 进行表单验证和类型安全</li>
                                             <li>• 实时验证和错误提示</li>
                                             <li>• 表单字段绑定和状态管理</li>
                                             <li>• 失焦验证和提交验证</li>
                                             <li>• 密码确认验证（跨字段验证）</li>
                                             <li>• 多种输入类型支持（文本、邮箱、密码、数字、文本域、复选框）</li>
                                             <li>• 表单重置功能</li>
-                                            <li>• 无障碍访问支持</li>
+                                            <li>• 无障碍访问支持（ARIA 属性）</li>
+                                            <li>• 符合 shadcn-vue 最佳实践</li>
                                         </ul>
                                     </ACardContent>
                                 </ACard>

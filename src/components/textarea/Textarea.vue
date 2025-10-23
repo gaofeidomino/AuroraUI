@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { cn } from '@/utils/cn'
-import { useVModel } from '@vueuse/core'
 import type { HTMLAttributes } from 'vue'
+import { useVModel } from '@vueuse/core'
+import { cn } from '@/utils/cn'
 
 defineOptions({ name: 'ATextarea' })
 
