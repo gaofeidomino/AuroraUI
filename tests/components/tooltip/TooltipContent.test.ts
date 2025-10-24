@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { Tooltip, TooltipContent, TooltipProvider } from '../../../tests/components/tooltip/index'
+import { Tooltip, TooltipContent, TooltipProvider } from '../../../src/components/tooltip/index'
 
 describe('TooltipContent Component', () => {
     it('renders correctly within Tooltip context', () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { ToggleGroup, ToggleGroupItem } from '../../../tests/components/toggle-group/index'
+import { ToggleGroup, ToggleGroupItem } from '../../../src/components/toggle-group/index'
 
 describe('ToggleGroupItem Component', () => {
     it('renders correctly within ToggleGroup context', () => {
@@ -9,13 +9,13 @@ describe('ToggleGroupItem Component', () => {
             template: `
                 <ToggleGroup>
                     <ToggleGroupItem value="item1">
-                        Item 1
+                        <div>Item Content</div>
                     </ToggleGroupItem>
                 </ToggleGroup>
             `,
         })
 
-        const content = screen.getByText('Item 1')
+        const content = screen.getByText('Item Content')
         expect(content).toBeInTheDocument()
     })
 
@@ -24,14 +24,14 @@ describe('ToggleGroupItem Component', () => {
             components: { ToggleGroup, ToggleGroupItem },
             template: `
                 <ToggleGroup>
-                    <ToggleGroupItem value="item2" :disabled="false">
-                        Item 2
+                    <ToggleGroupItem value="item1" :disabled="false">
+                        <div>Item Content</div>
                     </ToggleGroupItem>
                 </ToggleGroup>
             `,
         })
 
-        const content = screen.getByText('Item 2')
+        const content = screen.getByText('Item Content')
         expect(content).toBeInTheDocument()
     })
 
@@ -58,7 +58,7 @@ describe('ToggleGroupItem Component', () => {
             template: `
                 <ToggleGroup>
                     <ToggleGroupItem value="item1">
-                        Content
+                        <div>Content</div>
                     </ToggleGroupItem>
                 </ToggleGroup>
             `,

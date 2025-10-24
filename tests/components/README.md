@@ -98,6 +98,13 @@
 - **Tooltip** - 提示框
 - **ToggleGroup** - 切换按钮组
 
+### 新增组件测试
+
+- **Textarea** - 多行文本输入框测试
+- **Tooltip** - 提示框组件测试（包含 Tooltip、TooltipProvider、TooltipTrigger、TooltipContent）
+- **ToggleGroup** - 切换按钮组测试（包含 ToggleGroup、ToggleGroupItem）
+- **TagsInput** - 标签输入框测试（包含 TagsInput、TagsInputItem、TagsInputInput、TagsInputItemDelete、TagsInputItemText）
+
 ---
 
 ## 📝 运行测试

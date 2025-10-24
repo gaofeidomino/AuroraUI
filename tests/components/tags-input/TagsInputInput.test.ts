@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { TagsInput, TagsInputInput } from '../../../tests/components/tags-input/index'
+import { TagsInput, TagsInputInput } from '../../../src/components/tags-input/index'
 
 describe('TagsInputInput Component', () => {
     it('renders correctly within TagsInput context', () => {
@@ -8,13 +8,13 @@ describe('TagsInputInput Component', () => {
             components: { TagsInput, TagsInputInput },
             template: `
                 <TagsInput>
-                    <TagsInputInput />
+                    <TagsInputInput placeholder="Add tags..." />
                 </TagsInput>
             `,
         })
 
-        // 测试组件能够渲染，不依赖特定的DOM结构
-        expect(document.body).toBeTruthy()
+        const input = screen.getByPlaceholderText('Add tags...')
+        expect(input).toBeInTheDocument()
     })
 
     it('forwards props correctly within TagsInput context', () => {
@@ -22,13 +22,13 @@ describe('TagsInputInput Component', () => {
             components: { TagsInput, TagsInputInput },
             template: `
                 <TagsInput>
-                    <TagsInputInput placeholder="Add tag..." />
+                    <TagsInputInput placeholder="Add tags..." class="custom-class" />
                 </TagsInput>
             `,
         })
 
-        // 测试组件能够渲染，不依赖特定的DOM结构
-        expect(document.body).toBeTruthy()
+        const input = screen.getByPlaceholderText('Add tags...')
+        expect(input).toBeInTheDocument()
     })
 
     it('renders with slot content within TagsInput context', () => {
@@ -36,15 +36,15 @@ describe('TagsInputInput Component', () => {
             components: { TagsInput, TagsInputInput },
             template: `
                 <TagsInput>
-                    <TagsInputInput>
+                    <TagsInputInput placeholder="Add tags...">
                         <div data-testid="slot-content">Slot Content</div>
                     </TagsInputInput>
                 </TagsInput>
             `,
         })
 
-        // 测试组件能够渲染，不依赖特定的DOM结构
-        expect(document.body).toBeTruthy()
+        const input = screen.getByPlaceholderText('Add tags...')
+        expect(input).toBeInTheDocument()
     })
 
     it('has correct component name within TagsInput context', () => {
@@ -52,12 +52,12 @@ describe('TagsInputInput Component', () => {
             components: { TagsInput, TagsInputInput },
             template: `
                 <TagsInput>
-                    <TagsInputInput />
+                    <TagsInputInput placeholder="Add tags..." />
                 </TagsInput>
             `,
         })
 
-        // 测试组件能够渲染，不依赖特定的DOM结构
-        expect(document.body).toBeTruthy()
+        const input = screen.getByPlaceholderText('Add tags...')
+        expect(input).toBeInTheDocument()
     })
 })

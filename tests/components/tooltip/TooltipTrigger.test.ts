@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { Tooltip, TooltipTrigger, TooltipProvider } from '../../../tests/components/tooltip/index'
+import { Tooltip, TooltipTrigger, TooltipProvider } from '../../../src/components/tooltip/index'
 
 describe('TooltipTrigger Component', () => {
     it('renders correctly within Tooltip context', () => {
@@ -35,7 +35,7 @@ describe('TooltipTrigger Component', () => {
             `,
         })
 
-        const tooltipTrigger = screen.getByRole('button', { name: 'Trigger' })
+        const tooltipTrigger = document.querySelector('[data-slot="tooltip-trigger"]')
         expect(tooltipTrigger).toBeInTheDocument()
     })
 

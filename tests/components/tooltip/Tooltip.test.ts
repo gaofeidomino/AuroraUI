@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { Tooltip, TooltipProvider } from '../../../tests/components/tooltip/index'
+import { Tooltip, TooltipProvider } from '../../../src/components/tooltip/index'
 
 describe('Tooltip Component', () => {
     it('renders correctly with default props', () => {

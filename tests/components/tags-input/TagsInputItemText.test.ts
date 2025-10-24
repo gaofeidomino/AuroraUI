@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { TagsInput, TagsInputItem, TagsInputItemText } from '../../../tests/components/tags-input/index'
+import { TagsInput, TagsInputItem, TagsInputItemText } from '../../../src/components/tags-input/index'
 
 describe('TagsInputItemText Component', () => {
     it('renders correctly within TagsInput context', () => {

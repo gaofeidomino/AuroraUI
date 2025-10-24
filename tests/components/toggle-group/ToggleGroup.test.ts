@@ -1,26 +1,25 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { ToggleGroup } from '../../../tests/components/toggle-group/index'
+import { ToggleGroup } from '../../../src/components/toggle-group/index'
 
 describe('ToggleGroup Component', () => {
     it('renders correctly with default props', () => {
         render(ToggleGroup, {
             slots: {
-                default: '<div data-testid="toggle-group-content">ToggleGroup Content</div>',
+                default: '<div data-testid="toggle-group-content">Toggle Group Content</div>',
             },
         })
 
         const content = screen.getByTestId('toggle-group-content')
         expect(content).toBeInTheDocument()
-        expect(content).toHaveTextContent('ToggleGroup Content')
+        expect(content).toHaveTextContent('Toggle Group Content')
     })
 
     it('forwards props correctly', () => {
         render(ToggleGroup, {
             props: {
                 type: 'single',
-                variant: 'default',
-                size: 'default',
+                class: 'custom-class',
             },
             slots: {
                 default: '<div data-testid="props-content">Props Content</div>',

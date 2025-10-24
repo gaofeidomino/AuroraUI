@@ -1,18 +1,18 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { TagsInput } from '../../../tests/components/tags-input/index'
+import { TagsInput } from '../../../src/components/tags-input/index'
 
 describe('TagsInput Component', () => {
     it('renders correctly with default props', () => {
         render(TagsInput, {
             slots: {
-                default: '<div data-testid="tags-input-content">TagsInput Content</div>',
+                default: '<div data-testid="tags-input-content">Tags Input Content</div>',
             },
         })
 
         const content = screen.getByTestId('tags-input-content')
         expect(content).toBeInTheDocument()
-        expect(content).toHaveTextContent('TagsInput Content')
+        expect(content).toHaveTextContent('Tags Input Content')
     })
 
     it('forwards props correctly', () => {

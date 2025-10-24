@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { TagsInput, TagsInputItem } from '../../../tests/components/tags-input/index'
+import { TagsInput, TagsInputItem } from '../../../src/components/tags-input/index'
 
 describe('TagsInputItem Component', () => {
     it('renders correctly within TagsInput context', () => {
@@ -9,13 +9,13 @@ describe('TagsInputItem Component', () => {
             template: `
                 <TagsInput>
                     <TagsInputItem value="tag1">
-                        Tag 1
+                        <div>Item Content</div>
                     </TagsInputItem>
                 </TagsInput>
             `,
         })
 
-        const content = screen.getByText('Tag 1')
+        const content = screen.getByText('Item Content')
         expect(content).toBeInTheDocument()
     })
 
@@ -24,14 +24,14 @@ describe('TagsInputItem Component', () => {
             components: { TagsInput, TagsInputItem },
             template: `
                 <TagsInput>
-                    <TagsInputItem value="tag2" :disabled="false">
-                        Tag 2
+                    <TagsInputItem value="tag1" :disabled="false">
+                        <div>Item Content</div>
                     </TagsInputItem>
                 </TagsInput>
             `,
         })
 
-        const content = screen.getByText('Tag 2')
+        const content = screen.getByText('Item Content')
         expect(content).toBeInTheDocument()
     })
 
@@ -58,7 +58,7 @@ describe('TagsInputItem Component', () => {
             template: `
                 <TagsInput>
                     <TagsInputItem value="tag1">
-                        Content
+                        <div>Content</div>
                     </TagsInputItem>
                 </TagsInput>
             `,

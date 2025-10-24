@@ -1,29 +1,31 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/vue'
-import { TooltipProvider } from '../../../tests/components/tooltip/index'
+import { TooltipProvider } from '../../../src/components/tooltip/index'
 
 describe('TooltipProvider Component', () => {
     it('renders correctly with default props', () => {
-        render(TooltipProvider, {
-            slots: {
-                default: '<div data-testid="tooltip-provider-content">TooltipProvider Content</div>',
-            },
+        render({
+            components: { TooltipProvider },
+            template: `
+                <TooltipProvider>
+                    <div data-testid="provider-content">Provider Content</div>
+                </TooltipProvider>
+            `,
         })
 
-        const content = screen.getByTestId('tooltip-provider-content')
+        const content = screen.getByTestId('provider-content')
         expect(content).toBeInTheDocument()
-        expect(content).toHaveTextContent('TooltipProvider Content')
+        expect(content).toHaveTextContent('Provider Content')
     })
 
     it('forwards props correctly', () => {
-        render(TooltipProvider, {
-            props: {
-                delayDuration: 700,
-                skipDelayDuration: 300,
-            },
-            slots: {
-                default: '<div data-testid="props-content">Props Content</div>',
-            },
+        render({
+            components: { TooltipProvider },
+            template: `
+                <TooltipProvider :delayDuration="700" :skipDelayDuration="300">
+                    <div data-testid="props-content">Props Content</div>
+                </TooltipProvider>
+            `,
         })
 
         const content = screen.getByTestId('props-content')
@@ -31,10 +33,13 @@ describe('TooltipProvider Component', () => {
     })
 
     it('renders with slot content', () => {
-        render(TooltipProvider, {
-            slots: {
-                default: '<div data-testid="slot-content">Slot Content</div>',
-            },
+        render({
+            components: { TooltipProvider },
+            template: `
+                <TooltipProvider>
+                    <div data-testid="slot-content">Slot Content</div>
+                </TooltipProvider>
+            `,
         })
 
         const slotContent = screen.getByTestId('slot-content')
@@ -43,10 +48,13 @@ describe('TooltipProvider Component', () => {
     })
 
     it('has correct component name', () => {
-        render(TooltipProvider, {
-            slots: {
-                default: '<div data-testid="name-content">Content</div>',
-            },
+        render({
+            components: { TooltipProvider },
+            template: `
+                <TooltipProvider>
+                    <div data-testid="name-content">Content</div>
+                </TooltipProvider>
+            `,
         })
 
         const content = screen.getByTestId('name-content')
