@@ -46,15 +46,15 @@ function filterItems() {
     let itemCount = 0
 
     // Check which items should be included
-    for (const [id, value] of allItems.value) {
+    for (const [id, value] of Array.from(allItems.value.entries())) {
         const score = contains(value, filterState.search)
         filterState.filtered.items.set(id, score ? 1 : 0)
         if (score) itemCount++
     }
 
     // Check which groups have at least 1 item shown
-    for (const [groupId, group] of allGroups.value) {
-        for (const itemId of group) {
+    for (const [groupId, group] of Array.from(allGroups.value.entries())) {
+        for (const itemId of Array.from(group)) {
             if (filterState.filtered.items.get(itemId)! > 0) {
                 filterState.filtered.groups.add(groupId)
                 break

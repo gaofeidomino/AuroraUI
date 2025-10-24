@@ -3,7 +3,7 @@ import { createInjectionState } from '@vueuse/core'
 import emblaCarouselVue from 'embla-carousel-vue'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const [useProvideCarousel, useInjectCarousel] = createInjectionState(({ opts, orientation, plugins }: CarouselProps, emits: CarouselEmits) => {
+const [useProvideCarousel, useInjectCarousel] = createInjectionState(({ opts, orientation, plugins }: CarouselProps, emits: CarouselEmits): any => {
     const [emblaNode, emblaApi] = emblaCarouselVue(
         {
             ...opts,
@@ -48,7 +48,7 @@ const [useProvideCarousel, useInjectCarousel] = createInjectionState(({ opts, or
     return { carouselRef: emblaNode, carouselApi: emblaApi, canScrollPrev, canScrollNext, scrollPrev, scrollNext, orientation }
 })
 
-function useCarousel() {
+function useCarousel(): any {
     const carouselState = useInjectCarousel()
 
     if (!carouselState) throw new Error('useCarousel must be used within a <Carousel />')
