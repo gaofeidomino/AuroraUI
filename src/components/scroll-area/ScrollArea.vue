@@ -5,6 +5,8 @@ import { ScrollAreaCorner, ScrollAreaRoot, type ScrollAreaRootProps, ScrollAreaV
 import { cn } from '@/utils/cn'
 import ScrollBar from './ScrollBar.vue'
 
+defineOptions({ name: 'AScrollArea' })
+
 const props = defineProps<ScrollAreaRootProps & { class?: HTMLAttributes['class'] }>()
 
 const delegatedProps = reactiveOmit(props, 'class')

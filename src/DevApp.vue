@@ -89,6 +89,94 @@ import {
     AHoverCard,
     AHoverCardContent,
     AHoverCardTrigger,
+    AAlertDialog,
+    AAlertDialogAction,
+    AAlertDialogCancel,
+    AAlertDialogContent,
+    AAlertDialogDescription,
+    AAlertDialogFooter,
+    AAlertDialogHeader,
+    AAlertDialogTitle,
+    AAlertDialogTrigger,
+    ABreadcrumb,
+    ABreadcrumbEllipsis,
+    ABreadcrumbItem,
+    ABreadcrumbLink,
+    ABreadcrumbList,
+    ABreadcrumbPage,
+    ABreadcrumbSeparator,
+    ANumberField,
+    ANumberFieldContent,
+    ANumberFieldDecrement,
+    ANumberFieldIncrement,
+    ANumberFieldInput,
+    APagination,
+    APaginationContent,
+    APaginationEllipsis,
+    APaginationItem,
+    APaginationNext,
+    APaginationPrevious,
+    APinInput,
+    APinInputGroup,
+    APinInputSlot,
+    APopover,
+    APopoverContent,
+    APopoverTrigger,
+    AProgress,
+    ARadioGroup,
+    ARadioGroupItem,
+    AResizableHandle,
+    AResizablePanel,
+    AResizablePanelGroup,
+    AScrollArea,
+    ASelect,
+    ASelectContent,
+    ASelectItem,
+    ASelectLabel,
+    ASelectTrigger,
+    ASelectValue,
+    ASeparator,
+    ASheet,
+    ASheetContent,
+    ASheetDescription,
+    ASheetFooter,
+    ASheetHeader,
+    ASheetTitle,
+    ASheetTrigger,
+    ASidebar,
+    ASidebarContent,
+    ASidebarFooter,
+    ASidebarHeader,
+    ASidebarInset,
+    ASidebarMenu,
+    ASidebarMenuButton,
+    ASidebarMenuItem,
+    ASidebarProvider,
+    ASkeleton,
+    ASlider,
+    ASwitch,
+    ATable,
+    ATableBody,
+    ATableCell,
+    ATableHead,
+    ATableHeader,
+    ATableRow,
+    ATabs,
+    ATabsContent,
+    ATabsList,
+    ATabsTrigger,
+    ATagsInput,
+    ATagsInputInput,
+    ATagsInputItem,
+    ATagsInputItemDelete,
+    ATagsInputItemText,
+    AToggle,
+    AToggleGroup,
+    AToggleGroupItem,
+    ATooltip,
+    ATooltipContent,
+    ATooltipProvider,
+    ATooltipTrigger,
 } from './components'
 
 const clickCount = ref(0)
@@ -129,6 +217,55 @@ const dialogOpen = ref(false)
 
 // Drawer 相关状态
 const drawerOpen = ref(false)
+
+// AlertDialog 相关状态
+const alertDialogOpen = ref(false)
+
+// NumberField 相关状态
+const numberValue = ref(0)
+
+// Pagination 相关状态
+const currentPage = ref(1)
+const totalPages = ref(10)
+
+// PinInput 相关状态
+const pinValue = ref(['', '', '', ''])
+
+// Popover 相关状态
+const popoverOpen = ref(false)
+
+// Progress 相关状态
+const progressValue = ref(33)
+
+// RadioGroup 相关状态
+const radioValue = ref('')
+
+// Select 相关状态
+const selectValue = ref('')
+
+// Sheet 相关状态
+const sheetOpen = ref(false)
+
+// Slider 相关状态
+const sliderValue = ref([50])
+
+// Stepper 相关状态
+const stepperValue = ref(1)
+
+// Switch 相关状态
+const switchValue = ref(false)
+
+// Tabs 相关状态
+const tabsValue = ref('tab1')
+
+// TagsInput 相关状态
+const tagsValue = ref(['Vue', 'React'])
+
+// Toggle 相关状态
+const toggleValue = ref(false)
+
+// ToggleGroup 相关状态
+const toggleGroupValue = ref('')
 
 const handleClick = () => {
     clickCount.value++
@@ -2929,6 +3066,751 @@ const onReset = () => {
                                     </AHoverCardContent>
                                 </AHoverCard>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AlertDialog 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">AlertDialog 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <AAlertDialog v-model:open="alertDialogOpen">
+                                <AAlertDialogTrigger as-child>
+                                    <AButton variant="destructive">删除账户</AButton>
+                                </AAlertDialogTrigger>
+                                <AAlertDialogContent>
+                                    <AAlertDialogHeader>
+                                        <AAlertDialogTitle>确定要删除账户吗？</AAlertDialogTitle>
+                                        <AAlertDialogDescription> 此操作无法撤销。这将永久删除您的账户并移除您服务器中的所有数据。 </AAlertDialogDescription>
+                                    </AAlertDialogHeader>
+                                    <AAlertDialogFooter>
+                                        <AAlertDialogCancel>取消</AAlertDialogCancel>
+                                        <AAlertDialogAction class="bg-destructive text-destructive-foreground hover:bg-destructive/90"> 删除 </AAlertDialogAction>
+                                    </AAlertDialogFooter>
+                                </AAlertDialogContent>
+                            </AAlertDialog>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Breadcrumb 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Breadcrumb 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ABreadcrumb>
+                                <ABreadcrumbList>
+                                    <ABreadcrumbItem>
+                                        <ABreadcrumbLink href="/">首页</ABreadcrumbLink>
+                                    </ABreadcrumbItem>
+                                    <ABreadcrumbSeparator />
+                                    <ABreadcrumbItem>
+                                        <ABreadcrumbLink href="/components">组件</ABreadcrumbLink>
+                                    </ABreadcrumbItem>
+                                    <ABreadcrumbSeparator />
+                                    <ABreadcrumbItem>
+                                        <ABreadcrumbPage>面包屑</ABreadcrumbPage>
+                                    </ABreadcrumbItem>
+                                </ABreadcrumbList>
+                            </ABreadcrumb>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">带省略号</h3>
+                            <ABreadcrumb>
+                                <ABreadcrumbList>
+                                    <ABreadcrumbItem>
+                                        <ABreadcrumbLink href="/">首页</ABreadcrumbLink>
+                                    </ABreadcrumbItem>
+                                    <ABreadcrumbSeparator />
+                                    <ABreadcrumbItem>
+                                        <ABreadcrumbEllipsis />
+                                    </ABreadcrumbItem>
+                                    <ABreadcrumbSeparator />
+                                    <ABreadcrumbItem>
+                                        <ABreadcrumbLink href="/components">组件</ABreadcrumbLink>
+                                    </ABreadcrumbItem>
+                                    <ABreadcrumbSeparator />
+                                    <ABreadcrumbItem>
+                                        <ABreadcrumbPage>面包屑</ABreadcrumbPage>
+                                    </ABreadcrumbItem>
+                                </ABreadcrumbList>
+                            </ABreadcrumb>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NumberField 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">NumberField 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="w-full max-w-sm">
+                                <ANumberField v-model="numberValue" :min="0" :max="100" :step="1">
+                                    <ANumberFieldContent>
+                                        <ANumberFieldInput />
+                                        <ANumberFieldIncrement />
+                                        <ANumberFieldDecrement />
+                                    </ANumberFieldContent>
+                                </ANumberField>
+                                <p class="text-sm text-muted-foreground mt-2">当前值: {{ numberValue }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Pagination 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Pagination 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <APagination v-model="currentPage" :total="totalPages" :items-per-page="10" :sibling-count="1" :show-edges="true">
+                                <APaginationContent>
+                                    <APaginationItem :value="0">
+                                        <APaginationPrevious />
+                                    </APaginationItem>
+                                    <APaginationItem :value="1">
+                                        <span>1</span>
+                                    </APaginationItem>
+                                    <APaginationItem :value="2">
+                                        <span>2</span>
+                                    </APaginationItem>
+                                    <APaginationItem :value="3">
+                                        <span>3</span>
+                                    </APaginationItem>
+                                    <APaginationItem :value="4">
+                                        <APaginationEllipsis />
+                                    </APaginationItem>
+                                    <APaginationItem :value="10">
+                                        <span>10</span>
+                                    </APaginationItem>
+                                    <APaginationItem :value="11">
+                                        <APaginationNext />
+                                    </APaginationItem>
+                                </APaginationContent>
+                            </APagination>
+                            <p class="text-sm text-muted-foreground mt-2">当前页: {{ currentPage }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PinInput 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">PinInput 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="w-full max-w-sm">
+                                <APinInput v-model="pinValue" :length="4">
+                                    <APinInputGroup>
+                                        <APinInputSlot :index="0" />
+                                        <APinInputSlot :index="1" />
+                                        <APinInputSlot :index="2" />
+                                        <APinInputSlot :index="3" />
+                                    </APinInputGroup>
+                                </APinInput>
+                                <p class="text-sm text-muted-foreground mt-2">输入值: {{ pinValue }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Popover 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Popover 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <APopover v-model:open="popoverOpen">
+                                <APopoverTrigger as-child>
+                                    <AButton variant="outline">打开弹窗</AButton>
+                                </APopoverTrigger>
+                                <APopoverContent class="w-80">
+                                    <div class="space-y-2">
+                                        <h4 class="font-medium leading-none">弹窗标题</h4>
+                                        <p class="text-sm text-muted-foreground">这是一个弹窗组件，可以显示额外的信息或操作。</p>
+                                        <div class="flex gap-2 pt-2">
+                                            <AButton size="sm">确认</AButton>
+                                            <AButton size="sm" variant="outline">取消</AButton>
+                                        </div>
+                                    </div>
+                                </APopoverContent>
+                            </APopover>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Progress 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Progress 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <AProgress :value="progressValue" class="w-full" />
+                                    <p class="text-sm text-muted-foreground mt-2">进度: {{ progressValue }}%</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <AButton size="sm" @click="progressValue = Math.max(0, progressValue - 10)">减少</AButton>
+                                    <AButton size="sm" @click="progressValue = Math.min(100, progressValue + 10)">增加</AButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RadioGroup 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">RadioGroup 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ARadioGroup v-model="radioValue">
+                                <div class="flex items-center space-x-2">
+                                    <ARadioGroupItem value="vue" id="vue" />
+                                    <ALabel for="vue">Vue.js</ALabel>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <ARadioGroupItem value="react" id="react" />
+                                    <ALabel for="react">React</ALabel>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <ARadioGroupItem value="angular" id="angular" />
+                                    <ALabel for="angular">Angular</ALabel>
+                                </div>
+                            </ARadioGroup>
+                            <p class="text-sm text-muted-foreground mt-2">选中值: {{ radioValue || '无' }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RangeCalendar 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">RangeCalendar 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ACard class="w-fit">
+                                <ACardContent class="p-4">
+                                    <div class="text-center p-8 border rounded-md">
+                                        <p class="text-muted-foreground">RangeCalendar 组件</p>
+                                        <p class="text-sm text-muted-foreground mt-2">日历范围选择器</p>
+                                    </div>
+                                </ACardContent>
+                            </ACard>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Resizable 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Resizable 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <AResizablePanelGroup direction="horizontal" class="max-w-md rounded-lg border">
+                                <AResizablePanel :default-size="50">
+                                    <div class="flex h-[200px] items-center justify-center p-6">
+                                        <span class="font-semibold">面板 1</span>
+                                    </div>
+                                </AResizablePanel>
+                                <AResizableHandle />
+                                <AResizablePanel :default-size="50">
+                                    <div class="flex h-[200px] items-center justify-center p-6">
+                                        <span class="font-semibold">面板 2</span>
+                                    </div>
+                                </AResizablePanel>
+                            </AResizablePanelGroup>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ScrollArea 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">ScrollArea 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <AScrollArea class="h-[200px] w-full rounded-md border p-4">
+                                <div class="space-y-2">
+                                    <div v-for="i in 20" :key="i" class="p-2 bg-muted rounded">滚动项目 {{ i }}</div>
+                                </div>
+                            </AScrollArea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Select 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Select 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="w-full max-w-sm">
+                                <ASelect v-model="selectValue">
+                                    <ASelectTrigger>
+                                        <ASelectValue placeholder="选择一个框架" />
+                                    </ASelectTrigger>
+                                    <ASelectContent>
+                                        <ASelectLabel>前端框架</ASelectLabel>
+                                        <ASelectItem value="vue">Vue.js</ASelectItem>
+                                        <ASelectItem value="react">React</ASelectItem>
+                                        <ASelectItem value="angular">Angular</ASelectItem>
+                                        <ASelectItem value="svelte">Svelte</ASelectItem>
+                                    </ASelectContent>
+                                </ASelect>
+                                <p class="text-sm text-muted-foreground mt-2">选中值: {{ selectValue || '无' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Separator 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Separator 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-sm font-medium">第一部分</h4>
+                                    <p class="text-sm text-muted-foreground">这是第一部分的内容</p>
+                                </div>
+                                <ASeparator />
+                                <div>
+                                    <h4 class="text-sm font-medium">第二部分</h4>
+                                    <p class="text-sm text-muted-foreground">这是第二部分的内容</p>
+                                </div>
+                                <ASeparator class="my-4" />
+                                <div>
+                                    <h4 class="text-sm font-medium">第三部分</h4>
+                                    <p class="text-sm text-muted-foreground">这是第三部分的内容</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sheet 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Sheet 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ASheet v-model:open="sheetOpen">
+                                <ASheetTrigger as-child>
+                                    <AButton variant="outline">打开侧边栏</AButton>
+                                </ASheetTrigger>
+                                <ASheetContent>
+                                    <ASheetHeader>
+                                        <ASheetTitle>侧边栏标题</ASheetTitle>
+                                        <ASheetDescription> 这是一个侧边栏组件，可以显示额外的内容。 </ASheetDescription>
+                                    </ASheetHeader>
+                                    <div class="py-4">
+                                        <div class="space-y-4">
+                                            <div>
+                                                <ALabel>设置项 1</ALabel>
+                                                <AInput placeholder="请输入内容" />
+                                            </div>
+                                            <div>
+                                                <ALabel>设置项 2</ALabel>
+                                                <AInput placeholder="请输入内容" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ASheetFooter>
+                                        <AButton>保存</AButton>
+                                    </ASheetFooter>
+                                </ASheetContent>
+                            </ASheet>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sidebar 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Sidebar 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ASidebarProvider>
+                                <ASidebar>
+                                    <ASidebarHeader>
+                                        <ASidebarMenu>
+                                            <ASidebarMenuItem>
+                                                <ASidebarMenuButton>
+                                                    <span>仪表板</span>
+                                                </ASidebarMenuButton>
+                                            </ASidebarMenuItem>
+                                        </ASidebarMenu>
+                                    </ASidebarHeader>
+                                    <ASidebarContent>
+                                        <ASidebarMenu>
+                                            <ASidebarMenuItem>
+                                                <ASidebarMenuButton>
+                                                    <span>项目</span>
+                                                </ASidebarMenuButton>
+                                            </ASidebarMenuItem>
+                                            <ASidebarMenuItem>
+                                                <ASidebarMenuButton>
+                                                    <span>任务</span>
+                                                </ASidebarMenuButton>
+                                            </ASidebarMenuItem>
+                                        </ASidebarMenu>
+                                    </ASidebarContent>
+                                    <ASidebarFooter>
+                                        <ASidebarMenu>
+                                            <ASidebarMenuItem>
+                                                <ASidebarMenuButton>
+                                                    <span>设置</span>
+                                                </ASidebarMenuButton>
+                                            </ASidebarMenuItem>
+                                        </ASidebarMenu>
+                                    </ASidebarFooter>
+                                </ASidebar>
+                                <ASidebarInset>
+                                    <div class="p-4">
+                                        <h3 class="text-lg font-semibold">主要内容区域</h3>
+                                        <p class="text-muted-foreground">这里是侧边栏旁边的主要内容区域。</p>
+                                    </div>
+                                </ASidebarInset>
+                            </ASidebarProvider>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Skeleton 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Skeleton 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-4">
+                                    <ASkeleton class="h-12 w-12 rounded-full" />
+                                    <div class="space-y-2">
+                                        <ASkeleton class="h-4 w-[250px]" />
+                                        <ASkeleton class="h-4 w-[200px]" />
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <ASkeleton class="h-4 w-full" />
+                                    <ASkeleton class="h-4 w-3/4" />
+                                    <ASkeleton class="h-4 w-1/2" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slider 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Slider 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="space-y-4">
+                                <ASlider v-model="sliderValue" :max="100" :step="1" class="w-full" />
+                                <p class="text-sm text-muted-foreground">当前值: {{ sliderValue[0] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sonner 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Sonner 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="flex gap-2">
+                                <AButton @click="() => console.log('成功提示')">显示成功提示</AButton>
+                                <AButton variant="destructive" @click="() => console.log('错误提示')">显示错误提示</AButton>
+                                <AButton variant="outline" @click="() => console.log('信息提示')">显示信息提示</AButton>
+                            </div>
+                            <p class="text-sm text-muted-foreground mt-2">注意：Sonner 组件需要配合 toast 功能使用</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stepper 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Stepper 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">1</div>
+                                    <span>第一步</span>
+                                </div>
+                                <div class="w-4 h-px bg-border"></div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-muted text-muted-foreground flex items-center justify-center text-sm font-medium">2</div>
+                                    <span>第二步</span>
+                                </div>
+                                <div class="w-4 h-px bg-border"></div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-muted text-muted-foreground flex items-center justify-center text-sm font-medium">3</div>
+                                    <span>第三步</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-muted-foreground mt-2">当前步骤: {{ stepperValue }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Switch 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Switch 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="flex items-center space-x-2">
+                                <ASwitch v-model:checked="switchValue" />
+                                <ALabel>启用通知</ALabel>
+                            </div>
+                            <p class="text-sm text-muted-foreground mt-2">当前状态: {{ switchValue ? '开启' : '关闭' }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Table 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Table 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="rounded-md border">
+                                <ATable>
+                                    <ATableHeader>
+                                        <ATableRow>
+                                            <ATableHead>姓名</ATableHead>
+                                            <ATableHead>邮箱</ATableHead>
+                                            <ATableHead>角色</ATableHead>
+                                            <ATableHead>状态</ATableHead>
+                                        </ATableRow>
+                                    </ATableHeader>
+                                    <ATableBody>
+                                        <ATableRow>
+                                            <ATableCell>张三</ATableCell>
+                                            <ATableCell>zhangsan@example.com</ATableCell>
+                                            <ATableCell>管理员</ATableCell>
+                                            <ATableCell>
+                                                <ABadge>活跃</ABadge>
+                                            </ATableCell>
+                                        </ATableRow>
+                                        <ATableRow>
+                                            <ATableCell>李四</ATableCell>
+                                            <ATableCell>lisi@example.com</ATableCell>
+                                            <ATableCell>用户</ATableCell>
+                                            <ATableCell>
+                                                <ABadge variant="secondary">离线</ABadge>
+                                            </ATableCell>
+                                        </ATableRow>
+                                        <ATableRow>
+                                            <ATableCell>王五</ATableCell>
+                                            <ATableCell>wangwu@example.com</ATableCell>
+                                            <ATableCell>编辑</ATableCell>
+                                            <ATableCell>
+                                                <ABadge variant="outline">忙碌</ABadge>
+                                            </ATableCell>
+                                        </ATableRow>
+                                    </ATableBody>
+                                </ATable>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tabs 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Tabs 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ATabs v-model="tabsValue" class="w-full">
+                                <ATabsList class="grid w-full grid-cols-3">
+                                    <ATabsTrigger value="tab1">账户</ATabsTrigger>
+                                    <ATabsTrigger value="tab2">密码</ATabsTrigger>
+                                    <ATabsTrigger value="tab3">设置</ATabsTrigger>
+                                </ATabsList>
+                                <ATabsContent value="tab1" class="mt-4">
+                                    <ACard>
+                                        <ACardHeader>
+                                            <ACardTitle>账户信息</ACardTitle>
+                                            <ACardDescription>管理您的账户信息</ACardDescription>
+                                        </ACardHeader>
+                                        <ACardContent>
+                                            <div class="space-y-4">
+                                                <div>
+                                                    <ALabel>用户名</ALabel>
+                                                    <AInput placeholder="请输入用户名" />
+                                                </div>
+                                                <div>
+                                                    <ALabel>邮箱</ALabel>
+                                                    <AInput type="email" placeholder="请输入邮箱" />
+                                                </div>
+                                            </div>
+                                        </ACardContent>
+                                    </ACard>
+                                </ATabsContent>
+                                <ATabsContent value="tab2" class="mt-4">
+                                    <ACard>
+                                        <ACardHeader>
+                                            <ACardTitle>密码设置</ACardTitle>
+                                            <ACardDescription>更改您的密码</ACardDescription>
+                                        </ACardHeader>
+                                        <ACardContent>
+                                            <div class="space-y-4">
+                                                <div>
+                                                    <ALabel>当前密码</ALabel>
+                                                    <AInput type="password" placeholder="请输入当前密码" />
+                                                </div>
+                                                <div>
+                                                    <ALabel>新密码</ALabel>
+                                                    <AInput type="password" placeholder="请输入新密码" />
+                                                </div>
+                                            </div>
+                                        </ACardContent>
+                                    </ACard>
+                                </ATabsContent>
+                                <ATabsContent value="tab3" class="mt-4">
+                                    <ACard>
+                                        <ACardHeader>
+                                            <ACardTitle>系统设置</ACardTitle>
+                                            <ACardDescription>配置系统参数</ACardDescription>
+                                        </ACardHeader>
+                                        <ACardContent>
+                                            <div class="space-y-4">
+                                                <div class="flex items-center space-x-2">
+                                                    <ASwitch />
+                                                    <ALabel>启用通知</ALabel>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <ASwitch />
+                                                    <ALabel>自动保存</ALabel>
+                                                </div>
+                                            </div>
+                                        </ACardContent>
+                                    </ACard>
+                                </ATabsContent>
+                            </ATabs>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TagsInput 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">TagsInput 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="w-full max-w-sm">
+                                <ATagsInput v-model="tagsValue">
+                                    <ATagsInputItem v-for="tag in tagsValue" :key="tag" :value="tag">
+                                        <ATagsInputItemText />
+                                        <ATagsInputItemDelete />
+                                    </ATagsInputItem>
+                                    <ATagsInputInput placeholder="添加标签..." />
+                                </ATagsInput>
+                                <p class="text-sm text-muted-foreground mt-2">当前标签: {{ tagsValue.join(', ') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Toggle 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Toggle 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <div class="flex gap-2">
+                                <AToggle v-model:pressed="toggleValue"> 切换状态 </AToggle>
+                                <AToggle variant="outline"> 轮廓样式 </AToggle>
+                                <AToggle variant="outline"> 轮廓样式2 </AToggle>
+                            </div>
+                            <p class="text-sm text-muted-foreground mt-2">切换状态: {{ toggleValue ? '开启' : '关闭' }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ToggleGroup 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">ToggleGroup 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <AToggleGroup v-model="toggleGroupValue" type="single">
+                                <AToggleGroupItem value="bold">粗体</AToggleGroupItem>
+                                <AToggleGroupItem value="italic">斜体</AToggleGroupItem>
+                                <AToggleGroupItem value="underline">下划线</AToggleGroupItem>
+                            </AToggleGroup>
+                            <p class="text-sm text-muted-foreground mt-2">选中值: {{ toggleGroupValue || '无' }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tooltip 组件测试 -->
+                <section class="border rounded-lg p-6 bg-card">
+                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">Tooltip 组件测试</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
+                            <ATooltipProvider>
+                                <div class="flex gap-4">
+                                    <ATooltip>
+                                        <ATooltipTrigger as-child>
+                                            <AButton variant="outline">悬停查看提示</AButton>
+                                        </ATooltipTrigger>
+                                        <ATooltipContent>
+                                            <p>这是一个工具提示</p>
+                                        </ATooltipContent>
+                                    </ATooltip>
+
+                                    <ATooltip>
+                                        <ATooltipTrigger as-child>
+                                            <AButton variant="outline">另一个提示</AButton>
+                                        </ATooltipTrigger>
+                                        <ATooltipContent>
+                                            <p>这是另一个工具提示</p>
+                                        </ATooltipContent>
+                                    </ATooltip>
+                                </div>
+                            </ATooltipProvider>
                         </div>
                     </div>
                 </section>
