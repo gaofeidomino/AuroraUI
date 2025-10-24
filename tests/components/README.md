@@ -29,8 +29,12 @@
 | [Tabs](./tabs/README.md)                    | 2          | ✅   | ✅   |
 | [Resizable](./resizable/README.md)          | 3          | ✅   | ✅   |
 | [RangeCalendar](./range-calendar/README.md) | 8          | ✅   | ✅   |
+| [Textarea](./textarea/README.md)            | 1          | ✅   | ✅   |
+| [Tooltip](./tooltip/README.md)              | 4          | ✅   | ✅   |
+| [ToggleGroup](./toggle-group/README.md)     | 2          | ✅   | ✅   |
+| [TagsInput](./tags-input/README.md)         | 5          | ✅   | ✅   |
 
-**总计: 89+ 个测试文件**
+**总计: 101+ 个测试文件**
 
 ---
 
@@ -83,6 +87,16 @@
 ### 布局组件
 
 - **RangeCalendar** - 日期范围选择器
+
+### 表单组件
+
+- **Textarea** - 多行文本输入框
+- **TagsInput** - 标签输入框
+
+### 交互组件
+
+- **Tooltip** - 提示框
+- **ToggleGroup** - 切换按钮组
 
 ---
 
