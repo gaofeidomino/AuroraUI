@@ -25,6 +25,13 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "aurora-ui": "./cli/bin/aurora-ui.js"
+  },
+  "sideEffects": [
+    "**/*.css",
+    "**/style.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -40,6 +47,7 @@
     "node": "^20.19.0 || >=22.12.0"
   },
   "scripts": {
+    "cli": "tsx cli/src/index.ts",
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "build:lib": "BUILD_LIB=true vite build && npm run build:types",
@@ -111,6 +119,7 @@
     "jsdom": "^26.1.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
+    "tsx": "^4.20.6",
     "typescript": "~5.8.0",
     "vite": "^7.0.6",
     "vite-plugin-vue-devtools": "^8.0.0",
