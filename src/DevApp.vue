@@ -2726,350 +2726,6 @@ const onReset = () => {
                     </div>
                 </section>
 
-                <!-- HoverCard 组件测试 -->
-                <section class="border rounded-lg p-6 bg-card">
-                    <h2 class="text-xl font-semibold mb-4 text-card-foreground">HoverCard 组件测试</h2>
-
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-lg font-medium mb-3">基础用法</h3>
-                            <div class="flex flex-wrap gap-6">
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="link">@nextjs</AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-80">
-                                        <div class="flex justify-between space-x-4">
-                                            <AAvatar>
-                                                <AAvatarFallback>JS</AAvatarFallback>
-                                            </AAvatar>
-                                            <div class="space-y-1">
-                                                <h4 class="text-sm font-semibold">@nextjs</h4>
-                                                <p class="text-sm">The React Framework for the Web.</p>
-                                                <div class="flex items-center pt-2">
-                                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                                    </svg>
-                                                    <span class="text-xs text-muted-foreground"> 20.1k stars </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="link">@vuejs</AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-80">
-                                        <div class="flex justify-between space-x-4">
-                                            <AAvatar>
-                                                <AAvatarFallback>V</AAvatarFallback>
-                                            </AAvatar>
-                                            <div class="space-y-1">
-                                                <h4 class="text-sm font-semibold">@vuejs</h4>
-                                                <p class="text-sm">The Progressive JavaScript Framework.</p>
-                                                <div class="flex items-center pt-2">
-                                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                                    </svg>
-                                                    <span class="text-xs text-muted-foreground"> 38.5k stars </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="link">@reactjs</AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-80">
-                                        <div class="flex justify-between space-x-4">
-                                            <AAvatar>
-                                                <AAvatarFallback>R</AAvatarFallback>
-                                            </AAvatar>
-                                            <div class="space-y-1">
-                                                <h4 class="text-sm font-semibold">@reactjs</h4>
-                                                <p class="text-sm">A JavaScript library for building user interfaces.</p>
-                                                <div class="flex items-center pt-2">
-                                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                                    </svg>
-                                                    <span class="text-xs text-muted-foreground"> 216k stars </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 class="text-lg font-medium mb-3">用户信息卡片</h3>
-                            <div class="flex flex-wrap gap-6">
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="ghost" class="h-auto p-0">
-                                            <div class="flex items-center space-x-2">
-                                                <AAvatar class="h-8 w-8">
-                                                    <AAvatarImage src="https://github.com/shadcn.png" alt="用户头像" />
-                                                    <AAvatarFallback>张三</AAvatarFallback>
-                                                </AAvatar>
-                                                <div class="text-left">
-                                                    <div class="text-sm font-medium">张三</div>
-                                                    <div class="text-xs text-muted-foreground">前端开发工程师</div>
-                                                </div>
-                                            </div>
-                                        </AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-80">
-                                        <div class="space-y-3">
-                                            <div class="flex justify-between space-x-4">
-                                                <AAvatar class="h-12 w-12">
-                                                    <AAvatarImage src="https://github.com/shadcn.png" alt="张三" />
-                                                    <AAvatarFallback>张三</AAvatarFallback>
-                                                </AAvatar>
-                                                <div class="space-y-1">
-                                                    <h4 class="text-sm font-semibold">张三</h4>
-                                                    <p class="text-sm text-muted-foreground">前端开发工程师</p>
-                                                    <p class="text-xs text-muted-foreground">专注于 Vue.js 和 React 开发</p>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-center space-x-4 text-xs text-muted-foreground">
-                                                <div class="flex items-center">
-                                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                                    </svg>
-                                                    128 项目
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                                                        <circle cx="9" cy="7" r="4" />
-                                                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                                                    </svg>
-                                                    2.1k 关注者
-                                                </div>
-                                            </div>
-                                            <div class="pt-2">
-                                                <AButton size="sm" class="w-full">关注</AButton>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="ghost" class="h-auto p-0">
-                                            <div class="flex items-center space-x-2">
-                                                <AAvatar class="h-8 w-8">
-                                                    <AAvatarFallback>李四</AAvatarFallback>
-                                                </AAvatar>
-                                                <div class="text-left">
-                                                    <div class="text-sm font-medium">李四</div>
-                                                    <div class="text-xs text-muted-foreground">UI/UX 设计师</div>
-                                                </div>
-                                            </div>
-                                        </AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-80">
-                                        <div class="space-y-3">
-                                            <div class="flex justify-between space-x-4">
-                                                <AAvatar class="h-12 w-12">
-                                                    <AAvatarFallback>李四</AAvatarFallback>
-                                                </AAvatar>
-                                                <div class="space-y-1">
-                                                    <h4 class="text-sm font-semibold">李四</h4>
-                                                    <p class="text-sm text-muted-foreground">UI/UX 设计师</p>
-                                                    <p class="text-xs text-muted-foreground">专注于用户体验和界面设计</p>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-center space-x-4 text-xs text-muted-foreground">
-                                                <div class="flex items-center">
-                                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                                    </svg>
-                                                    89 项目
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                                                        <circle cx="9" cy="7" r="4" />
-                                                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                                                    </svg>
-                                                    1.5k 关注者
-                                                </div>
-                                            </div>
-                                            <div class="pt-2">
-                                                <AButton size="sm" variant="outline" class="w-full">已关注</AButton>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 class="text-lg font-medium mb-3">产品信息卡片</h3>
-                            <div class="flex flex-wrap gap-6">
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="outline" class="h-auto p-4">
-                                            <div class="text-left">
-                                                <div class="flex items-center space-x-2 mb-2">
-                                                    <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                                                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <div class="font-medium">AuroraUI Pro</div>
-                                                        <div class="text-sm text-muted-foreground">专业版</div>
-                                                    </div>
-                                                </div>
-                                                <div class="text-sm text-muted-foreground">功能完整的企业级组件库</div>
-                                            </div>
-                                        </AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-96">
-                                        <div class="space-y-3">
-                                            <div class="flex items-start space-x-3">
-                                                <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-                                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                                    </svg>
-                                                </div>
-                                                <div class="space-y-1">
-                                                    <h4 class="text-sm font-semibold">AuroraUI Pro</h4>
-                                                    <p class="text-sm text-muted-foreground">专业版组件库，包含所有高级功能</p>
-                                                </div>
-                                            </div>
-                                            <div class="space-y-2">
-                                                <div class="text-sm">
-                                                    <div class="flex items-center justify-between">
-                                                        <span>包含组件数量</span>
-                                                        <span class="font-medium">50+</span>
-                                                    </div>
-                                                    <div class="flex items-center justify-between">
-                                                        <span>主题定制</span>
-                                                        <span class="font-medium">✓ 支持</span>
-                                                    </div>
-                                                    <div class="flex items-center justify-between">
-                                                        <span>TypeScript</span>
-                                                        <span class="font-medium">✓ 支持</span>
-                                                    </div>
-                                                    <div class="flex items-center justify-between">
-                                                        <span>响应式设计</span>
-                                                        <span class="font-medium">✓ 支持</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pt-2">
-                                                <AButton size="sm" class="w-full">了解更多</AButton>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="outline" class="h-auto p-4">
-                                            <div class="text-left">
-                                                <div class="flex items-center space-x-2 mb-2">
-                                                    <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
-                                                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <div class="font-medium">AuroraUI Free</div>
-                                                        <div class="text-sm text-muted-foreground">免费版</div>
-                                                    </div>
-                                                </div>
-                                                <div class="text-sm text-muted-foreground">基础组件库，适合个人项目</div>
-                                            </div>
-                                        </AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-96">
-                                        <div class="space-y-3">
-                                            <div class="flex items-start space-x-3">
-                                                <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-                                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
-                                                </div>
-                                                <div class="space-y-1">
-                                                    <h4 class="text-sm font-semibold">AuroraUI Free</h4>
-                                                    <p class="text-sm text-muted-foreground">免费版组件库，包含基础功能</p>
-                                                </div>
-                                            </div>
-                                            <div class="space-y-2">
-                                                <div class="text-sm">
-                                                    <div class="flex items-center justify-between">
-                                                        <span>包含组件数量</span>
-                                                        <span class="font-medium">20+</span>
-                                                    </div>
-                                                    <div class="flex items-center justify-between">
-                                                        <span>主题定制</span>
-                                                        <span class="font-medium text-muted-foreground">✗ 不支持</span>
-                                                    </div>
-                                                    <div class="flex items-center justify-between">
-                                                        <span>TypeScript</span>
-                                                        <span class="font-medium">✓ 支持</span>
-                                                    </div>
-                                                    <div class="flex items-center justify-between">
-                                                        <span>响应式设计</span>
-                                                        <span class="font-medium">✓ 支持</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pt-2">
-                                                <AButton size="sm" variant="outline" class="w-full">立即使用</AButton>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 class="text-lg font-medium mb-3">自定义样式</h3>
-                            <div class="flex flex-wrap gap-6">
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="secondary" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0"> 渐变按钮 </AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-80 border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50">
-                                        <div class="space-y-2">
-                                            <h4 class="text-sm font-semibold text-purple-900">自定义样式</h4>
-                                            <p class="text-sm text-purple-700">这是一个带有自定义渐变背景的悬停卡片</p>
-                                            <div class="pt-2">
-                                                <AButton size="sm" class="w-full bg-purple-500 hover:bg-purple-600"> 自定义按钮 </AButton>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-
-                                <AHoverCard>
-                                    <AHoverCardTrigger as-child>
-                                        <AButton variant="outline" class="border-2 border-blue-300 text-blue-600 hover:bg-blue-50"> 蓝色主题 </AButton>
-                                    </AHoverCardTrigger>
-                                    <AHoverCardContent class="w-80 border-blue-200 bg-blue-50">
-                                        <div class="space-y-2">
-                                            <h4 class="text-sm font-semibold text-blue-900">蓝色主题</h4>
-                                            <p class="text-sm text-blue-700">这是一个蓝色主题的悬停卡片</p>
-                                            <div class="pt-2">
-                                                <AButton size="sm" class="w-full bg-blue-500 hover:bg-blue-600"> 蓝色按钮 </AButton>
-                                            </div>
-                                        </div>
-                                    </AHoverCardContent>
-                                </AHoverCard>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- AlertDialog 组件测试 -->
                 <section class="border rounded-lg p-6 bg-card">
                     <h2 class="text-xl font-semibold mb-4 text-card-foreground">AlertDialog 组件测试</h2>
@@ -3173,29 +2829,19 @@ const onReset = () => {
                     <div class="space-y-6">
                         <div>
                             <h3 class="text-lg font-medium mb-3">基础用法</h3>
-                            <APagination v-model="currentPage" :total="totalPages" :items-per-page="10" :sibling-count="1" :show-edges="true">
-                                <APaginationContent>
-                                    <APaginationItem :value="0">
-                                        <APaginationPrevious />
-                                    </APaginationItem>
-                                    <APaginationItem :value="1">
-                                        <span>1</span>
-                                    </APaginationItem>
-                                    <APaginationItem :value="2">
-                                        <span>2</span>
-                                    </APaginationItem>
-                                    <APaginationItem :value="3">
-                                        <span>3</span>
-                                    </APaginationItem>
-                                    <APaginationItem :value="4">
-                                        <APaginationEllipsis />
-                                    </APaginationItem>
-                                    <APaginationItem :value="10">
-                                        <span>10</span>
-                                    </APaginationItem>
-                                    <APaginationItem :value="11">
-                                        <APaginationNext />
-                                    </APaginationItem>
+                            <APagination v-slot="{ page }" :items-per-page="10" :total="30" :default-page="currentPage">
+                                <APaginationContent v-slot="{ items }">
+                                    <APaginationPrevious />
+
+                                    <template v-for="(item, index) in items" :key="index">
+                                        <APaginationItem v-if="item.type === 'page'" :value="item.value" :is-active="item.value === page">
+                                            {{ item.value }}
+                                        </APaginationItem>
+                                    </template>
+
+                                    <APaginationEllipsis :index="4" />
+
+                                    <APaginationNext />
                                 </APaginationContent>
                             </APagination>
                             <p class="text-sm text-muted-foreground mt-2">当前页: {{ currentPage }}</p>
@@ -3448,7 +3094,7 @@ const onReset = () => {
                 </section>
 
                 <!-- Sidebar 组件测试 -->
-                <section class="border rounded-lg p-6 bg-card">
+                <!-- <section class="border rounded-lg p-6 bg-card">
                     <h2 class="text-xl font-semibold mb-4 text-card-foreground">Sidebar 组件测试</h2>
 
                     <div class="space-y-6">
@@ -3498,7 +3144,7 @@ const onReset = () => {
                             </ASidebarProvider>
                         </div>
                     </div>
-                </section>
+                </section> -->
 
                 <!-- Skeleton 组件测试 -->
                 <section class="border rounded-lg p-6 bg-card">

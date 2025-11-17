@@ -26,6 +26,7 @@ dist/favicon.ico
 dist/.DS_Store
 
 # 测试文件
+tests/
 test-aurora.js
 /tmp/
 
