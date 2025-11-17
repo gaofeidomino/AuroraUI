@@ -13,14 +13,13 @@ const props = defineProps<{
 const content = computed(() => {
     if (!props.errors || props.errors.length === 0) return null
 
-    const uniqueErrors = [
-        ...new Map(
-            props.errors.filter(Boolean).map((error) => {
-                const message = typeof error === 'string' ? error : error?.message
-                return [message, error]
-            }),
-        ).values(),
-    ]
+    const errorMap = new Map(
+        props.errors.filter(Boolean).map((error) => {
+            const message = typeof error === 'string' ? error : error?.message
+            return [message, error]
+        }),
+    )
+    const uniqueErrors = Array.from(errorMap.values())
 
     if (uniqueErrors.length === 1 && uniqueErrors[0]) {
         return typeof uniqueErrors[0] === 'string' ? uniqueErrors[0] : uniqueErrors[0].message
