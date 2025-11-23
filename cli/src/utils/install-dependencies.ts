@@ -4,11 +4,7 @@ import type { PackageManager } from './get-package-manager'
 
 const execAsync = promisify(exec)
 
-export async function installDependencies(
-    dependencies: string[],
-    packageManager: PackageManager,
-    skipConfirm: boolean = false
-): Promise<void> {
+export async function installDependencies(dependencies: string[], packageManager: PackageManager, skipConfirm: boolean = false): Promise<void> {
     if (dependencies.length === 0) {
         return
     }
@@ -31,13 +27,16 @@ export async function installDependencies(
     }
 
     console.log(`\nRunning: ${command}`)
-    
+
     try {
         const { stdout, stderr } = await execAsync(command, {
             cwd: process.cwd(),
-            stdio: 'inherit',
         })
-        
+
+        if (stdout) {
+            console.log(stdout)
+        }
+
         if (stderr && !stderr.includes('warning')) {
             console.error(`\n⚠️  Warning: ${stderr}`)
         }
@@ -47,4 +46,3 @@ export async function installDependencies(
         console.log(`  ${command}`)
     }
 }
-

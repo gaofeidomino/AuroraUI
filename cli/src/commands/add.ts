@@ -5,6 +5,7 @@ import { registry } from '../registry.js'
 import { resolveConfig } from '../utils/resolve-config.js'
 import { getPackageManager } from '../utils/get-package-manager.js'
 import { transformComponent } from '../utils/transform-component.js'
+import { installDependencies } from '../utils/install-dependencies.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -85,27 +86,50 @@ export async function add(componentName: string, options: { dir?: string; yes?: 
         console.log(`  ✓ src/utils/cn.ts`)
     }
 
-    // Check if aurora-ui-plus is installed (required for dependency re-exports)
-    const packageJsonPath = path.join(process.cwd(), 'package.json')
-    let auroraInstalled = false
-    try {
-        const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf-8'))
-        const allDeps = {
-            ...(packageJson.dependencies || {}),
-            ...(packageJson.devDependencies || {}),
-        }
-        auroraInstalled = 'aurora-ui-plus' in allDeps
-    } catch {
-        // package.json doesn't exist or is invalid
-    }
+    // Install component dependencies
+    if (component.dependencies && component.dependencies.length > 0) {
+        const packageJsonPath = path.join(process.cwd(), 'package.json')
+        let existingDeps: Record<string, string> = {}
 
-    if (!auroraInstalled) {
-        console.log(`\n⚠️  Warning: aurora-ui-plus is not installed in your project.`)
-        console.log(`   Components will import dependencies from aurora-ui-plus.`)
-        console.log(`   Please install it first:`)
-        const packageManager = await getPackageManager()
-        const installCommand = packageManager === 'pnpm' ? 'pnpm add aurora-ui-plus' : packageManager === 'yarn' ? 'yarn add aurora-ui-plus' : 'npm install aurora-ui-plus'
-        console.log(`   ${installCommand}\n`)
+        try {
+            const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf-8'))
+            existingDeps = {
+                ...(packageJson.dependencies || {}),
+                ...(packageJson.devDependencies || {}),
+            }
+        } catch {
+            // package.json doesn't exist or is invalid
+        }
+
+        // Filter out already installed dependencies
+        const missingDeps = component.dependencies.filter((dep) => {
+            // Handle dependencies with version specifiers (e.g., "package@version" or "@scope/package@version")
+            // For scoped packages, we need to handle @scope/package@version format
+            let depName: string
+            if (dep.startsWith('@')) {
+                // Scoped package: @scope/package or @scope/package@version
+                // Split by '@' and check: ['', 'scope/package'] or ['', 'scope/package', 'version']
+                const parts = dep.split('@')
+                if (parts.length === 2) {
+                    // @scope/package (no version)
+                    depName = dep
+                } else {
+                    // @scope/package@version - join first two parts (empty string + scope/package)
+                    depName = `@${parts[1]}`
+                }
+            } else {
+                // Regular package: package or package@version
+                // Split by '@' and take first part
+                depName = dep.split('@')[0]
+            }
+            return !(depName in existingDeps)
+        })
+
+        if (missingDeps.length > 0) {
+            console.log(`\n📦 Installing dependencies: ${missingDeps.join(', ')}`)
+            const packageManager = await getPackageManager()
+            await installDependencies(missingDeps, packageManager, options.yes || false)
+        }
     }
 
     console.log(`\n✅ Component "${component.name}" added successfully!`)
