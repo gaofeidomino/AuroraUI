@@ -16,7 +16,7 @@ export async function init(options: { dir?: string; yes?: boolean }) {
 
     // Create components.json config file
     const configPath = path.join(process.cwd(), 'components.json')
-    
+
     try {
         await fs.access(configPath)
         if (!options.yes) {
@@ -25,22 +25,26 @@ export async function init(options: { dir?: string; yes?: boolean }) {
         }
     } catch {
         // File doesn't exist, create it
-        const configContent = JSON.stringify({
-            $schema: 'https://aurora-ui.com/schema.json',
-            style: 'default',
-            rsc: false,
-            tsx: false,
-            tailwind: {
-                config: 'tailwind.config.js',
-                css: 'src/style.css',
-                baseColor: 'slate',
-                cssVariables: true,
+        const configContent = JSON.stringify(
+            {
+                $schema: 'https://aurora-ui.com/schema.json',
+                style: 'default',
+                rsc: false,
+                tsx: false,
+                tailwind: {
+                    config: 'tailwind.config.js',
+                    css: 'src/style.css',
+                    baseColor: 'slate',
+                    cssVariables: true,
+                },
+                aliases: {
+                    components: componentsDir,
+                    utils: 'src/utils',
+                },
             },
-            aliases: {
-                components: componentsDir,
-                utils: 'src/utils',
-            },
-        }, null, 2)
+            null,
+            2,
+        )
 
         await fs.writeFile(configPath, configContent, 'utf-8')
         console.log(`✅ Created components.json`)
@@ -49,7 +53,7 @@ export async function init(options: { dir?: string; yes?: boolean }) {
     // Copy utils file
     const utilsPath = path.join(PROJECT_ROOT, 'src/utils/cn.ts')
     const targetUtilsPath = path.join(process.cwd(), 'src/utils/cn.ts')
-    
+
     try {
         await fs.access(targetUtilsPath)
         console.log(`⚠️  src/utils/cn.ts already exists. Skipping...`)
@@ -71,4 +75,3 @@ export async function init(options: { dir?: string; yes?: boolean }) {
     console.log(`  pnpm dlx aurora-ui add button`)
     console.log(`  pnpm dlx aurora-ui add card`)
 }
-
