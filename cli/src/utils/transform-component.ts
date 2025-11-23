@@ -50,10 +50,28 @@ export function transformComponent(content: string, options: { from: string; to:
     const importPath = normalizedPath === '.' ? './cn' : `${normalizedPath}/cn`
     transformed = transformed.replace(/from ['"]@\/utils\/cn['"]/g, `from '${importPath}'`)
 
-    // Note: We keep the original dependency imports unchanged
-    // Dependencies will be installed separately in the user's project
-    // This allows users to have full control over dependency versions
-    // and avoids requiring them to install the entire aurora-ui-plus package
+    // Replace external dependencies with imports from aurora-ui-plus
+    // This allows users to only install aurora-ui-plus without needing to install these dependencies separately
+    // All these dependencies are re-exported from aurora-ui-plus
+    const dependencyMap: Record<string, string> = {
+        'reka-ui': 'aurora-ui-plus',
+        clsx: 'aurora-ui-plus',
+        'tailwind-merge': 'aurora-ui-plus',
+        'class-variance-authority': 'aurora-ui-plus',
+        '@vueuse/core': 'aurora-ui-plus',
+    }
+
+    // Replace all imports from these dependencies to import from aurora-ui-plus instead
+    for (const [dep, replacement] of Object.entries(dependencyMap)) {
+        // Match patterns like:
+        // - import { X } from 'dep'
+        // - import X from 'dep'
+        // - import type { X } from 'dep'
+        // - import * as X from 'dep'
+        // - import { X } from 'dep/subpath'
+        const importRegex = new RegExp(`from ['"]${dep.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:/.*)?['"]`, 'g')
+        transformed = transformed.replace(importRegex, `from '${replacement}'`)
+    }
 
     // Replace other @/ imports - keep them as @/ since users should configure path aliases
     // But we can provide a comment about it

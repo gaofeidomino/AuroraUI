@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url'
 import { registry } from '../registry.js'
 import { resolveConfig } from '../utils/resolve-config.js'
 import { getPackageManager } from '../utils/get-package-manager.js'
-import { installDependencies } from '../utils/install-dependencies.js'
 import { transformComponent } from '../utils/transform-component.js'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -86,52 +85,27 @@ export async function add(componentName: string, options: { dir?: string; yes?: 
         console.log(`  ✓ src/utils/cn.ts`)
     }
 
-    // Install required dependencies
-    if (component.dependencies && component.dependencies.length > 0) {
-        // Get base dependencies that are needed for cn.ts
-        const baseDeps = ['clsx', 'tailwind-merge']
-        const allDeps = [...new Set([...component.dependencies, ...baseDeps])]
-
-        // Check which dependencies are already installed
-        const packageJsonPath = path.join(process.cwd(), 'package.json')
-        let installedDeps: string[] = []
-        try {
-            const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf-8'))
-            installedDeps = [...Object.keys(packageJson.dependencies || {}), ...Object.keys(packageJson.devDependencies || {})]
-        } catch {
-            // package.json doesn't exist or is invalid
+    // Check if aurora-ui-plus is installed (required for dependency re-exports)
+    const packageJsonPath = path.join(process.cwd(), 'package.json')
+    let auroraInstalled = false
+    try {
+        const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf-8'))
+        const allDeps = {
+            ...(packageJson.dependencies || {}),
+            ...(packageJson.devDependencies || {}),
         }
+        auroraInstalled = 'aurora-ui-plus' in allDeps
+    } catch {
+        // package.json doesn't exist or is invalid
+    }
 
-        // Filter out already installed dependencies
-        const depsToInstall = allDeps.filter((dep) => !installedDeps.includes(dep))
-
-        if (depsToInstall.length > 0) {
-            console.log(`\n📦 Installing dependencies: ${depsToInstall.join(', ')}`)
-            const packageManager = await getPackageManager()
-
-            // Read dependency versions from AuroraUI's package.json
-            const auroraPackageJsonPath = path.join(PROJECT_ROOT, 'package.json')
-            let depVersions: Record<string, string> = {}
-            try {
-                const auroraPackageJson = JSON.parse(await fs.readFile(auroraPackageJsonPath, 'utf-8'))
-                depVersions = { ...auroraPackageJson.dependencies }
-            } catch {
-                // Fallback: use latest versions
-            }
-
-            // Build dependency list with versions for command execution
-            const depsWithVersions = depsToInstall.map((dep) => {
-                const version = depVersions[dep] || 'latest'
-                // Extract version number from "^0.7.1" format or use as-is
-                const cleanVersion = version.replace(/^[\^~]/, '')
-                return `${dep}@${cleanVersion}`
-            })
-
-            // Install dependencies
-            await installDependencies(depsWithVersions, packageManager, options.yes || false)
-        } else {
-            console.log(`\n✅ All required dependencies are already installed.`)
-        }
+    if (!auroraInstalled) {
+        console.log(`\n⚠️  Warning: aurora-ui-plus is not installed in your project.`)
+        console.log(`   Components will import dependencies from aurora-ui-plus.`)
+        console.log(`   Please install it first:`)
+        const packageManager = await getPackageManager()
+        const installCommand = packageManager === 'pnpm' ? 'pnpm add aurora-ui-plus' : packageManager === 'yarn' ? 'yarn add aurora-ui-plus' : 'npm install aurora-ui-plus'
+        console.log(`   ${installCommand}\n`)
     }
 
     console.log(`\n✅ Component "${component.name}" added successfully!`)
