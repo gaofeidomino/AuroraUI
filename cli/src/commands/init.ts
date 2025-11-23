@@ -55,7 +55,13 @@ export async function init(options: { dir?: string; yes?: boolean }) {
         console.log(`⚠️  src/utils/cn.ts already exists. Skipping...`)
     } catch {
         await fs.mkdir(path.dirname(targetUtilsPath), { recursive: true })
-        const utilsContent = await fs.readFile(utilsPath, 'utf-8')
+        let utilsContent = await fs.readFile(utilsPath, 'utf-8')
+        // Transform dependencies to import from aurora-ui-plus
+        const { transformComponent } = await import('../utils/transform-component.js')
+        utilsContent = transformComponent(utilsContent, {
+            from: targetUtilsPath,
+            to: path.dirname(targetUtilsPath),
+        })
         await fs.writeFile(targetUtilsPath, utilsContent, 'utf-8')
         console.log(`✅ Created src/utils/cn.ts`)
     }

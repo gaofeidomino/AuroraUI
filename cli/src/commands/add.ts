@@ -77,18 +77,18 @@ export async function add(componentName: string, options: { dir?: string; yes?: 
         // Utils file doesn't exist, copy it
         await fs.mkdir(path.dirname(targetUtilsPath), { recursive: true })
         let utilsContent = await fs.readFile(utilsPath, 'utf-8')
-        // Transform @ imports to relative paths
-        utilsContent = utilsContent.replace(/from ['"]@\/utils\//g, "from '@/utils/")
+        // Transform dependencies to import from aurora-ui-plus
+        utilsContent = transformComponent(utilsContent, {
+            from: targetUtilsPath,
+            to: path.dirname(targetUtilsPath),
+        })
         await fs.writeFile(targetUtilsPath, utilsContent, 'utf-8')
         console.log(`  ✓ src/utils/cn.ts`)
     }
 
-    // Install dependencies
-    if (component.dependencies && component.dependencies.length > 0) {
-        console.log(`\n📥 Installing dependencies...`)
-        const packageManager = await getPackageManager()
-        await installDependencies(component.dependencies, packageManager, options.yes)
-    }
+    // Note: Dependencies like reka-ui, clsx, tailwind-merge, etc. are now imported from aurora-ui-plus
+    // They are already installed as dependencies of aurora-ui-plus, so no need to install them separately
+    // Users should install aurora-ui-plus first: pnpm add aurora-ui-plus
 
     console.log(`\n✅ Component "${component.name}" added successfully!`)
     console.log(`\nUsage:`)
