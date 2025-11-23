@@ -1,6 +1,6 @@
 {
   "name": "aurora-ui-plus",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A personal learning project - Vue 3 UI component library built with TypeScript and Tailwind CSS",
   "keywords": [
     "vue",
@@ -42,7 +42,8 @@
   },
   "files": [
     "dist",
-    "cli",
+    "cli/src",
+    "cli/bin",
     "README.md",
     "INSTALLATION.md"
   ],

@@ -30,6 +30,13 @@ tests/
 test-aurora.js
 /tmp/
 
+# CLI 开发文件
+cli/node_modules/
+cli/package.json
+cli/pnpm-lock.yaml
+cli/tsconfig.json
+cli/README.md
+
 # IDE 文件
 .vscode/
 .idea/
