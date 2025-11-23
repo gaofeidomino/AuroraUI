@@ -1,5 +1,5 @@
-# 开发文件
-src/
+# 开发文件（排除，但保留 components 和 utils）
+src/index.ts
 examples/
 public/
 *.config.js

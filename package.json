@@ -42,6 +42,8 @@
   },
   "files": [
     "dist",
+    "src/components",
+    "src/utils",
     "cli/src",
     "cli/bin",
     "README.md",
