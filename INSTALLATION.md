@@ -14,7 +14,7 @@ pnpm dlx aurora-ui-plus@latest init
 npx aurora-ui-plus@latest init
 ```
 
-这会创建 `components.json` 配置文件并复制必要的工具文件（如 `src/utils/cn.ts`）。
+这会创建 `components.json` 配置文件并复制必要的工具文件（如 `src/utils/cn.ts`）。同时会自动安装基础依赖（`clsx` 和 `tailwind-merge`）。
 
 ### 添加组件
 
@@ -60,7 +60,10 @@ import { ACard, ACardHeader, ACardTitle, ACardContent } from '@/components/ui/ca
 - ✅ 只安装需要的组件，减少项目体积
 - ✅ 组件代码在你的项目中，可以自由修改
 - ✅ 自动处理路径转换和依赖安装
+- ✅ 自动安装组件所需的依赖（如 `reka-ui`、`class-variance-authority` 等）
 - ✅ 更好的 Tree-shaking 支持
+
+> 📦 **依赖管理**：使用 CLI 安装组件时，所需的依赖会自动安装到你的项目中。你无需手动安装 `aurora-ui-plus` 包，也无需担心依赖版本冲突。CLI 会自动检测已安装的依赖，只安装缺失的依赖。
 
 ### 可用组件
 

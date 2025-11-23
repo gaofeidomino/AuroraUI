@@ -58,4 +58,3 @@ export const registry: Component[] = [
     },
     // 可以继续添加更多组件
 ]
-

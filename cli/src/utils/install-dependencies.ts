@@ -13,6 +13,7 @@ export async function installDependencies(
         return
     }
 
+    // Dependencies can be in format "package" or "package@version"
     const deps = dependencies.join(' ')
     let command: string
 
