@@ -9,7 +9,14 @@ import { dirname, join } from 'path'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const packageJson = JSON.parse(readFileSync(join(__dirname, '../package.json'), 'utf-8'))
+// Try to read cli/package.json first, fallback to root package.json (for pnpm dlx usage)
+let packageJson: any
+try {
+    packageJson = JSON.parse(readFileSync(join(__dirname, '../package.json'), 'utf-8'))
+} catch {
+    // If cli/package.json doesn't exist, try root package.json
+    packageJson = JSON.parse(readFileSync(join(__dirname, '../../../package.json'), 'utf-8'))
+}
 const version = packageJson.version
 
 const program = new Command()

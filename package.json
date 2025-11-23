@@ -46,6 +46,7 @@
     "src/utils",
     "cli/src",
     "cli/bin",
+    "cli/package.json",
     "README.md",
     "INSTALLATION.md"
   ],
