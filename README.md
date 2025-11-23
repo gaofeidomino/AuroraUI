@@ -18,47 +18,33 @@ A modern Vue 3 UI component library built with **TypeScript** and **Tailwind CSS
 - 🧪 **Well Tested** - Comprehensive test coverage with Vitest
 - 📦 **Tree Shakable** - Import only what you need
 - 🎪 **Customizable** - Easy theming and component customization
+- 🛠️ **CLI Tool** - Install components individually, just like shadcn-vue
 
 ## 🚀 Quick Start
 
-### Installation
+AuroraUI provides two ways to use components:
+
+1. **Install components individually (Recommended)** - Use the CLI tool to install only the components you need. Component code is copied directly into your project.
+2. **Install the entire package** - Install the complete component library package.
+
+For detailed installation and usage instructions, see the [Installation Guide](./INSTALLATION.md).
+
+### Quick Examples
+
+**Install components individually:**
 
 ```bash
-npm install aurora-ui-plus
-# or
+# Initialize
+pnpm dlx aurora-ui-plus@latest init
+
+# Add components
+pnpm dlx aurora-ui-plus@latest add button
+```
+
+**Install the entire package:**
+
+```bash
 pnpm add aurora-ui-plus
-# or
-yarn add aurora-ui-plus
-```
-
-### Basic Usage
-
-```vue
-<template>
-  <div>
-    <AButton variant="primary" size="lg"> Click me </AButton>
-    <ACard>
-      <ACardHeader>
-        <ACardTitle>Card Title</ACardTitle>
-      </ACardHeader>
-      <ACardContent>
-        <p>Card content goes here.</p>
-      </ACardContent>
-    </ACard>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { AButton, ACard, ACardHeader, ACardTitle, ACardContent } from 'aurora-ui-plus'
-</script>
-```
-
-### Styling
-
-Import the component styles:
-
-```ts
-import 'aurora-ui-plus/style'
 ```
 
 ## 🛠️ Development
@@ -122,16 +108,24 @@ pnpm publish:rc           # Release candidate (1.0.0 -> 1.0.1-rc.0)
 
 ## 📦 Available Components
 
+All components can be installed individually via the CLI tool or imported from the entire package.
+
+Main components include:
+
 - **Layout**: Card, AspectRatio
-- **Forms**: Button, Input, Label, Textarea
+- **Forms**: Button, Input, Label, Textarea, Field
 - **Navigation**: Breadcrumb
 - **Feedback**: Alert, AlertDialog, Badge
 - **Data Display**: Avatar, Calendar, Accordion
 - **Utility**: Various utility components
 
+> 💡 **Tip**: Check the [Installation Guide](./INSTALLATION.md) to learn how to install components individually, or use `pnpm dlx aurora-ui-plus@latest add <component-name>` to see all components available via CLI.
+
 ## 📚 Documentation
 
+- [Installation Guide](./INSTALLATION.md) - Detailed installation and usage instructions
 - [Component Examples](./examples/) - Interactive examples and usage
+- [CLI Tool Guide](./cli/README.md) - How to use the CLI tool for component installation
 - [Testing Guide](./TESTING.md) - Testing strategies and best practices
 - [Development Guide](./DEVELOPMENT.md) - Development workflow and guidelines
 - [Project Structure](./PROJECT_STRUCTURE.md) - Understanding the codebase

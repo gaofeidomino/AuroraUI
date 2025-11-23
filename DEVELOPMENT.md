@@ -22,11 +22,23 @@ pnpm dev:examples
 
 在 `src/DevApp.vue` 的"新组件开发区域"添加测试代码
 
-### 3. 编写测试
+### 3. 注册到 CLI（可选）
+
+如果希望组件支持通过 CLI 单独安装，需要在 `cli/src/registry.ts` 中注册：
+
+```typescript
+{
+    name: 'your-component',
+    dependencies: ['clsx', 'tailwind-merge'],
+    exports: ['YourComponent'],
+}
+```
+
+### 4. 编写测试
 
 在 `tests/components/` 下添加测试文件
 
-### 4. 完善示例
+### 5. 完善示例
 
 在 `examples/src/components/ComponentExamples.vue` 中添加完整示例
 
