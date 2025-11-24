@@ -1,6 +1,7 @@
 export interface Component {
     name: string
-    dependencies?: string[]
+    dependencies?: string[] // npm package dependencies
+    registryDependencies?: string[] // component dependencies (other components)
     exports?: string[]
     files?: string[]
 }
@@ -54,6 +55,7 @@ export const registry: Component[] = [
     {
         name: 'field',
         dependencies: ['reka-ui', 'class-variance-authority', 'clsx', 'tailwind-merge'],
+        registryDependencies: ['label', 'input'], // Field component depends on label and input
         exports: ['Field', 'FieldContent', 'FieldDescription', 'FieldError', 'FieldGroup', 'FieldLabel', 'FieldLegend', 'FieldSeparator', 'FieldSet', 'FieldTitle'],
     },
     // 可以继续添加更多组件

@@ -29,6 +29,7 @@ program
     .argument('<component>', 'Component name (e.g., button, card, input)')
     .option('-d, --dir <dir>', 'Target directory for components', 'src/components/ui')
     .option('-y, --yes', 'Skip confirmation prompts')
+    .option('-o, --overwrite', 'Overwrite existing files')
     .action(async (component, options) => {
         await add(component, options)
     })

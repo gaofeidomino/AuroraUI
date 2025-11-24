@@ -12,10 +12,11 @@ const __dirname = path.dirname(__filename)
 // Get the project root (AuroraUI root, not cli root)
 const PROJECT_ROOT = path.resolve(__dirname, '../../../')
 
-export async function add(componentName: string, options: { dir?: string; yes?: boolean }) {
-    const component = registry.find((c) => c.name === componentName.toLowerCase())
-
-    if (!component) {
+export async function add(componentName: string, options: { dir?: string; yes?: boolean; overwrite?: boolean }) {
+    // Resolve component tree with dependencies
+    const componentsToInstall = resolveComponentTree(componentName.toLowerCase())
+    
+    if (componentsToInstall.length === 0) {
         console.error(`❌ Component "${componentName}" not found.`)
         console.log('\nAvailable components:')
         registry.forEach((c) => {
@@ -31,40 +32,86 @@ export async function add(componentName: string, options: { dir?: string; yes?: 
     // Create target directory if it doesn't exist
     await fs.mkdir(targetPath, { recursive: true })
 
-    // Copy component files
-    const componentDir = path.join(PROJECT_ROOT, 'src/components', component.name)
-    const files = await getComponentFiles(componentDir)
+    // Collect all dependencies (npm packages) from all components
+    const allDependencies = new Set<string>()
+    const installedComponents: string[] = []
 
-    if (files.length === 0) {
-        console.error(`❌ Component files not found for "${componentName}"`)
-        process.exit(1)
-    }
+    // Install components in topological order
+    for (const component of componentsToInstall) {
+        const componentTargetPath = path.join(targetPath, component.name)
+        
+        // Check if component already exists
+        const componentExists = await checkComponentExists(componentTargetPath)
+        
+        if (componentExists && !options.overwrite) {
+            console.log(`\n⚠️  Component "${component.name}" already exists. Skipping...`)
+            console.log(`   Use --overwrite to overwrite existing files.`)
+            // Still collect dependencies even if component exists
+            if (component.dependencies) {
+                component.dependencies.forEach(dep => allDependencies.add(dep))
+            }
+            continue
+        }
 
-    // Create component subdirectory
-    const componentTargetPath = path.join(targetPath, component.name)
-    await fs.mkdir(componentTargetPath, { recursive: true })
+        // Copy component files
+        const componentDir = path.join(PROJECT_ROOT, 'src/components', component.name)
+        const files = await getComponentFiles(componentDir)
 
-    console.log(`\n📦 Adding component: ${component.name}`)
-    console.log(`📁 Target directory: ${componentTargetPath}\n`)
+        if (files.length === 0) {
+            console.error(`❌ Component files not found for "${component.name}"`)
+            continue
+        }
 
-    // Copy and transform files
-    for (const file of files) {
-        const relativePath = path.relative(componentDir, file)
-        const targetFile = path.join(componentTargetPath, relativePath)
-        const targetFileDir = path.dirname(targetFile)
+        // Create component subdirectory
+        await fs.mkdir(componentTargetPath, { recursive: true })
 
-        await fs.mkdir(targetFileDir, { recursive: true })
+        if (installedComponents.length === 0) {
+            console.log(`\n📦 Adding component: ${component.name}`)
+        } else {
+            console.log(`\n📦 Adding dependency: ${component.name}`)
+        }
+        console.log(`📁 Target directory: ${componentTargetPath}\n`)
 
-        let content = await fs.readFile(file, 'utf-8')
+        // Copy and transform files
+        for (const file of files) {
+            const relativePath = path.relative(componentDir, file)
+            const targetFile = path.join(componentTargetPath, relativePath)
+            const targetFileDir = path.dirname(targetFile)
 
-        // Transform component code (handle path aliases, etc.)
-        content = transformComponent(content, {
-            from: targetFile, // Use target file path for relative path calculation
-            to: componentTargetPath,
-        })
+            await fs.mkdir(targetFileDir, { recursive: true })
 
-        await fs.writeFile(targetFile, content, 'utf-8')
-        console.log(`  ✓ ${relativePath}`)
+            // Check if file exists
+            let fileExists = false
+            try {
+                await fs.access(targetFile)
+                fileExists = true
+            } catch {
+                // File doesn't exist
+            }
+
+            if (fileExists && !options.overwrite) {
+                console.log(`  ⚠️  ${relativePath} already exists. Skipping...`)
+                continue
+            }
+
+            let content = await fs.readFile(file, 'utf-8')
+
+            // Transform component code (handle path aliases, etc.)
+            content = transformComponent(content, {
+                from: targetFile, // Use target file path for relative path calculation
+                to: componentTargetPath,
+            })
+
+            await fs.writeFile(targetFile, content, 'utf-8')
+            console.log(`  ✓ ${relativePath}`)
+        }
+
+        // Collect dependencies
+        if (component.dependencies) {
+            component.dependencies.forEach(dep => allDependencies.add(dep))
+        }
+
+        installedComponents.push(component.name)
     }
 
     // Copy utils if needed
@@ -87,7 +134,7 @@ export async function add(componentName: string, options: { dir?: string; yes?: 
     }
 
     // Install component dependencies
-    if (component.dependencies && component.dependencies.length > 0) {
+    if (allDependencies.size > 0) {
         const packageJsonPath = path.join(process.cwd(), 'package.json')
         let existingDeps: Record<string, string> = {}
 
@@ -102,7 +149,7 @@ export async function add(componentName: string, options: { dir?: string; yes?: 
         }
 
         // Filter out already installed dependencies
-        const missingDeps = component.dependencies.filter((dep) => {
+        const missingDeps = Array.from(allDependencies).filter((dep) => {
             // Handle dependencies with version specifiers (e.g., "package@version" or "@scope/package@version")
             // For scoped packages, we need to handle @scope/package@version format
             let depName: string
@@ -132,10 +179,81 @@ export async function add(componentName: string, options: { dir?: string; yes?: 
         }
     }
 
-    console.log(`\n✅ Component "${component.name}" added successfully!`)
-    console.log(`\nUsage:`)
-    const importPath = `${targetDir}/${component.name}`
-    console.log(`  import { ${component.exports?.[0] || component.name} } from '${importPath}'`)
+    if (installedComponents.length > 0) {
+        const mainComponent = componentsToInstall[0]
+        console.log(`\n✅ Component "${mainComponent.name}" added successfully!`)
+        if (installedComponents.length > 1) {
+            console.log(`   Also installed dependencies: ${installedComponents.slice(1).join(', ')}`)
+        }
+        console.log(`\nUsage:`)
+        const importPath = `${targetDir}/${mainComponent.name}`
+        console.log(`  import { ${mainComponent.exports?.[0] || mainComponent.name} } from '${importPath}'`)
+    } else {
+        console.log(`\n⚠️  Component "${componentName}" already exists. No changes made.`)
+    }
+}
+
+/**
+ * Resolve component tree with dependencies using topological sort
+ * Returns components in installation order (dependencies first)
+ */
+function resolveComponentTree(componentName: string): typeof registry {
+    const componentMap = new Map<string, typeof registry[0]>()
+    registry.forEach(c => componentMap.set(c.name, c))
+
+    const visited = new Set<string>()
+    const visiting = new Set<string>()
+    const result: typeof registry = []
+    const componentSet = new Set<string>()
+
+    function visit(name: string): void {
+        if (visiting.has(name)) {
+            // Circular dependency detected
+            console.warn(`⚠️  Circular dependency detected involving "${name}"`)
+            return
+        }
+        if (visited.has(name)) {
+            return
+        }
+
+        const component = componentMap.get(name)
+        if (!component) {
+            return
+        }
+
+        visiting.add(name)
+
+        // Visit dependencies first
+        if (component.registryDependencies) {
+            for (const dep of component.registryDependencies) {
+                visit(dep)
+            }
+        }
+
+        visiting.delete(name)
+        visited.add(name)
+
+        // Add to result if not already added (deduplication)
+        if (!componentSet.has(name)) {
+            result.push(component)
+            componentSet.add(name)
+        }
+    }
+
+    visit(componentName)
+    return result
+}
+
+/**
+ * Check if component directory exists and has files
+ */
+async function checkComponentExists(componentPath: string): Promise<boolean> {
+    try {
+        const files = await getComponentFiles(componentPath)
+        return files.length > 0
+    } catch {
+        return false
+    }
 }
 
 async function getComponentFiles(dir: string): Promise<string[]> {

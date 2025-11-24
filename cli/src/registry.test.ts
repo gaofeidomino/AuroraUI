@@ -23,6 +23,13 @@ describe('registry', () => {
         })
       }
 
+      if (component.registryDependencies) {
+        expect(Array.isArray(component.registryDependencies)).toBe(true)
+        component.registryDependencies.forEach((dep) => {
+          expect(typeof dep).toBe('string')
+        })
+      }
+
       if (component.exports) {
         expect(Array.isArray(component.exports)).toBe(true)
         component.exports.forEach((exp) => {
